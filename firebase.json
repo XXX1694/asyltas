@@ -1,0 +1,14 @@
+{
+    "flutter": {
+        "platforms": {
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "asyltas-2c153",
+                    "configurations": {
+                        "web": "1:143774859773:web:81232e7b9f52e63da45994"
+                    }
+                }
+            }
+        }
+    }
+}
