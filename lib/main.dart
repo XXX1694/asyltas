@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:asyltas/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:asyltas/app/app.bottomsheets.dart';
@@ -9,6 +13,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   setPathUrlStrategy();
   await setupLocator(stackedRouter: stackedRouter);
   setupDialogUi();
@@ -23,6 +30,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveApp(
       builder: (_) => MaterialApp.router(
+        scrollBehavior: NoThumbScrollBehavior().copyWith(scrollbars: false),
+        debugShowCheckedModeBanner: false,
         routerDelegate: stackedRouter.delegate(),
         routeInformationParser: stackedRouter.defaultRouteParser(),
       ),
@@ -31,4 +40,14 @@ class MainApp extends StatelessWidget {
           duration: const Duration(milliseconds: 400),
         );
   }
+}
+
+class NoThumbScrollBehavior extends ScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.trackpad,
+      };
 }
