@@ -136,6 +136,12 @@ class _MiniCatalogState extends State<MiniCatalog> {
                         : categoryProducts.length,
                     itemBuilder: (context, index) {
                       return Container(
+                        padding: const EdgeInsets.only(
+                          left: 25,
+                          right: 25,
+                          top: 15,
+                          bottom: 36,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           boxShadow: [
@@ -145,6 +151,7 @@ class _MiniCatalogState extends State<MiniCatalog> {
                               blurRadius: 90,
                             )
                           ],
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(categoryProducts[index].name ?? ''),
                       );
