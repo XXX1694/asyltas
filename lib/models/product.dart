@@ -1,12 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 
+// ignore: depend_on_referenced_packages
 import 'package:json_annotation/json_annotation.dart';
 
 part 'product.g.dart';
 
 @JsonSerializable()
 class ProductModel {
-  final String? id;
+  String? id;
   final String? name;
   final int? numberLeft;
   final int? price;

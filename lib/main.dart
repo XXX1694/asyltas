@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:asyltas/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveApp(
       builder: (_) => MaterialApp.router(
+        scrollBehavior: NoThumbScrollBehavior().copyWith(scrollbars: false),
         debugShowCheckedModeBanner: false,
         routerDelegate: stackedRouter.delegate(),
         routeInformationParser: stackedRouter.defaultRouteParser(),
@@ -37,4 +40,14 @@ class MainApp extends StatelessWidget {
           duration: const Duration(milliseconds: 400),
         );
   }
+}
+
+class NoThumbScrollBehavior extends ScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.trackpad,
+      };
 }

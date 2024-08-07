@@ -19,7 +19,7 @@ class TopText extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           'Товары различных категорий от камней \nдо ручных изделий',
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.poppins(
             color: kcLightGrey,
             fontSize: 16,
           ),

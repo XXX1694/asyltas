@@ -1,36 +1,28 @@
-import 'package:asyltas/app/app.bottomsheets.dart';
-import 'package:asyltas/app/app.dialogs.dart';
 import 'package:asyltas/app/app.locator.dart';
-import 'package:asyltas/ui/common/app_strings.dart';
+import 'package:asyltas/app/app.router.dart';
+import 'package:asyltas/models/product.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
-
-  String get counterLabel => 'Counter is: $_counter';
-
-  int _counter = 0;
-
-  void incrementCounter() {
-    _counter++;
-    rebuildUi();
+  final _routerService = locator<RouterService>();
+  Future goToMainPage() async {
+    await _routerService.navigateTo(const HomeViewRoute());
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Stacked Rocks!',
-      description: 'Give stacked $_counter stars on Github',
-    );
+  Future goToLoginPage() async {
+    await _routerService.navigateTo(const LoginViewRoute());
   }
 
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
-    );
+  Future goToRegistrationPage() async {
+    await _routerService.navigateTo(const RegistrationViewRoute());
+  }
+
+  Future goToCatalogPage() async {
+    await _routerService.navigateTo(const CatalogViewRoute());
+  }
+
+  Future goToProductPage({required ProductModel product}) async {
+    await _routerService.navigateTo(ProductViewRoute(product: product));
   }
 }
