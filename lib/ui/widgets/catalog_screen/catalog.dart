@@ -104,305 +104,295 @@ class _CatalogState extends State<Catalog> {
   List<ProductModel> categoryProducts = [];
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Flexible(
-            flex: 5,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Категория',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 30,
-                    color: Colors.black,
-                  ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Flexible(
+          flex: 5,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Категория',
+                style: GoogleFonts.montserrat(
+                  fontSize: 30,
+                  color: Colors.black,
                 ),
-                const SizedBox(
-                  height: 32,
-                ),
-                Flexible(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: category.length,
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          categoryProducts = [];
-                          for (int i = 0; i < products.length; i++) {
-                            final product =
-                                products[i].data() as Map<String, dynamic>;
-                            String productCategoryId =
-                                (product['category_id'] ?? '').toString();
-                            String selectedCategoryId =
-                                (category[index]['id'] ?? '').toString();
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: category.length,
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        categoryProducts = [];
+                        for (int i = 0; i < products.length; i++) {
+                          final product =
+                              products[i].data() as Map<String, dynamic>;
+                          String productCategoryId =
+                              (product['category_id'] ?? '').toString();
+                          String selectedCategoryId =
+                              (category[index]['id'] ?? '').toString();
 
-                            if (productCategoryId == selectedCategoryId) {
-                              categoryProducts
-                                  .add(ProductModel.fromJson(product));
-                              categoryProducts.last.id = products[i].id;
-                            }
+                          if (productCategoryId == selectedCategoryId) {
+                            categoryProducts
+                                .add(ProductModel.fromJson(product));
+                            categoryProducts.last.id = products[i].id;
                           }
-                          selescted = index;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Text(
-                          category[index]['name']!,
-                          style: GoogleFonts.montserrat(
-                            color: selescted == index
-                                ? const Color(0xFF4F6D9F)
-                                : Colors.black54,
-                            fontSize: 18,
-                            decoration: selescted == index
-                                ? TextDecoration.underline
-                                : TextDecoration.none,
-                            decorationColor: const Color(0xFF4F6D9F),
-                          ),
+                        }
+                        selescted = index;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text(
+                        category[index]['name']!,
+                        style: GoogleFonts.montserrat(
+                          color: selescted == index
+                              ? const Color(0xFF4F6D9F)
+                              : Colors.black54,
+                          fontSize: 18,
+                          decoration: selescted == index
+                              ? TextDecoration.underline
+                              : TextDecoration.none,
+                          decorationColor: const Color(0xFF4F6D9F),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          const SizedBox(width: 100),
-          Expanded(
-            flex: 20,
-            child: StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('products').snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return GridView.builder(
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 302 / 348,
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 24,
-                    ),
-                    itemCount: 12,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(25),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(0, 40),
-                              color: kcBlack.withOpacity(0.06),
-                              blurRadius: 90,
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Text(''),
-                      );
-                    },
-                  );
-                }
-                if (snapshot.hasError) {
-                  return GridView.builder(
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      childAspectRatio: 302 / 348,
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 24,
-                    ),
-                    itemCount: 12,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(25),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(0, 40),
-                              color: kcBlack.withOpacity(0.06),
-                              blurRadius: 90,
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Text(''),
-                      );
-                    },
-                  );
-                  // return Center(
-                  //     child: Text('Something went wrong! ${snapshot.error}'));
-                }
-                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Center(child: Text('No products available.'));
-                }
-                products = snapshot.data!.docs;
-                categoryProducts = [];
-                for (int i = 0; i < products.length; i++) {
-                  final product = products[i].data() as Map<String, dynamic>;
-                  String productCategoryId =
-                      (product['category_id'] ?? '').toString();
-                  String selectedCategoryId =
-                      (category[selescted]['id'] ?? '').toString();
-
-                  if (productCategoryId == selectedCategoryId) {
-                    categoryProducts.add(ProductModel.fromJson(product));
-                    categoryProducts.last.id = products[i].id;
-                  }
-                }
+        ),
+        const SizedBox(width: 100),
+        Expanded(
+          flex: 20,
+          child: StreamBuilder<QuerySnapshot>(
+            stream:
+                FirebaseFirestore.instance.collection('products').snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return GridView.builder(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.all(0),
-                  physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 386 / 438,
+                    childAspectRatio: 302 / 348,
                     crossAxisCount: 3,
                     crossAxisSpacing: 24,
                     mainAxisSpacing: 24,
-                    // mainAxisExtent: 438,
                   ),
-                  itemCount: categoryProducts.length,
+                  itemCount: 12,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        widget.showProduct(product: categoryProducts[index]);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(0, 40),
-                              color: kcBlack.withOpacity(0.06),
-                              blurRadius: 90,
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AspectRatio(
-                              aspectRatio: 4 / 3,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: categoryProducts[index].images != null
-                                      ? Image(
-                                          height: double.infinity,
-                                          width: double.infinity,
-                                          fit: BoxFit.cover,
-                                          image: FirebaseImageProvider(
-                                            FirebaseUrl(
-                                              categoryProducts[index]
-                                                      .images?[0] ??
-                                                  '',
-                                            ),
-                                            options: const CacheOptions(
-                                              checkIfFileUpdatedOnServer: true,
-                                              // Source from image will be fetched
-                                              //
-                                              // Default [Source.cacheServer]
-                                              // source: Source.server,
-                                            ),
-                                          ),
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            // [ImageNotFoundException] will be thrown if image does not exist on server.
-                                            if (error
-                                                is ImageNotFoundException) {
-                                              return const Text(
-                                                  'Image not found on Cloud Storage.');
-                                            } else {
-                                              return Text(
-                                                  'Error loading image: $error');
-                                            }
-                                          },
-                                          // The loading progress may not be accurate as Firebase Storage API
-                                          // does not provide a stream of bytes downloaded. The progress updates only at the start and end of the loading process.
-                                          loadingBuilder: (_,
-                                              Widget child,
-                                              ImageChunkEvent?
-                                                  loadingProgress) {
-                                            if (loadingProgress == null) {
-                                              // Show the loaded image if loading is complete.
-                                              return child;
-                                            } else {
-                                              return Container(
-                                                color: Colors.grey.shade400,
-                                              );
-                                            }
-                                          },
-                                        )
-                                      : Container(
-                                          color: Colors.grey.shade400,
-                                        ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    categoryProducts[index].name ?? '',
-                                    style: GoogleFonts.montserrat(
-                                      color: kcBlack,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "${categoryProducts[index].price ?? ''} ₸",
-                                        style: GoogleFonts.poppins(
-                                          color: kcPrimaryColor,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Осталось: ${categoryProducts[index].numberLeft ?? ''}",
-                                        style: GoogleFonts.poppins(
-                                          color: kcBlack,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                    return Container(
+                      padding: const EdgeInsets.all(25),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(0, 40),
+                            color: kcBlack.withOpacity(0.06),
+                            blurRadius: 90,
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      child: const Text(''),
                     );
                   },
                 );
-              },
-            ),
+              }
+              if (snapshot.hasError) {
+                return GridView.builder(
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 302 / 348,
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 24,
+                  ),
+                  itemCount: 12,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: const EdgeInsets.all(25),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(0, 40),
+                            color: kcBlack.withOpacity(0.06),
+                            blurRadius: 90,
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(''),
+                    );
+                  },
+                );
+                // return Center(
+                //     child: Text('Something went wrong! ${snapshot.error}'));
+              }
+              if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                return const Center(child: Text('No products available.'));
+              }
+              products = snapshot.data!.docs;
+              categoryProducts = [];
+              for (int i = 0; i < products.length; i++) {
+                final product = products[i].data() as Map<String, dynamic>;
+                String productCategoryId =
+                    (product['category_id'] ?? '').toString();
+                String selectedCategoryId =
+                    (category[selescted]['id'] ?? '').toString();
+
+                if (productCategoryId == selectedCategoryId) {
+                  categoryProducts.add(ProductModel.fromJson(product));
+                  categoryProducts.last.id = products[i].id;
+                }
+              }
+              return GridView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(0),
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 386 / 438,
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 24,
+                  mainAxisSpacing: 24,
+                  // mainAxisExtent: 438,
+                ),
+                itemCount: categoryProducts.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      widget.showProduct(product: categoryProducts[index]);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(0, 40),
+                            color: kcBlack.withOpacity(0.06),
+                            blurRadius: 90,
+                          )
+                        ],
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 4 / 3,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: categoryProducts[index].images != null
+                                    ? Image(
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                        image: FirebaseImageProvider(
+                                          FirebaseUrl(
+                                            categoryProducts[index]
+                                                    .images?[0] ??
+                                                '',
+                                          ),
+                                          options: const CacheOptions(
+                                            checkIfFileUpdatedOnServer: true,
+                                          ),
+                                        ),
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          // [ImageNotFoundException] will be thrown if image does not exist on server.
+                                          if (error is ImageNotFoundException) {
+                                            return const Text(
+                                                'Image not found on Cloud Storage.');
+                                          } else {
+                                            return Text(
+                                              'Error loading image: $error',
+                                            );
+                                          }
+                                        },
+                                        // The loading progress may not be accurate as Firebase Storage API
+                                        // does not provide a stream of bytes downloaded. The progress updates only at the start and end of the loading process.
+                                        loadingBuilder: (_, Widget child,
+                                            ImageChunkEvent? loadingProgress) {
+                                          if (loadingProgress == null) {
+                                            // Show the loaded image if loading is complete.
+                                            return child;
+                                          } else {
+                                            return Container(
+                                              color: Colors.grey.shade400,
+                                            );
+                                          }
+                                        },
+                                      )
+                                    : Container(
+                                        color: Colors.grey.shade400,
+                                      ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  categoryProducts[index].name ?? '',
+                                  style: GoogleFonts.montserrat(
+                                    color: kcBlack,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "${categoryProducts[index].price ?? ''} ₸",
+                                      style: GoogleFonts.poppins(
+                                        color: kcPrimaryColor,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Осталось: ${categoryProducts[index].numberLeft ?? ''}",
+                                      style: GoogleFonts.poppins(
+                                        color: kcBlack,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

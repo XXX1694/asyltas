@@ -206,6 +206,7 @@ class _MiniCatalogState extends State<MiniCatalog> {
                                       ),
                                       options: const CacheOptions(
                                         checkIfFileUpdatedOnServer: true,
+
                                         // Source from image will be fetched
                                         //
                                         // Default [Source.cacheServer]
