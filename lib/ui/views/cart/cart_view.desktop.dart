@@ -1,21 +1,19 @@
-import 'package:asyltas/ui/common/app_colors.dart';
+import 'package:asyltas/ui/widgets/cart_screen/cart.dart';
+import 'package:asyltas/ui/widgets/cart_screen/top_text.dart';
 import 'package:asyltas/ui/widgets/home_screen/banner.dart';
 import 'package:asyltas/ui/widgets/home_screen/features.dart';
 import 'package:asyltas/ui/widgets/home_screen/footer.dart';
-import 'package:asyltas/ui/widgets/home_screen/mini_catalog.dart';
 import 'package:asyltas/ui/widgets/home_screen/top_bar.dart';
-import 'package:asyltas/ui/widgets/home_screen/top_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
-import 'home_viewmodel.dart';
+import 'cart_viewmodel.dart';
 
-class HomeViewDesktop extends ViewModelWidget<HomeViewModel> {
-  const HomeViewDesktop({super.key});
+class CartViewDesktop extends ViewModelWidget<CartViewModel> {
+  const CartViewDesktop({super.key});
 
   @override
-  Widget build(BuildContext context, HomeViewModel viewModel) {
+  Widget build(BuildContext context, CartViewModel viewModel) {
     final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
@@ -45,54 +43,22 @@ class HomeViewDesktop extends ViewModelWidget<HomeViewModel> {
                     viewModel.goToRegistrationPage();
                   },
                   toSalesPage: () {},
-                  toProfilePage: () {
-                    viewModel.goToProfilePage();
-                  },
                   toCartPage: () {
                     viewModel.goToCartPage();
+                  },
+                  toProfilePage: () {
+                    viewModel.goToProfilePage();
                   },
                 ),
               ),
               const SizedBox(height: 100),
-              const TopText(),
-              const SizedBox(height: 50),
+              const CartTopText(),
+              const SizedBox(height: 75),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 140 * deviceWidth / 2200,
                 ),
-                child: MiniCatalog(
-                  showProduct: viewModel.goToProductPage,
-                ),
-              ),
-              const SizedBox(height: 50),
-              GestureDetector(
-                onTap: () {
-                  viewModel.goToCatalogPage();
-                },
-                child: Container(
-                  height: 56,
-                  width: 207,
-                  decoration: BoxDecoration(
-                    color: kcPrimaryColor,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: const Offset(0, 20),
-                        color: kcBlack.withOpacity(0.15),
-                        blurRadius: 35,
-                      )
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Показать все',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
+                child: const CartBlock(),
               ),
               const SizedBox(height: 100),
               AdBanner(

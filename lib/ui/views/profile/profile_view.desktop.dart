@@ -9,13 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
-import 'home_viewmodel.dart';
+import 'profile_viewmodel.dart';
 
-class HomeViewDesktop extends ViewModelWidget<HomeViewModel> {
-  const HomeViewDesktop({super.key});
+class ProfileViewDesktop extends ViewModelWidget<ProfileViewModel> {
+  const ProfileViewDesktop({super.key});
 
   @override
-  Widget build(BuildContext context, HomeViewModel viewModel) {
+  Widget build(BuildContext context, ProfileViewModel viewModel) {
     final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
@@ -45,11 +45,11 @@ class HomeViewDesktop extends ViewModelWidget<HomeViewModel> {
                     viewModel.goToRegistrationPage();
                   },
                   toSalesPage: () {},
-                  toProfilePage: () {
-                    viewModel.goToProfilePage();
-                  },
                   toCartPage: () {
                     viewModel.goToCartPage();
+                  },
+                  toProfilePage: () {
+                    viewModel.goToProfilePage();
                   },
                 ),
               ),

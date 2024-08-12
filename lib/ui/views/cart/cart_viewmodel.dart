@@ -4,7 +4,7 @@ import 'package:asyltas/models/product.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class HomeViewModel extends BaseViewModel {
+class CartViewModel extends BaseViewModel {
   final _routerService = locator<RouterService>();
   Future goToMainPage() async {
     await _routerService.navigateTo(const HomeViewRoute());
@@ -26,11 +26,11 @@ class HomeViewModel extends BaseViewModel {
     await _routerService.navigateTo(ProductViewRoute(product: product));
   }
 
-  Future goToCartPage() async {
-    await _routerService.navigateTo(const CartViewRoute());
-  }
-
   Future goToProfilePage() async {
     await _routerService.navigateTo(const ProfileViewRoute());
+  }
+
+  Future goToCartPage() async {
+    await _routerService.navigateTo(const CartViewRoute());
   }
 }

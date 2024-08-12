@@ -42,6 +42,12 @@ class CatalogViewDesktop extends ViewModelWidget<CatalogViewmodel> {
                     viewModel.goToRegistrationPage();
                   },
                   toSalesPage: () {},
+                  toCartPage: () {
+                    viewModel.goToCartPage();
+                  },
+                  toProfilePage: () {
+                    viewModel.goToProfilePage();
+                  },
                 ),
               ),
               const SizedBox(

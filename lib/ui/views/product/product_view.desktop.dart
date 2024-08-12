@@ -42,6 +42,12 @@ class ProductViewDesktop extends ViewModelWidget<ProductViewmodel> {
                     viewModel.goToRegistrationPage();
                   },
                   toSalesPage: () {},
+                  toCartPage: () {
+                    viewModel.goToCartPage();
+                  },
+                  toProfilePage: () {
+                    viewModel.goToProfilePage();
+                  },
                 ),
               ),
               const SizedBox(height: 80),

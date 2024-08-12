@@ -1,7 +1,7 @@
 import 'package:asyltas/models/product.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
+import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_cached_image/firebase_cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -197,43 +197,10 @@ class _MiniCatalogState extends State<MiniCatalog> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: Image(
-                                    fit: BoxFit.cover,
-                                    image: FirebaseImageProvider(
-                                      FirebaseUrl(
+                                  child: AppImage(
+                                    imageUrl:
                                         categoryProducts[index].images?[0] ??
                                             '',
-                                      ),
-                                      options: const CacheOptions(
-                                        checkIfFileUpdatedOnServer: true,
-
-                                        // Source from image will be fetched
-                                        //
-                                        // Default [Source.cacheServer]
-                                        // source: Source.server,
-                                      ),
-                                    ),
-                                    errorBuilder: (context, error, stackTrace) {
-                                      // [ImageNotFoundException] will be thrown if image does not exist on server.
-                                      if (error is ImageNotFoundException) {
-                                        return const Text(
-                                            'Image not found on Cloud Storage.');
-                                      } else {
-                                        return Text(
-                                            'Error loading image: $error');
-                                      }
-                                    },
-                                    loadingBuilder: (_, Widget child,
-                                        ImageChunkEvent? loadingProgress) {
-                                      if (loadingProgress == null) {
-                                        // Show the loaded image if loading is complete.
-                                        return child;
-                                      } else {
-                                        return Container(
-                                          color: Colors.grey.shade400,
-                                        );
-                                      }
-                                    },
                                   ),
                                 ),
                               ),

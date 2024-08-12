@@ -12,12 +12,16 @@ class TopBar extends StatelessWidget {
     required this.toMainPage,
     required this.toRegistrationPage,
     required this.toSalesPage,
+    required this.toCartPage,
+    required this.toProfilePage,
   });
   final Function toLoginPage;
   final Function toCatalogPage;
   final Function toRegistrationPage;
   final Function toSalesPage;
   final Function toMainPage;
+  final Function toCartPage;
+  final Function toProfilePage;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -57,6 +61,9 @@ class TopBar extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
+                        onTap: () {
+                          toCartPage();
+                        },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 13,
@@ -69,6 +76,9 @@ class TopBar extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
+                        onTap: () {
+                          toProfilePage();
+                        },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 13,
@@ -183,24 +193,24 @@ class TopBar extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 25,
-                        vertical: 13,
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Скидки',
-                          style: GoogleFonts.montserrat(
-                            color: kcPrimaryColor,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {},
+                  //   child: Container(
+                  //     padding: const EdgeInsets.symmetric(
+                  //       horizontal: 25,
+                  //       vertical: 13,
+                  //     ),
+                  //     child: Center(
+                  //       child: Text(
+                  //         'Скидки',
+                  //         style: GoogleFonts.montserrat(
+                  //           color: kcPrimaryColor,
+                  //           fontSize: 16,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   GestureDetector(
                     onTap: () {
                       toLoginPage();
