@@ -3,8 +3,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 
 import 'payment_view.desktop.dart';
-import 'payment_view.tablet.dart';
-import 'payment_view.mobile.dart';
 import 'payment_viewmodel.dart';
 
 class PaymentView extends StackedView<PaymentViewModel> {
@@ -17,8 +15,8 @@ class PaymentView extends StackedView<PaymentViewModel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const PaymentViewMobile(),
-      tablet: (_) => const PaymentViewTablet(),
+      mobile: (_) => const PaymentViewDesktop(),
+      tablet: (_) => const PaymentViewDesktop(),
       desktop: (_) => const PaymentViewDesktop(),
     );
   }

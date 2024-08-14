@@ -3,8 +3,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 
 import 'cart_view.desktop.dart';
-import 'cart_view.tablet.dart';
-import 'cart_view.mobile.dart';
 import 'cart_viewmodel.dart';
 
 class CartView extends StackedView<CartViewModel> {
@@ -17,8 +15,8 @@ class CartView extends StackedView<CartViewModel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const CartViewMobile(),
-      tablet: (_) => const CartViewTablet(),
+      mobile: (_) => const CartViewDesktop(),
+      tablet: (_) => const CartViewDesktop(),
       desktop: (_) => const CartViewDesktop(),
     );
   }

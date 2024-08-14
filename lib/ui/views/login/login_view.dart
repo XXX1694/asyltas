@@ -3,8 +3,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 
 import 'login_view.desktop.dart';
-import 'login_view.tablet.dart';
-import 'login_view.mobile.dart';
 import 'login_viewmodel.dart';
 
 class LoginView extends StackedView<LoginViewmodel> {
@@ -17,8 +15,8 @@ class LoginView extends StackedView<LoginViewmodel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const LoginViewMobile(),
-      tablet: (_) => const LoginViewTablet(),
+      mobile: (_) => const LoginViewDesktop(),
+      tablet: (_) => const LoginViewDesktop(),
       desktop: (_) => const LoginViewDesktop(),
     );
   }
