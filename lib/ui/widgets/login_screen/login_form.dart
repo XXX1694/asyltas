@@ -2,6 +2,7 @@ import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/login_screen/email_field.dart';
 import 'package:asyltas/ui/widgets/login_screen/password_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -74,8 +75,9 @@ class _LoginFormState extends State<LoginForm> {
             controller: passwordController,
           ),
           const SizedBox(height: 35),
-          GestureDetector(
-            onTap: () async {
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () async {
               final res = await signInAndSaveToken(
                 emailController.text,
                 passwordController.text,
@@ -113,8 +115,9 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           const SizedBox(height: 20),
-          GestureDetector(
-            onTap: () {
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () {
               widget.toRegistration();
             },
             child: Container(

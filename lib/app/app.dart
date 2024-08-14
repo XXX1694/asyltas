@@ -4,6 +4,7 @@ import 'package:asyltas/ui/views/cart/cart_view.dart';
 import 'package:asyltas/ui/views/catalog/catalog_view.dart';
 import 'package:asyltas/ui/views/home/home_view.dart';
 import 'package:asyltas/ui/views/login/login_view.dart';
+import 'package:asyltas/ui/views/payment/payment_view.dart';
 import 'package:asyltas/ui/views/product/product_view.dart';
 import 'package:asyltas/ui/views/profile/profile_view.dart';
 import 'package:asyltas/ui/views/registration/registration_view.dart';
@@ -18,13 +19,14 @@ import 'package:stacked_services/stacked_services.dart';
     CustomRoute(page: StartupView, initial: true),
     CustomRoute(
       page: HomeView,
-      path: 'home',
+      path: '/home',
     ),
-    CustomRoute(page: LoginView, path: 'login'),
-    CustomRoute(page: RegistrationView, path: 'registration'),
-    CustomRoute(page: CatalogView, path: 'catalog'),
-    CustomRoute(page: CartView, path: 'cart'),
-    CustomRoute(page: ProfileView, path: 'profile'),
+    CustomRoute(page: LoginView, path: '/login'),
+    CustomRoute(page: RegistrationView, path: '/registration'),
+    CustomRoute(page: CatalogView, path: '/catalog'),
+    CustomRoute(page: CartView, path: '/cart'),
+    CustomRoute(page: ProfileView, path: '/profile'),
+    CustomRoute(page: PaymentView, path: '/payment'),
     CustomRoute(
       page: ProductView,
       path: 'catalog/:productId',
@@ -34,7 +36,7 @@ import 'package:stacked_services/stacked_services.dart';
     CustomRoute(page: UnknownView, path: '/404'),
 
     /// When none of the above routes match, redirect to UnknownView
-    RedirectRoute(path: '*', redirectTo: '/404'),
+    RedirectRoute(path: '*', redirectTo: '/home'),
   ],
   dependencies: [
     LazySingleton(classType: BottomSheetService),

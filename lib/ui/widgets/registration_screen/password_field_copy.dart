@@ -1,4 +1,5 @@
 import 'package:asyltas/ui/common/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,8 +28,9 @@ class _PasswordFieldCopyState extends State<PasswordFieldCopy> {
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
-          suffixIcon: GestureDetector(
-            onTap: () => setState(() {
+          suffixIcon: CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () => setState(() {
               _obscureText = !_obscureText;
             }),
             child: Icon(

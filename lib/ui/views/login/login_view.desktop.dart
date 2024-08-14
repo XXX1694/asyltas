@@ -1,4 +1,5 @@
 import 'package:asyltas/ui/widgets/login_screen/login_form.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
@@ -36,7 +37,15 @@ class LoginViewDesktop extends ViewModelWidget<LoginViewmodel> {
             children: [
               Expanded(
                 child: Container(
-                  color: const Color(0xFFDBDBDB),
+                  // color: const Color(0xFFDBDBDB),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/images/login_image.jpg',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 30),
@@ -62,8 +71,9 @@ class LoginViewDesktop extends ViewModelWidget<LoginViewmodel> {
                       padding: const EdgeInsets.only(right: 80),
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: GestureDetector(
-                          onTap: () {},
+                        child: CupertinoButton(
+                          padding: const EdgeInsets.all(0),
+                          onPressed: () {},
                           child: Text(
                             'Asyltas Terms & Codnitions',
                             style: GoogleFonts.poppins(

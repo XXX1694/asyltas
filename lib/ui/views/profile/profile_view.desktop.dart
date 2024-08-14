@@ -5,6 +5,7 @@ import 'package:asyltas/ui/widgets/home_screen/footer.dart';
 import 'package:asyltas/ui/widgets/home_screen/mini_catalog.dart';
 import 'package:asyltas/ui/widgets/home_screen/top_bar.dart';
 import 'package:asyltas/ui/widgets/home_screen/top_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
@@ -65,8 +66,9 @@ class ProfileViewDesktop extends ViewModelWidget<ProfileViewModel> {
                 ),
               ),
               const SizedBox(height: 50),
-              GestureDetector(
-                onTap: () {
+              CupertinoButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {
                   viewModel.goToCatalogPage();
                 },
                 child: Container(

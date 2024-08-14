@@ -89,29 +89,58 @@ Future<bool> addToNewOrderField(
     // Update the newOrder field by appending newData
     await userRef.update({'newOrder': FieldValue.arrayUnion(newData)});
 
-    print('Data added to newOrder successfully');
+    if (kDebugMode) {
+      print('Data added to newOrder successfully');
+    }
     return true;
   } catch (e) {
-    print('Error adding data to newOrder: $e');
+    if (kDebugMode) {
+      print('Error adding data to newOrder: $e');
+    }
     return false;
     // Handle any errors here
   }
 }
 
-Future<void> addDataToOrdersCollection(
+Future<bool> addDataToOrdersCollection(
     List<Map<String, dynamic>> newData) async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   try {
     // Reference to the orders collection
+    final prefs = await SharedPreferences.getInstance();
+    String? docID = prefs.getString('idToken');
+
     CollectionReference ordersRef = firestore.collection('orders');
+    final docRef = FirebaseFirestore.instance.collection('users').doc(docID);
 
+    final docSnapshot = await docRef.get();
+    Map<String, dynamic> data = {};
+    if (docSnapshot.exists) {
+      data = docSnapshot.data() ?? {};
+    } else {
+      if (kDebugMode) {
+        print('Document does not exist');
+      }
+    }
     // Add newData to the orders collection
-    await ordersRef
-        .add({'data': newData, 'timestamp': FieldValue.serverTimestamp()});
+    await ordersRef.add(
+      {
+        'data': newData,
+        'user_info': data,
+        'timestamp': DateTime.now(),
+        'count': 1,
+      },
+    );
 
-    print('Data added to orders collection successfully');
+    if (kDebugMode) {
+      print('Data added to orders collection successfully');
+    }
+    return true;
   } catch (e) {
-    print('Error adding data to orders collection: $e');
+    if (kDebugMode) {
+      print('Error adding data to orders collection: $e');
+    }
+    return false;
     // Handle any errors here
   }
 }

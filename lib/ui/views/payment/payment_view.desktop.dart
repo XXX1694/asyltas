@@ -1,5 +1,3 @@
-import 'package:asyltas/ui/widgets/cart_screen/cart.dart';
-import 'package:asyltas/ui/widgets/cart_screen/top_text.dart';
 import 'package:asyltas/ui/widgets/home_screen/banner.dart';
 import 'package:asyltas/ui/widgets/home_screen/features.dart';
 import 'package:asyltas/ui/widgets/home_screen/footer.dart';
@@ -7,13 +5,13 @@ import 'package:asyltas/ui/widgets/home_screen/top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'cart_viewmodel.dart';
+import 'payment_viewmodel.dart';
 
-class CartViewDesktop extends ViewModelWidget<CartViewModel> {
-  const CartViewDesktop({super.key});
+class PaymentViewDesktop extends ViewModelWidget<PaymentViewModel> {
+  const PaymentViewDesktop({super.key});
 
   @override
-  Widget build(BuildContext context, CartViewModel viewModel) {
+  Widget build(BuildContext context, PaymentViewModel viewModel) {
     final double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
@@ -52,14 +50,15 @@ class CartViewDesktop extends ViewModelWidget<CartViewModel> {
                 ),
               ),
               const SizedBox(height: 100),
-              const CartTopText(),
-              const SizedBox(height: 75),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 140 * deviceWidth / 2200,
                 ),
-                child: CartBlock(
-                  toPayment: viewModel.goToPaymentPage,
+                child: Center(
+                  child: Image.asset(
+                    'assets/qr-code.png',
+                    height: deviceWidth * 0.5,
+                  ),
                 ),
               ),
               const SizedBox(height: 100),

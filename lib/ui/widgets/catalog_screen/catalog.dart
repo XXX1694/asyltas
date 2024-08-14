@@ -1,4 +1,6 @@
-import 'package:firebase_cached_image/firebase_cached_image.dart';
+import 'package:asyltas/ui/widgets/app_iamge.dart';
+import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:asyltas/models/product.dart';
@@ -128,8 +130,9 @@ class _CatalogState extends State<Catalog> {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: category.length,
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () {
+                  itemBuilder: (context, index) => CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
                       setState(() {
                         categoryProducts = [];
                         for (int i = 0; i < products.length; i++) {
@@ -268,8 +271,9 @@ class _CatalogState extends State<Catalog> {
                 ),
                 itemCount: categoryProducts.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
+                  return CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
                       widget.showProduct(product: categoryProducts[index]);
                     },
                     child: Container(
@@ -298,45 +302,10 @@ class _CatalogState extends State<Catalog> {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: categoryProducts[index].images != null
-                                    ? Image(
-                                        height: double.infinity,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                        image: FirebaseImageProvider(
-                                          FirebaseUrl(
-                                            categoryProducts[index]
-                                                    .images?[0] ??
-                                                '',
-                                          ),
-                                          options: const CacheOptions(
-                                            checkIfFileUpdatedOnServer: true,
-                                          ),
-                                        ),
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          // [ImageNotFoundException] will be thrown if image does not exist on server.
-                                          if (error is ImageNotFoundException) {
-                                            return const Text(
-                                                'Image not found on Cloud Storage.');
-                                          } else {
-                                            return Text(
-                                              'Error loading image: $error',
-                                            );
-                                          }
-                                        },
-                                        // The loading progress may not be accurate as Firebase Storage API
-                                        // does not provide a stream of bytes downloaded. The progress updates only at the start and end of the loading process.
-                                        loadingBuilder: (_, Widget child,
-                                            ImageChunkEvent? loadingProgress) {
-                                          if (loadingProgress == null) {
-                                            // Show the loaded image if loading is complete.
-                                            return child;
-                                          } else {
-                                            return Container(
-                                              color: Colors.grey.shade400,
-                                            );
-                                          }
-                                        },
+                                    ? AppImage(
+                                        imageUrl: categoryProducts[index]
+                                                .images?[0] ??
+                                            '',
                                       )
                                     : Container(
                                         color: Colors.grey.shade400,

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,8 +24,9 @@ class CustomFooter extends StatelessWidget {
                 height: 37,
               ),
               const Spacer(),
-              GestureDetector(
-                onTap: () {},
+              CupertinoButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {},
                 child: Text(
                   'Поддержка',
                   style: GoogleFonts.poppins(
@@ -34,8 +36,9 @@ class CustomFooter extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 80),
-              GestureDetector(
-                onTap: () {},
+              CupertinoButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {},
                 child: Text(
                   'Оплата',
                   style: GoogleFonts.poppins(
@@ -45,8 +48,9 @@ class CustomFooter extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 80),
-              GestureDetector(
-                onTap: () {},
+              CupertinoButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {},
                 child: Text(
                   'Контакты',
                   style: GoogleFonts.poppins(

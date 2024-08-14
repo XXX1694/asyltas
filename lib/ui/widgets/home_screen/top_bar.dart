@@ -1,5 +1,6 @@
 import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,7 +49,9 @@ class TopBar extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       const Spacer(),
-                      GestureDetector(
+                      CupertinoButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {},
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 17,
@@ -60,8 +63,9 @@ class TopBar extends StatelessWidget {
                           ),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
+                      CupertinoButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {
                           toCartPage();
                         },
                         child: Padding(
@@ -75,8 +79,9 @@ class TopBar extends StatelessWidget {
                           ),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
+                      CupertinoButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {
                           toProfilePage();
                         },
                         child: Padding(
@@ -95,8 +100,9 @@ class TopBar extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      GestureDetector(
-                        onTap: () {
+                      CupertinoButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {
                           toMainPage();
                         },
                         child: Container(
@@ -115,8 +121,9 @@ class TopBar extends StatelessWidget {
                           ),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
+                      CupertinoButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {
                           toCatalogPage();
                         },
                         child: Container(
@@ -153,8 +160,9 @@ class TopBar extends StatelessWidget {
                     height: 47,
                   ),
                   const Spacer(),
-                  GestureDetector(
-                    onTap: () {
+                  CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
                       toMainPage();
                     },
                     child: Container(
@@ -173,8 +181,9 @@ class TopBar extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
+                  CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
                       toCatalogPage();
                     },
                     child: Container(
@@ -211,8 +220,9 @@ class TopBar extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-                  GestureDetector(
-                    onTap: () {
+                  CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
                       toLoginPage();
                     },
                     child: Container(
@@ -231,8 +241,9 @@ class TopBar extends StatelessWidget {
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
+                  CupertinoButton(
+                    padding: const EdgeInsets.all(0),
+                    onPressed: () {
                       toRegistrationPage();
                     },
                     child: Container(

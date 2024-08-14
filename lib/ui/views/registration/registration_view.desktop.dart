@@ -1,4 +1,5 @@
 import 'package:asyltas/ui/widgets/registration_screen/registration_form.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
@@ -62,8 +63,9 @@ class RegistrationViewDesktop extends ViewModelWidget<RegistrationViewmodel> {
                       padding: const EdgeInsets.only(right: 80),
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: GestureDetector(
-                          onTap: () {},
+                        child: CupertinoButton(
+                          padding: const EdgeInsets.all(0),
+                          onPressed: () {},
                           child: Text(
                             'Asyltas Terms & Codnitions',
                             style: GoogleFonts.poppins(

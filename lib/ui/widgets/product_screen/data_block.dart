@@ -1,5 +1,6 @@
 import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/models/product.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -107,8 +108,9 @@ class DataBlock extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 50),
-          GestureDetector(
-            onTap: () async {
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () async {
               final token = await getSavedToken();
               if (token != null) {
                 final res = await addToNewOrderField(
@@ -118,15 +120,15 @@ class DataBlock extends StatelessWidget {
                   ],
                 );
                 if (res) {
-                  await addDataToOrdersCollection(
-                    [
-                      {
-                        'user': token,
-                        'count': 1,
-                        'product': product.toJson(),
-                      },
-                    ],
-                  );
+                  // await addDataToOrdersCollection(
+                  //   [
+                  //     {
+                  //       'user': token,
+                  //       'count': 1,
+                  //       'product': product.toJson(),
+                  //     },
+                  //   ],
+                  // );
                   toHome();
                 }
               } else {

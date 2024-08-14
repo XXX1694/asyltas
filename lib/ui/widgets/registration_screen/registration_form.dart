@@ -6,6 +6,7 @@ import 'package:asyltas/ui/widgets/registration_screen/name_field.dart';
 import 'package:asyltas/ui/widgets/registration_screen/password_field_copy.dart';
 import 'package:asyltas/ui/widgets/registration_screen/phone_field.dart';
 import 'package:asyltas/ui/widgets/registration_screen/surname_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -108,8 +109,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
             ),
           ),
           const SizedBox(height: 35),
-          GestureDetector(
-            onTap: () async {
+          CupertinoButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () async {
               final bool res = await registerUser(
                 email: emailController.text,
                 password: passwordController.text,
@@ -161,8 +163,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   fontSize: 16,
                 ),
               ),
-              GestureDetector(
-                onTap: () {
+              CupertinoButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () {
                   widget.toLogin();
                 },
                 child: Text(

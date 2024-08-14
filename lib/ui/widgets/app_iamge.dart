@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:asyltas/ui/common/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -35,16 +36,30 @@ class _AppImageState extends State<AppImage> {
       future: _imageBytesFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const ShrimerPlaceholder(
+            height: double.infinity,
+            width: double.infinity,
+          );
         } else if (snapshot.hasError) {
-          return const Text('Error loading image');
+          return const ErrorPlaceholder(
+            height: double.infinity,
+            width: double.infinity,
+          );
         } else if (snapshot.hasData) {
           return Image.memory(
             snapshot.data!,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) =>
+                const ErrorPlaceholder(
+              height: double.infinity,
+              width: double.infinity,
+            ),
           );
         } else {
-          return const Text('No image available');
+          return const ErrorPlaceholder(
+            height: double.infinity,
+            width: double.infinity,
+          );
         }
       },
     );

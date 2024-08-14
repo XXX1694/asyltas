@@ -2,6 +2,7 @@ import 'package:asyltas/models/product.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -167,8 +168,9 @@ class _MiniCatalogState extends State<MiniCatalog> {
                   itemCount:
                       categoryProducts.length > 9 ? 9 : categoryProducts.length,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
+                    return CupertinoButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
                         widget.showProduct(product: categoryProducts[index]);
                       },
                       child: Container(
@@ -278,8 +280,9 @@ class _MiniCatalogState extends State<MiniCatalog> {
   }
 
   Widget categoryItem(int index) {
-    return GestureDetector(
-      onTap: () {
+    return CupertinoButton(
+      padding: const EdgeInsets.all(0),
+      onPressed: () {
         setState(() {
           categoryProducts = [];
           for (int i = 0; i < products.length; i++) {

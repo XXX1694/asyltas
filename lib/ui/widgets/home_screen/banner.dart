@@ -1,5 +1,6 @@
 import 'package:asyltas/models/product.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -112,8 +113,9 @@ class AdBanner extends StatelessWidget {
                       ),
                     ),
                     const Spacer(flex: 20),
-                    GestureDetector(
-                      onTap: () {
+                    CupertinoButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
                         showProduct(
                           product: ProductModel(
                             '02l2xpTsC00BgmMZD1CT',
