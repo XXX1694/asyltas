@@ -149,6 +149,30 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20),
+                    FutureBuilder(
+                      future: checkAuth(),
+                      builder: (context, snapshot) {
+                        if (snapshot.data == true) {
+                          return GestureDetector(
+                            onTap: () async {
+                              await deleteToken();
+                              viewModel.goToMainPage();
+                            },
+                            child: Text(
+                              'Выйти',
+                              style: GoogleFonts.montserrat(
+                                color: Colors.red.shade400,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
+                    ),
                     // const SizedBox(height: 12),
                     // CupertinoButton(
                     //   padding: const EdgeInsets.all(0),

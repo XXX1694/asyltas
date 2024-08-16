@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/views/profile/profile_view.mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
@@ -15,7 +16,7 @@ class ProfileView extends StackedView<ProfileViewModel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const ProfileViewDesktop(),
+      mobile: (_) => const ProfileViewMobile(),
       tablet: (_) => const ProfileViewDesktop(),
       desktop: (_) => const ProfileViewDesktop(),
     );

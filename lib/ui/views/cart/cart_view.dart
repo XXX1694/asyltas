@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/views/cart/cart_view.mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
@@ -15,7 +16,7 @@ class CartView extends StackedView<CartViewModel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const CartViewDesktop(),
+      mobile: (_) => const CartViewMobile(),
       tablet: (_) => const CartViewDesktop(),
       desktop: (_) => const CartViewDesktop(),
     );

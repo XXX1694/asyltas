@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/views/registration/registration_view.mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
@@ -15,7 +16,7 @@ class RegistrationView extends StackedView<RegistrationViewmodel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const RegistrationViewDesktop(),
+      mobile: (_) => const RegistrationViewMobile(),
       tablet: (_) => const RegistrationViewDesktop(),
       desktop: (_) => const RegistrationViewDesktop(),
     );

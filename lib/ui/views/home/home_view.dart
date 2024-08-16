@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/views/home/home_view.mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
@@ -15,7 +16,7 @@ class HomeView extends StackedView<HomeViewModel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const HomeViewDesktop(),
+      mobile: (_) => const HomeViewMobile(),
       tablet: (_) => const HomeViewDesktop(),
       desktop: (_) => const HomeViewDesktop(),
     );

@@ -69,6 +69,11 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
                                 color: Colors.grey.shade300,
+                                image: const DecorationImage(
+                                  image: AssetImage(
+                                    'assets/images/asyltas_profile.png',
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(width: 16),
@@ -83,7 +88,7 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                const SizedBox(height: 12),
+                                const SizedBox(height: 8),
                                 RichText(
                                   text: TextSpan(
                                     children: [
@@ -106,6 +111,7 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                                     ],
                                   ),
                                 ),
+                                const SizedBox(height: 4),
                                 RichText(
                                   text: TextSpan(
                                     children: [

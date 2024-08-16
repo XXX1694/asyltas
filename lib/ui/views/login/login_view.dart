@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/views/login/login_view.mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
@@ -15,7 +16,7 @@ class LoginView extends StackedView<LoginViewmodel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const LoginViewDesktop(),
+      mobile: (_) => const LoginViewMobile(),
       tablet: (_) => const LoginViewDesktop(),
       desktop: (_) => const LoginViewDesktop(),
     );

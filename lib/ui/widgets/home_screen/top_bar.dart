@@ -1,10 +1,11 @@
 import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TopBar extends StatelessWidget {
+class TopBar extends StatefulWidget {
   const TopBar({
     super.key,
     required this.toLoginPage,
@@ -22,6 +23,12 @@ class TopBar extends StatelessWidget {
   final Function toMainPage;
   final Function toCartPage;
   final Function toProfilePage;
+
+  @override
+  State<TopBar> createState() => _TopBarState();
+}
+
+class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -45,7 +52,7 @@ class TopBar extends StatelessWidget {
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Spacer(),
                       CupertinoButton(
@@ -65,7 +72,7 @@ class TopBar extends StatelessWidget {
                       CupertinoButton(
                         padding: const EdgeInsets.all(0),
                         onPressed: () {
-                          toCartPage();
+                          widget.toCartPage();
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -80,17 +87,22 @@ class TopBar extends StatelessWidget {
                       ),
                       CupertinoButton(
                         padding: const EdgeInsets.all(0),
-                        onPressed: () {
-                          toProfilePage();
+                        onPressed: () async {
+                          await deleteToken();
+                          setState(() {});
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 13,
                             vertical: 13,
                           ),
-                          child: SvgPicture.asset(
-                            'assets/profile.svg',
-                            width: 20,
+                          // child: SvgPicture.asset(
+                          //   'assets/profile.svg',
+                          //   width: 20,
+                          // ),
+                          child: Icon(
+                            Icons.exit_to_app,
+                            color: Colors.black,
                           ),
                         ),
                       )
@@ -102,7 +114,7 @@ class TopBar extends StatelessWidget {
                       CupertinoButton(
                         padding: const EdgeInsets.all(0),
                         onPressed: () {
-                          toMainPage();
+                          widget.toMainPage();
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
@@ -123,7 +135,7 @@ class TopBar extends StatelessWidget {
                       CupertinoButton(
                         padding: const EdgeInsets.all(0),
                         onPressed: () {
-                          toCatalogPage();
+                          widget.toCatalogPage();
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
@@ -162,7 +174,7 @@ class TopBar extends StatelessWidget {
                   CupertinoButton(
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
-                      toMainPage();
+                      widget.toMainPage();
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -183,7 +195,7 @@ class TopBar extends StatelessWidget {
                   CupertinoButton(
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
-                      toCatalogPage();
+                      widget.toCatalogPage();
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -222,7 +234,7 @@ class TopBar extends StatelessWidget {
                   CupertinoButton(
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
-                      toLoginPage();
+                      widget.toLoginPage();
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -243,7 +255,7 @@ class TopBar extends StatelessWidget {
                   CupertinoButton(
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
-                      toRegistrationPage();
+                      widget.toRegistrationPage();
                     },
                     child: Container(
                       height: double.infinity,

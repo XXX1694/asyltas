@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/views/catalog/catalog_view.mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
@@ -15,7 +16,7 @@ class CatalogView extends StackedView<CatalogViewmodel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const CatalogViewDesktop(),
+      mobile: (_) => const CatalogViewMobile(),
       tablet: (_) => const CatalogViewDesktop(),
       desktop: (_) => const CatalogViewDesktop(),
     );

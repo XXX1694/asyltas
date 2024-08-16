@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/views/payment/payment_view.mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
@@ -15,7 +16,7 @@ class PaymentView extends StackedView<PaymentViewModel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const PaymentViewDesktop(),
+      mobile: (_) => const PaymentViewMobile(),
       tablet: (_) => const PaymentViewDesktop(),
       desktop: (_) => const PaymentViewDesktop(),
     );
