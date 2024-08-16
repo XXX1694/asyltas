@@ -3,8 +3,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 
 import 'registration_view.desktop.dart';
-import 'registration_view.tablet.dart';
-import 'registration_view.mobile.dart';
 import 'registration_viewmodel.dart';
 
 class RegistrationView extends StackedView<RegistrationViewmodel> {
@@ -17,8 +15,8 @@ class RegistrationView extends StackedView<RegistrationViewmodel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const RegistrationViewMobile(),
-      tablet: (_) => const RegistrationViewTablet(),
+      mobile: (_) => const RegistrationViewDesktop(),
+      tablet: (_) => const RegistrationViewDesktop(),
       desktop: (_) => const RegistrationViewDesktop(),
     );
   }

@@ -3,8 +3,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 
 import 'home_view.desktop.dart';
-import 'home_view.tablet.dart';
-import 'home_view.mobile.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -17,8 +15,8 @@ class HomeView extends StackedView<HomeViewModel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const HomeViewMobile(),
-      tablet: (_) => const HomeViewTablet(),
+      mobile: (_) => const HomeViewDesktop(),
+      tablet: (_) => const HomeViewDesktop(),
       desktop: (_) => const HomeViewDesktop(),
     );
   }

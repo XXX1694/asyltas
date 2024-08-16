@@ -4,8 +4,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 
 import 'product_view.desktop.dart';
-import 'product_view.tablet.dart';
-import 'product_view.mobile.dart';
 import 'product_viewmodel.dart';
 
 class ProductView extends StackedView<ProductViewmodel> {
@@ -22,8 +20,8 @@ class ProductView extends StackedView<ProductViewmodel> {
     Widget? child,
   ) {
     return ScreenTypeLayout.builder(
-      mobile: (_) => const ProductViewMobile(),
-      tablet: (_) => const ProductViewTablet(),
+      mobile: (_) => const ProductViewDesktop(),
+      tablet: (_) => const ProductViewDesktop(),
       desktop: (_) => const ProductViewDesktop(),
     );
   }
