@@ -1,7 +1,6 @@
 import 'package:asyltas/models/product.dart';
 import 'package:firebase_cached_image/firebase_cached_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class ImageBlock extends StatelessWidget {
   const ImageBlock({super.key, required this.product});

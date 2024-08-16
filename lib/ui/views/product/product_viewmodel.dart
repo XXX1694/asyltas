@@ -35,5 +35,9 @@ class ProductViewmodel extends BaseViewModel {
     await _routerService.navigateTo(const CartViewRoute());
   }
 
+  Future goToMenu() async {
+    await _routerService.navigateTo(const MenuViewRoute());
+  }
+
   ProductViewmodel({required this.product});
 }

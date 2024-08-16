@@ -2,8 +2,11 @@ import 'package:asyltas/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:asyltas/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:asyltas/ui/views/cart/cart_view.dart';
 import 'package:asyltas/ui/views/catalog/catalog_view.dart';
+import 'package:asyltas/ui/views/category/category_view.dart';
+import 'package:asyltas/ui/views/contacts/contacts_view.dart';
 import 'package:asyltas/ui/views/home/home_view.dart';
 import 'package:asyltas/ui/views/login/login_view.dart';
+import 'package:asyltas/ui/views/menu/menu_view.dart';
 import 'package:asyltas/ui/views/payment/payment_view.dart';
 import 'package:asyltas/ui/views/product/product_view.dart';
 import 'package:asyltas/ui/views/profile/profile_view.dart';
@@ -27,6 +30,9 @@ import 'package:stacked_services/stacked_services.dart';
     CustomRoute(page: CartView, path: '/cart'),
     CustomRoute(page: ProfileView, path: '/profile'),
     CustomRoute(page: PaymentView, path: '/payment'),
+    CustomRoute(page: MenuView, path: '/menu'),
+    CustomRoute(page: CategoryView, path: '/category'),
+    CustomRoute(page: ContactsView, path: '/contacts'),
     CustomRoute(
       page: ProductView,
       path: 'catalog/:productId',

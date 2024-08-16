@@ -17,4 +17,8 @@ class LoginViewmodel extends BaseViewModel {
   Future goToRegistrationPage() async {
     await _routerService.navigateTo(const RegistrationViewRoute());
   }
+
+  Future goToMenu() async {
+    await _routerService.navigateTo(const MenuViewRoute());
+  }
 }

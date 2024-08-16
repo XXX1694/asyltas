@@ -154,17 +154,21 @@ class _CatalogState extends State<Catalog> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Text(
-                        category[index]['name']!,
-                        style: GoogleFonts.montserrat(
-                          color: selescted == index
-                              ? const Color(0xFF4F6D9F)
-                              : Colors.black54,
-                          fontSize: 18,
-                          decoration: selescted == index
-                              ? TextDecoration.underline
-                              : TextDecoration.none,
-                          decorationColor: const Color(0xFF4F6D9F),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          category[index]['name']!,
+                          style: GoogleFonts.montserrat(
+                            color: selescted == index
+                                ? const Color(0xFF4F6D9F)
+                                : Colors.black54,
+                            fontSize: 18,
+                            decoration: selescted == index
+                                ? TextDecoration.underline
+                                : TextDecoration.none,
+                            decorationColor: const Color(0xFF4F6D9F),
+                          ),
+                          textAlign: TextAlign.left,
                         ),
                       ),
                     ),

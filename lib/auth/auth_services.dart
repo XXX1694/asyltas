@@ -103,7 +103,8 @@ Future<bool> addToNewOrderField(
 }
 
 Future<bool> addDataToOrdersCollection(
-    List<Map<String, dynamic>> newData) async {
+  List<Map<String, dynamic>> newData,
+) async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   try {
     // Reference to the orders collection
@@ -128,11 +129,18 @@ Future<bool> addDataToOrdersCollection(
         'data': newData,
         'user_info': data,
         'timestamp': DateTime.now(),
-        'count': 1,
       },
     );
 
+    DocumentReference docRefUser =
+        FirebaseFirestore.instance.collection('users').doc(docID);
+
+    await docRefUser.update({
+      'newOrder': FieldValue.delete(),
+    });
+
     if (kDebugMode) {
+      print('Field newOrder deleted successfully.');
       print('Data added to orders collection successfully');
     }
     return true;
@@ -142,6 +150,36 @@ Future<bool> addDataToOrdersCollection(
     }
     return false;
     // Handle any errors here
+  }
+}
+
+Future<Map<String, dynamic>?> getUserData() async {
+  try {
+    // Get the SharedPreferences instance
+    final prefs = await SharedPreferences.getInstance();
+
+    // Retrieve the userDocId from SharedPreferences
+    final userDocId = prefs.getString('idToken');
+
+    if (userDocId == null) {
+      throw Exception('No userDocId found in SharedPreferences');
+    }
+
+    // Access Firestore instance
+    final firestore = FirebaseFirestore.instance;
+
+    // Fetch the user document from the 'users' collection
+    final userDoc = await firestore.collection('users').doc(userDocId).get();
+
+    if (!userDoc.exists) {
+      throw Exception('User document does not exist');
+    }
+
+    // Return the user data
+    return userDoc.data();
+  } catch (e) {
+    print('Error getting user data: $e');
+    return null;
   }
 }
 
@@ -173,7 +211,15 @@ Future<bool> registerUser({
       if (kDebugMode) {
         print('User registered and additional details saved.');
       }
-      return true;
+      bool res = await signInAndSaveToken(
+        email,
+        password,
+      );
+      if (res) {
+        return true;
+      } else {
+        return false;
+      }
     }
   } catch (e) {
     if (kDebugMode) {

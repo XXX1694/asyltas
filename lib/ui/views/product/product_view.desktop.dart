@@ -65,7 +65,7 @@ class ProductViewDesktop extends ViewModelWidget<ProductViewmodel> {
                     child: DataBlock(
                       product: viewModel.product,
                       toLogin: viewModel.goToLoginPage,
-                      toHome: viewModel.goToMainPage,
+                      toHome: viewModel.goToCartPage,
                     ),
                   ),
                 ],

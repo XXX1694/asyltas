@@ -33,4 +33,8 @@ class ProfileViewModel extends BaseViewModel {
   Future goToCartPage() async {
     await _routerService.navigateTo(const ProfileViewRoute());
   }
+
+  Future goToMenu() async {
+    await _routerService.navigateTo(const MenuViewRoute());
+  }
 }

@@ -37,7 +37,15 @@ class RegistrationViewDesktop extends ViewModelWidget<RegistrationViewmodel> {
             children: [
               Expanded(
                 child: Container(
-                  color: const Color(0xFFDBDBDB),
+                  // color: const Color(0xFFDBDBDB),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/images/login_image.jpg',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 30),

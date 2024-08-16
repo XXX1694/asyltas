@@ -33,4 +33,24 @@ class CatalogViewmodel extends BaseViewModel {
   Future goToCartPage() async {
     await _routerService.navigateTo(const ProfileViewRoute());
   }
+
+  Future goToCategoryPage(
+    String categoryId,
+    String categoryName,
+  ) async {
+    await _routerService.navigateTo(
+      CategoryViewRoute(
+        categoryId: categoryId,
+        categoryName: categoryName,
+      ),
+    );
+  }
+
+  Future goBack() async {
+    _routerService.back();
+  }
+
+  Future goToMenu() async {
+    await _routerService.navigateTo(const MenuViewRoute());
+  }
 }

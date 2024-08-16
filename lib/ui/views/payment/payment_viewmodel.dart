@@ -33,4 +33,8 @@ class PaymentViewModel extends BaseViewModel {
   Future goToCartPage() async {
     await _routerService.navigateTo(const CartViewRoute());
   }
+
+  Future goToMenu() async {
+    await _routerService.navigateTo(const MenuViewRoute());
+  }
 }

@@ -33,4 +33,8 @@ class HomeViewModel extends BaseViewModel {
   Future goToProfilePage() async {
     await _routerService.navigateTo(const ProfileViewRoute());
   }
+
+  Future goToMenu() async {
+    await _routerService.navigateTo(const MenuViewRoute());
+  }
 }

@@ -3,6 +3,7 @@ import 'package:asyltas/ui/widgets/home_screen/features.dart';
 import 'package:asyltas/ui/widgets/home_screen/footer.dart';
 import 'package:asyltas/ui/widgets/home_screen/top_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'payment_viewmodel.dart';
@@ -49,15 +50,45 @@ class PaymentViewDesktop extends ViewModelWidget<PaymentViewModel> {
                   },
                 ),
               ),
+              const SizedBox(height: 70),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Оплата',
+                    style: GoogleFonts.montserrat(
+                      color: Colors.black,
+                      fontSize: 42,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Оплатите полную сумму через каспи и отправьте чек на ватсап',
+                    style: GoogleFonts.montserrat(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 100),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 140 * deviceWidth / 2200,
                 ),
                 child: Center(
-                  child: Image.asset(
-                    'assets/qr-code.png',
-                    height: deviceWidth * 0.5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(
+                        'assets/kaspi.png',
+                        height: deviceWidth * 0.3,
+                      ),
+                      Image.asset(
+                        'assets/whatsapp.png',
+                        height: deviceWidth * 0.3,
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:typed_data';
 import 'package:asyltas/ui/common/placeholder.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ class AppImage extends StatefulWidget {
   const AppImage({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AppImageState createState() => _AppImageState();
 }
 

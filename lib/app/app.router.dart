@@ -5,33 +5,36 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i13;
-import 'package:stacked/stacked.dart' as _i12;
-import 'package:stacked_services/stacked_services.dart' as _i11;
+import 'package:flutter/material.dart' as _i16;
+import 'package:stacked/stacked.dart' as _i15;
+import 'package:stacked_services/stacked_services.dart' as _i14;
 
-import '../models/product.dart' as _i14;
+import '../models/product.dart' as _i17;
 import '../ui/views/cart/cart_view.dart' as _i6;
 import '../ui/views/catalog/catalog_view.dart' as _i5;
+import '../ui/views/category/category_view.dart' as _i10;
+import '../ui/views/contacts/contacts_view.dart' as _i11;
 import '../ui/views/home/home_view.dart' as _i2;
 import '../ui/views/login/login_view.dart' as _i3;
+import '../ui/views/menu/menu_view.dart' as _i9;
 import '../ui/views/payment/payment_view.dart' as _i8;
-import '../ui/views/product/product_view.dart' as _i9;
+import '../ui/views/product/product_view.dart' as _i12;
 import '../ui/views/profile/profile_view.dart' as _i7;
 import '../ui/views/registration/registration_view.dart' as _i4;
 import '../ui/views/startup/startup_view.dart' as _i1;
-import '../ui/views/unknown/unknown_view.dart' as _i10;
+import '../ui/views/unknown/unknown_view.dart' as _i13;
 
 final stackedRouter =
-    StackedRouterWeb(navigatorKey: _i11.StackedService.navigatorKey);
+    StackedRouterWeb(navigatorKey: _i14.StackedService.navigatorKey);
 
-class StackedRouterWeb extends _i12.RootStackRouter {
-  StackedRouterWeb({_i13.GlobalKey<_i13.NavigatorState>? navigatorKey})
+class StackedRouterWeb extends _i15.RootStackRouter {
+  StackedRouterWeb({_i16.GlobalKey<_i16.NavigatorState>? navigatorKey})
       : super(navigatorKey);
 
   @override
-  final Map<String, _i12.PageFactory> pagesMap = {
+  final Map<String, _i15.PageFactory> pagesMap = {
     StartupViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i1.StartupView(),
         opaque: true,
@@ -39,7 +42,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     HomeViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i2.HomeView(),
         opaque: true,
@@ -47,7 +50,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     LoginViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i3.LoginView(),
         opaque: true,
@@ -55,7 +58,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     RegistrationViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i4.RegistrationView(),
         opaque: true,
@@ -63,7 +66,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     CatalogViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i5.CatalogView(),
         opaque: true,
@@ -71,7 +74,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     CartViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i6.CartView(),
         opaque: true,
@@ -79,7 +82,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     ProfileViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i7.ProfileView(),
         opaque: true,
@@ -87,18 +90,47 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     PaymentViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i8.PaymentView(),
         opaque: true,
         barrierDismissible: false,
       );
     },
+    MenuViewRoute.name: (routeData) {
+      return _i15.CustomPage<dynamic>(
+        routeData: routeData,
+        child: const _i9.MenuView(),
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    CategoryViewRoute.name: (routeData) {
+      final args = routeData.argsAs<CategoryViewArgs>();
+      return _i15.CustomPage<dynamic>(
+        routeData: routeData,
+        child: _i10.CategoryView(
+          key: args.key,
+          categoryId: args.categoryId,
+          categoryName: args.categoryName,
+        ),
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
+    ContactsViewRoute.name: (routeData) {
+      return _i15.CustomPage<dynamic>(
+        routeData: routeData,
+        child: const _i11.ContactsView(),
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
     ProductViewRoute.name: (routeData) {
       final args = routeData.argsAs<ProductViewArgs>();
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
-        child: _i9.ProductView(
+        child: _i12.ProductView(
           key: args.key,
           product: args.product,
         ),
@@ -107,9 +139,9 @@ class StackedRouterWeb extends _i12.RootStackRouter {
       );
     },
     UnknownViewRoute.name: (routeData) {
-      return _i12.CustomPage<dynamic>(
+      return _i15.CustomPage<dynamic>(
         routeData: routeData,
-        child: const _i10.UnknownView(),
+        child: const _i13.UnknownView(),
         opaque: true,
         barrierDismissible: false,
       );
@@ -117,48 +149,60 @@ class StackedRouterWeb extends _i12.RootStackRouter {
   };
 
   @override
-  List<_i12.RouteConfig> get routes => [
-        _i12.RouteConfig(
+  List<_i15.RouteConfig> get routes => [
+        _i15.RouteConfig(
           StartupViewRoute.name,
           path: '/',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           HomeViewRoute.name,
           path: '/home',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           LoginViewRoute.name,
           path: '/login',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           RegistrationViewRoute.name,
           path: '/registration',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           CatalogViewRoute.name,
           path: '/catalog',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           CartViewRoute.name,
           path: '/cart',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           ProfileViewRoute.name,
           path: '/profile',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           PaymentViewRoute.name,
           path: '/payment',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
+          MenuViewRoute.name,
+          path: '/menu',
+        ),
+        _i15.RouteConfig(
+          CategoryViewRoute.name,
+          path: '/category',
+        ),
+        _i15.RouteConfig(
+          ContactsViewRoute.name,
+          path: '/contacts',
+        ),
+        _i15.RouteConfig(
           ProductViewRoute.name,
           path: 'catalog/:productId',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           UnknownViewRoute.name,
           path: '/404',
         ),
-        _i12.RouteConfig(
+        _i15.RouteConfig(
           '*#redirect',
           path: '*',
           redirectTo: '/home',
@@ -169,7 +213,7 @@ class StackedRouterWeb extends _i12.RootStackRouter {
 
 /// generated route for
 /// [_i1.StartupView]
-class StartupViewRoute extends _i12.PageRouteInfo<void> {
+class StartupViewRoute extends _i15.PageRouteInfo<void> {
   const StartupViewRoute()
       : super(
           StartupViewRoute.name,
@@ -181,7 +225,7 @@ class StartupViewRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.HomeView]
-class HomeViewRoute extends _i12.PageRouteInfo<void> {
+class HomeViewRoute extends _i15.PageRouteInfo<void> {
   const HomeViewRoute()
       : super(
           HomeViewRoute.name,
@@ -193,7 +237,7 @@ class HomeViewRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.LoginView]
-class LoginViewRoute extends _i12.PageRouteInfo<void> {
+class LoginViewRoute extends _i15.PageRouteInfo<void> {
   const LoginViewRoute()
       : super(
           LoginViewRoute.name,
@@ -205,7 +249,7 @@ class LoginViewRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.RegistrationView]
-class RegistrationViewRoute extends _i12.PageRouteInfo<void> {
+class RegistrationViewRoute extends _i15.PageRouteInfo<void> {
   const RegistrationViewRoute()
       : super(
           RegistrationViewRoute.name,
@@ -217,7 +261,7 @@ class RegistrationViewRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.CatalogView]
-class CatalogViewRoute extends _i12.PageRouteInfo<void> {
+class CatalogViewRoute extends _i15.PageRouteInfo<void> {
   const CatalogViewRoute()
       : super(
           CatalogViewRoute.name,
@@ -229,7 +273,7 @@ class CatalogViewRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.CartView]
-class CartViewRoute extends _i12.PageRouteInfo<void> {
+class CartViewRoute extends _i15.PageRouteInfo<void> {
   const CartViewRoute()
       : super(
           CartViewRoute.name,
@@ -241,7 +285,7 @@ class CartViewRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.ProfileView]
-class ProfileViewRoute extends _i12.PageRouteInfo<void> {
+class ProfileViewRoute extends _i15.PageRouteInfo<void> {
   const ProfileViewRoute()
       : super(
           ProfileViewRoute.name,
@@ -253,7 +297,7 @@ class ProfileViewRoute extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.PaymentView]
-class PaymentViewRoute extends _i12.PageRouteInfo<void> {
+class PaymentViewRoute extends _i15.PageRouteInfo<void> {
   const PaymentViewRoute()
       : super(
           PaymentViewRoute.name,
@@ -264,11 +308,74 @@ class PaymentViewRoute extends _i12.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.ProductView]
-class ProductViewRoute extends _i12.PageRouteInfo<ProductViewArgs> {
+/// [_i9.MenuView]
+class MenuViewRoute extends _i15.PageRouteInfo<void> {
+  const MenuViewRoute()
+      : super(
+          MenuViewRoute.name,
+          path: '/menu',
+        );
+
+  static const String name = 'MenuView';
+}
+
+/// generated route for
+/// [_i10.CategoryView]
+class CategoryViewRoute extends _i15.PageRouteInfo<CategoryViewArgs> {
+  CategoryViewRoute({
+    _i16.Key? key,
+    required String categoryId,
+    required String categoryName,
+  }) : super(
+          CategoryViewRoute.name,
+          path: '/category',
+          args: CategoryViewArgs(
+            key: key,
+            categoryId: categoryId,
+            categoryName: categoryName,
+          ),
+        );
+
+  static const String name = 'CategoryView';
+}
+
+class CategoryViewArgs {
+  const CategoryViewArgs({
+    this.key,
+    required this.categoryId,
+    required this.categoryName,
+  });
+
+  final _i16.Key? key;
+
+  final String categoryId;
+
+  final String categoryName;
+
+  @override
+  String toString() {
+    return 'CategoryViewArgs{key: $key, categoryId: $categoryId, categoryName: $categoryName}';
+  }
+}
+
+/// generated route for
+/// [_i11.ContactsView]
+class ContactsViewRoute extends _i15.PageRouteInfo<void> {
+  const ContactsViewRoute()
+      : super(
+          ContactsViewRoute.name,
+          path: '/contacts',
+        );
+
+  static const String name = 'ContactsView';
+}
+
+/// generated route for
+/// [_i12.ProductView]
+class ProductViewRoute extends _i15.PageRouteInfo<ProductViewArgs> {
   ProductViewRoute({
-    _i13.Key? key,
-    required _i14.ProductModel product,
+    _i16.Key? key,
+    required _i17.ProductModel product,
   }) : super(
           ProductViewRoute.name,
           path: 'catalog/:productId',
@@ -287,9 +394,9 @@ class ProductViewArgs {
     required this.product,
   });
 
-  final _i13.Key? key;
+  final _i16.Key? key;
 
-  final _i14.ProductModel product;
+  final _i17.ProductModel product;
 
   @override
   String toString() {
@@ -298,8 +405,8 @@ class ProductViewArgs {
 }
 
 /// generated route for
-/// [_i10.UnknownView]
-class UnknownViewRoute extends _i12.PageRouteInfo<void> {
+/// [_i13.UnknownView]
+class UnknownViewRoute extends _i15.PageRouteInfo<void> {
   const UnknownViewRoute()
       : super(
           UnknownViewRoute.name,
@@ -309,9 +416,9 @@ class UnknownViewRoute extends _i12.PageRouteInfo<void> {
   static const String name = 'UnknownView';
 }
 
-extension RouterStateExtension on _i11.RouterService {
+extension RouterStateExtension on _i14.RouterService {
   Future<dynamic> navigateToStartupView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const StartupViewRoute(),
       onFailure: onFailure,
@@ -319,7 +426,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> navigateToHomeView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const HomeViewRoute(),
       onFailure: onFailure,
@@ -327,7 +434,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> navigateToLoginView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const LoginViewRoute(),
       onFailure: onFailure,
@@ -335,7 +442,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> navigateToRegistrationView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const RegistrationViewRoute(),
       onFailure: onFailure,
@@ -343,7 +450,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> navigateToCatalogView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const CatalogViewRoute(),
       onFailure: onFailure,
@@ -351,7 +458,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> navigateToCartView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const CartViewRoute(),
       onFailure: onFailure,
@@ -359,7 +466,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> navigateToProfileView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const ProfileViewRoute(),
       onFailure: onFailure,
@@ -367,17 +474,49 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> navigateToPaymentView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const PaymentViewRoute(),
       onFailure: onFailure,
     );
   }
 
+  Future<dynamic> navigateToMenuView(
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
+    return navigateTo(
+      const MenuViewRoute(),
+      onFailure: onFailure,
+    );
+  }
+
+  Future<dynamic> navigateToCategoryView({
+    _i16.Key? key,
+    required String categoryId,
+    required String categoryName,
+    void Function(_i15.NavigationFailure)? onFailure,
+  }) async {
+    return navigateTo(
+      CategoryViewRoute(
+        key: key,
+        categoryId: categoryId,
+        categoryName: categoryName,
+      ),
+      onFailure: onFailure,
+    );
+  }
+
+  Future<dynamic> navigateToContactsView(
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
+    return navigateTo(
+      const ContactsViewRoute(),
+      onFailure: onFailure,
+    );
+  }
+
   Future<dynamic> navigateToProductView({
-    _i13.Key? key,
-    required _i14.ProductModel product,
-    void Function(_i12.NavigationFailure)? onFailure,
+    _i16.Key? key,
+    required _i17.ProductModel product,
+    void Function(_i15.NavigationFailure)? onFailure,
   }) async {
     return navigateTo(
       ProductViewRoute(
@@ -389,7 +528,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> navigateToUnknownView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return navigateTo(
       const UnknownViewRoute(),
       onFailure: onFailure,
@@ -397,7 +536,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithStartupView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const StartupViewRoute(),
       onFailure: onFailure,
@@ -405,7 +544,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithHomeView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const HomeViewRoute(),
       onFailure: onFailure,
@@ -413,7 +552,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithLoginView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const LoginViewRoute(),
       onFailure: onFailure,
@@ -421,7 +560,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithRegistrationView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const RegistrationViewRoute(),
       onFailure: onFailure,
@@ -429,7 +568,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithCatalogView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const CatalogViewRoute(),
       onFailure: onFailure,
@@ -437,7 +576,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithCartView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const CartViewRoute(),
       onFailure: onFailure,
@@ -445,7 +584,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithProfileView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const ProfileViewRoute(),
       onFailure: onFailure,
@@ -453,17 +592,49 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithPaymentView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const PaymentViewRoute(),
       onFailure: onFailure,
     );
   }
 
+  Future<dynamic> replaceWithMenuView(
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
+    return replaceWith(
+      const MenuViewRoute(),
+      onFailure: onFailure,
+    );
+  }
+
+  Future<dynamic> replaceWithCategoryView({
+    _i16.Key? key,
+    required String categoryId,
+    required String categoryName,
+    void Function(_i15.NavigationFailure)? onFailure,
+  }) async {
+    return replaceWith(
+      CategoryViewRoute(
+        key: key,
+        categoryId: categoryId,
+        categoryName: categoryName,
+      ),
+      onFailure: onFailure,
+    );
+  }
+
+  Future<dynamic> replaceWithContactsView(
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
+    return replaceWith(
+      const ContactsViewRoute(),
+      onFailure: onFailure,
+    );
+  }
+
   Future<dynamic> replaceWithProductView({
-    _i13.Key? key,
-    required _i14.ProductModel product,
-    void Function(_i12.NavigationFailure)? onFailure,
+    _i16.Key? key,
+    required _i17.ProductModel product,
+    void Function(_i15.NavigationFailure)? onFailure,
   }) async {
     return replaceWith(
       ProductViewRoute(
@@ -475,7 +646,7 @@ extension RouterStateExtension on _i11.RouterService {
   }
 
   Future<dynamic> replaceWithUnknownView(
-      {void Function(_i12.NavigationFailure)? onFailure}) async {
+      {void Function(_i15.NavigationFailure)? onFailure}) async {
     return replaceWith(
       const UnknownViewRoute(),
       onFailure: onFailure,
