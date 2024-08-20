@@ -268,8 +268,8 @@ class _TopBarState extends State<TopBar> {
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            offset: const Offset(0, 20),
-                            color: kcBlack.withOpacity(0.15),
+                            offset: const Offset(0, 10),
+                            color: kcBlack.withOpacity(0.05),
                             blurRadius: 15,
                           ),
                         ],

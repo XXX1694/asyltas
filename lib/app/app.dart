@@ -11,7 +11,6 @@ import 'package:asyltas/ui/views/payment/payment_view.dart';
 import 'package:asyltas/ui/views/product/product_view.dart';
 import 'package:asyltas/ui/views/profile/profile_view.dart';
 import 'package:asyltas/ui/views/registration/registration_view.dart';
-import 'package:asyltas/ui/views/startup/startup_view.dart';
 import 'package:asyltas/ui/views/unknown/unknown_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -19,7 +18,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 @StackedApp(
   routes: [
-    CustomRoute(page: StartupView, initial: true),
+    //CustomRoute(page: StartupView, initial: true),
     CustomRoute(
       page: HomeView,
       path: '/home',

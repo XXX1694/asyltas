@@ -113,16 +113,13 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       ),
                     ),
                     const SizedBox(height: 18),
-                    CupertinoButton(
-                      padding: const EdgeInsets.all(0),
-                      onPressed: () async {
+                    GestureDetector(
+                      onTap: () async {
                         final token = await getSavedToken();
                         if (token != null) {
                           final res = await addToNewOrderField(
                             token,
-                            [
-                              viewModel.product.toJson(),
-                            ],
+                            [viewModel.product.toJson()],
                           );
                           if (res) {
                             viewModel.goToCartPage();

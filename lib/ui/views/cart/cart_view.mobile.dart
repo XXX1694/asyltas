@@ -17,6 +17,15 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
 
   @override
   Widget build(BuildContext context, CartViewModel viewModel) {
+    ValueNotifier<num> overall = ValueNotifier<num>(0);
+    void _incrementOverall(int price) {
+      overall.value += price;
+    }
+
+    void _decreaceOverall(int price) {
+      overall.value -= price;
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -94,7 +103,8 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                           scrollDirection: Axis.vertical,
                           itemCount: snapshot.data?.length ?? 0,
                           itemBuilder: (context, index) {
-                            snapshot.data?[index]['count'] = 1;
+                            overall.value += snapshot.data?[index]['price'] *
+                                snapshot.data?[index]['count'];
                             return Container(
                               margin: const EdgeInsets.symmetric(
                                 horizontal: 20,
@@ -169,18 +179,21 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                                 children: [
                                                   GestureDetector(
                                                     onTap: () {
-                                                      setState(
-                                                        () {
-                                                          if (snapshot.data?[
-                                                                      index]
-                                                                  ['count'] >
-                                                              0) {
+                                                      _decreaceOverall(
+                                                        snapshot.data?[index]
+                                                            ['price'],
+                                                      );
+                                                      if (snapshot.data?[index]
+                                                              ['count'] >
+                                                          1) {
+                                                        setState(
+                                                          () {
                                                             snapshot.data?[
                                                                     index]
                                                                 ['count']--;
-                                                          }
-                                                        },
-                                                      );
+                                                          },
+                                                        );
+                                                      }
                                                     },
                                                     child: Padding(
                                                       padding: const EdgeInsets
@@ -207,6 +220,10 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                                   ),
                                                   GestureDetector(
                                                     onTap: () {
+                                                      _incrementOverall(
+                                                        snapshot.data?[index]
+                                                            ['price'],
+                                                      );
                                                       setState(() {
                                                         snapshot.data?[index]
                                                             ['count']++;
@@ -267,6 +284,36 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                       //     ],
                       //   ),
                       // ),
+                      ValueListenableBuilder<num>(
+                        builder: (context, value, child) => Row(
+                          children: [
+                            const Spacer(
+                              flex: 10,
+                            ),
+                            Text(
+                              'Итого: ',
+                              style: GoogleFonts.montserrat(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              "${overall.value} ₸",
+                              style: GoogleFonts.montserrat(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const Spacer(
+                              flex: 1,
+                            ),
+                          ],
+                        ),
+                        valueListenable: overall,
+                      ),
+                      const SizedBox(height: 20),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CupertinoButton(
@@ -281,7 +328,9 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                               sendData,
                             );
                             if (res) {
-                              viewModel.goToPaymentPage();
+                              viewModel.goToPaymentPage(
+                                overall.value.toString(),
+                              );
                             }
                           },
                           child: Container(

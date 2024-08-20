@@ -80,7 +80,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
               borderRadius: BorderRadius.circular(8),
               boxShadow: const [
                 BoxShadow(
-                  offset: Offset(0, 20),
+                  offset: Offset(0, 10),
                   blurRadius: 35,
                   color: Colors.black12,
                 ),

@@ -5,6 +5,10 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class PaymentViewModel extends BaseViewModel {
+  final String price;
+  PaymentViewModel({
+    required this.price,
+  });
   final _routerService = locator<RouterService>();
   Future goToMainPage() async {
     await _routerService.navigateTo(const HomeViewRoute());

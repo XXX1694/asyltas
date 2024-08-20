@@ -55,7 +55,7 @@ class PaymentViewDesktop extends ViewModelWidget<PaymentViewModel> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Оплата',
+                    'К оплате: ${viewModel.price}',
                     style: GoogleFonts.montserrat(
                       color: Colors.black,
                       fontSize: 42,

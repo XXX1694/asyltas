@@ -70,6 +70,8 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                     CatalogMobile(
                       showProduct: viewModel.goToProductPage,
                       categoryId: viewModel.categoryId,
+                      goHome: viewModel.goToMainPage,
+                      goLogin: viewModel.goToLoginPage,
                     )
                   ],
                 ),

@@ -96,7 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: const [
                   BoxShadow(
-                    offset: Offset(0, 20),
+                    offset: Offset(0, 10),
                     blurRadius: 35,
                     color: Colors.black12,
                   ),

@@ -98,7 +98,7 @@ class DataBlock extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: ' шт осталось',
+                  text: ' шт в пачке',
                   style: GoogleFonts.montserrat(
                     color: Colors.black54,
                     fontSize: 16,
@@ -111,6 +111,7 @@ class DataBlock extends StatelessWidget {
           CupertinoButton(
             padding: const EdgeInsets.all(0),
             onPressed: () async {
+              product.count = 1;
               final token = await getSavedToken();
               if (token != null) {
                 final res = await addToNewOrderField(

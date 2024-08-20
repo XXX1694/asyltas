@@ -11,10 +11,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CartBlock extends StatelessWidget {
   const CartBlock({super.key, required this.toPayment});
-  final Function toPayment;
+  final Function(String) toPayment;
+
   @override
   Widget build(BuildContext context) {
     // double deviceWidth = MediaQuery.of(context).size.width;
+
+    ValueNotifier<num> overall = ValueNotifier<num>(0);
+    void _incrementOverall(int price) {
+      overall.value += price;
+    }
+
+    void _decreaceOverall(int price) {
+      overall.value -= price;
+    }
+
     return FutureBuilder(
       future: _loadData(),
       builder: (context, snapshot) {
@@ -87,7 +98,9 @@ class CartBlock extends StatelessWidget {
               dataRowMaxHeight: 200,
               // columnSpacing: deviceWidth * 0.18,
               rows: snapshot.data!.map((order) {
-                order['count'] = 1;
+                overall.value += order['price'] * order['count'];
+                ValueNotifier<num> total = ValueNotifier<num>(0);
+                total.value = order['price'];
                 return DataRow(
                   cells: [
                     DataCell(
@@ -176,8 +189,11 @@ class CartBlock extends StatelessWidget {
                                     onTap: () {
                                       setState(
                                         () {
-                                          if (order['count'] > 0) {
+                                          if (order['count'] > 1) {
                                             order['count']--;
+                                            _decreaceOverall(order['price']);
+                                            total.value =
+                                                order['count'] * order['price'];
                                           }
                                         },
                                       );
@@ -201,9 +217,13 @@ class CartBlock extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
+                                      _incrementOverall(order['price']);
+
                                       setState(() {
                                         order['count']++;
                                       });
+                                      total.value =
+                                          order['count'] * order['price'];
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -223,20 +243,53 @@ class CartBlock extends StatelessWidget {
                     DataCell(
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Text(
-                          order['price'].toString(),
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.montserrat(
-                            color: Colors.black,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500,
+                        child: ValueListenableBuilder(
+                          builder: (context, value, child) => Text(
+                            "${total.value.toString()} ₸",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.montserrat(
+                              color: Colors.black,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
+                          valueListenable: total,
                         ),
                       ),
                     ),
                   ],
                 );
               }).toList(),
+            ),
+            const Divider(),
+            ValueListenableBuilder<num>(
+              builder: (context, value, child) => Row(
+                children: [
+                  const Spacer(
+                    flex: 10,
+                  ),
+                  Text(
+                    'Итого: ',
+                    style: GoogleFonts.montserrat(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    "${overall.value} ₸",
+                    style: GoogleFonts.montserrat(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const Spacer(
+                    flex: 1,
+                  ),
+                ],
+              ),
+              valueListenable: overall,
             ),
             const SizedBox(height: 30),
             CupertinoButton(
@@ -251,7 +304,7 @@ class CartBlock extends StatelessWidget {
                   sendData,
                 );
                 if (res) {
-                  toPayment();
+                  toPayment(overall.value.toString());
                 }
               },
               child: Container(

@@ -49,7 +49,7 @@ class PaymentViewMobile extends ViewModelWidget<PaymentViewModel> {
                 children: [
                   const SizedBox(height: 40),
                   Text(
-                    'Оплата',
+                    'К оплате: ${viewModel.price}',
                     style: GoogleFonts.montserrat(
                       color: kcPrimaryColor,
                       fontSize: 24,
@@ -65,30 +65,52 @@ class PaymentViewMobile extends ViewModelWidget<PaymentViewModel> {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  CupertinoButton(
-                    color: const Color(0xFFF14635),
-                    child: const Text('Kaspi'),
-                    onPressed: () async {
+                  GestureDetector(
+                    onTap: () async {
                       const url = 'https://pay.kaspi.kz/pay/zgueos6v';
                       if (await canLaunchUrl(Uri.parse(url))) {
-                        await launchUrl(Uri.parse(url));
+                        await launchUrl(
+                          Uri.parse(url),
+                          mode: LaunchMode.externalApplication,
+                        );
                       } else {
                         throw 'Could not launch $url';
                       }
                     },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF14635),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Text('Kaspi'),
+                    ),
                   ),
                   const SizedBox(height: 20),
-                  CupertinoButton(
-                    color: const Color(0xFF47C756),
-                    child: const Text('Whatsapp'),
-                    onPressed: () async {
+                  GestureDetector(
+                    onTap: () async {
                       const url = 'https://wa.me/message/PQBV66LSNTE6O1';
                       if (await canLaunchUrl(Uri.parse(url))) {
-                        await launchUrl(Uri.parse(url));
+                        await launchUrl(
+                          Uri.parse(url),
+                          mode: LaunchMode.externalApplication,
+                        );
                       } else {
                         throw 'Could not launch $url';
                       }
                     },
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF47C756),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Text('Whatsapp'),
+                    ),
                   ),
                 ],
               ),

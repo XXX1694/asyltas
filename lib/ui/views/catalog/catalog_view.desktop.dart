@@ -61,6 +61,8 @@ class CatalogViewDesktop extends ViewModelWidget<CatalogViewmodel> {
                 ),
                 child: Catalog(
                   showProduct: viewModel.goToProductPage,
+                  goHome: viewModel.goToMainPage,
+                  goLogin: viewModel.goToLoginPage,
                 ),
               ),
               const SizedBox(height: 100),

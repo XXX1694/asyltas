@@ -7,7 +7,11 @@ import 'payment_view.desktop.dart';
 import 'payment_viewmodel.dart';
 
 class PaymentView extends StackedView<PaymentViewModel> {
-  const PaymentView({super.key});
+  final String price;
+  const PaymentView({
+    super.key,
+    required this.price,
+  });
 
   @override
   Widget builder(
@@ -26,5 +30,7 @@ class PaymentView extends StackedView<PaymentViewModel> {
   PaymentViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      PaymentViewModel();
+      PaymentViewModel(
+        price: price,
+      );
 }

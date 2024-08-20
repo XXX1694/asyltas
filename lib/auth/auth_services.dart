@@ -128,6 +128,7 @@ Future<bool> addDataToOrdersCollection(
       {
         'data': newData,
         'user_info': data,
+        'status': 'new',
         'timestamp': DateTime.now(),
       },
     );

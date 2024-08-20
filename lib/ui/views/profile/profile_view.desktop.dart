@@ -2,7 +2,6 @@ import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/home_screen/banner.dart';
 import 'package:asyltas/ui/widgets/home_screen/features.dart';
 import 'package:asyltas/ui/widgets/home_screen/footer.dart';
-import 'package:asyltas/ui/widgets/home_screen/mini_catalog.dart';
 import 'package:asyltas/ui/widgets/home_screen/top_bar.dart';
 import 'package:asyltas/ui/widgets/home_screen/top_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,14 +56,6 @@ class ProfileViewDesktop extends ViewModelWidget<ProfileViewModel> {
               const SizedBox(height: 100),
               const TopText(),
               const SizedBox(height: 50),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 140 * deviceWidth / 2200,
-                ),
-                child: MiniCatalog(
-                  showProduct: viewModel.goToProductPage,
-                ),
-              ),
               const SizedBox(height: 50),
               CupertinoButton(
                 padding: const EdgeInsets.all(0),
@@ -79,8 +70,8 @@ class ProfileViewDesktop extends ViewModelWidget<ProfileViewModel> {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        offset: const Offset(0, 20),
-                        color: kcBlack.withOpacity(0.15),
+                        offset: const Offset(0, 10),
+                        color: kcBlack.withOpacity(0.05),
                         blurRadius: 35,
                       )
                     ],

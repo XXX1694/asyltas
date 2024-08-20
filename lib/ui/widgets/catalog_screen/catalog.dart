@@ -1,3 +1,4 @@
+import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -12,8 +13,15 @@ typedef FutureCallbackFunction = Future Function(
     {required ProductModel product});
 
 class Catalog extends StatefulWidget {
-  const Catalog({super.key, required this.showProduct});
+  const Catalog({
+    super.key,
+    required this.showProduct,
+    required this.goHome,
+    required this.goLogin,
+  });
   final FutureCallbackFunction showProduct;
+  final Function goLogin;
+  final Function goHome;
   @override
   State<Catalog> createState() => _CatalogState();
 }
@@ -202,7 +210,7 @@ class _CatalogState extends State<Catalog> {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            offset: const Offset(0, 40),
+                            offset: const Offset(0, 20),
                             color: kcBlack.withOpacity(0.06),
                             blurRadius: 90,
                           )
@@ -231,7 +239,7 @@ class _CatalogState extends State<Catalog> {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            offset: const Offset(0, 40),
+                            offset: const Offset(0, 20),
                             color: kcBlack.withOpacity(0.06),
                             blurRadius: 90,
                           )
@@ -286,7 +294,7 @@ class _CatalogState extends State<Catalog> {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            offset: const Offset(0, 40),
+                            offset: const Offset(0, 20),
                             color: kcBlack.withOpacity(0.06),
                             blurRadius: 90,
                           )
@@ -343,12 +351,45 @@ class _CatalogState extends State<Catalog> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    Text(
-                                      "Осталось: ${categoryProducts[index].numberLeft ?? ''}",
-                                      style: GoogleFonts.poppins(
-                                        color: kcBlack,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
+                                    const SizedBox(width: 40),
+                                    GestureDetector(
+                                      onTap: () async {
+                                        categoryProducts[index].count = 1;
+                                        final token = await getSavedToken();
+                                        if (token != null) {
+                                          final res = await addToNewOrderField(
+                                            token,
+                                            [categoryProducts[index].toJson()],
+                                          );
+                                          if (res) {
+                                            widget.goHome;
+                                          } else {
+                                            widget.goLogin;
+                                          }
+                                        } else {
+                                          widget.goLogin;
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 38,
+                                        width: 132,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            border: Border.all(
+                                              color: kcPrimaryColor,
+                                            )),
+                                        child: Center(
+                                          child: Text(
+                                            'В корзину',
+                                            style: GoogleFonts.montserrat(
+                                              color: kcPrimaryColor,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],

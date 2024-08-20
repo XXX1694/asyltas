@@ -43,6 +43,8 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
               const SizedBox(height: 30),
               MiniCatalogMobile(
                 showProduct: viewModel.goToProductPage,
+                goHome: viewModel.goToMainPage,
+                goLogin: viewModel.goToLoginPage,
               ),
               const SizedBox(height: 50),
             ],

@@ -14,7 +14,7 @@ class FeaturesBlock extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            offset: const Offset(0, 20),
+            offset: const Offset(0, 10),
             color: kcBlack.withOpacity(0.06),
             blurRadius: 50,
           )

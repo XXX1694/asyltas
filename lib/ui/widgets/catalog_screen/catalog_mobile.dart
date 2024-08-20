@@ -1,3 +1,4 @@
+import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,17 +9,22 @@ import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-typedef FutureCallbackFunction = Future Function(
-    {required ProductModel product});
+typedef FutureCallbackFunction = Future Function({
+  required ProductModel product,
+});
 
 class CatalogMobile extends StatefulWidget {
   const CatalogMobile({
     super.key,
     required this.showProduct,
     required this.categoryId,
+    required this.goHome,
+    required this.goLogin,
   });
   final FutureCallbackFunction showProduct;
   final String categoryId;
+  final Function goLogin;
+  final Function goHome;
   @override
   State<CatalogMobile> createState() => _CatalogMobileState();
 }
@@ -93,11 +99,11 @@ class _CatalogMobileState extends State<CatalogMobile> {
                       AspectRatio(
                         aspectRatio: 1 / 1,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(14),
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(12),
                             ),
                             child: AppImage(
                               imageUrl:
@@ -129,26 +135,64 @@ class _CatalogMobileState extends State<CatalogMobile> {
                               ),
                             ),
                             const SizedBox(height: 12),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "${categoryProducts[index].price ?? ''} ₸",
-                                  style: GoogleFonts.poppins(
-                                    color: kcPrimaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${categoryProducts[index].price ?? ''} ₸",
+                                    style: GoogleFonts.poppins(
+                                      color: kcPrimaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Осталось: ${categoryProducts[index].numberLeft ?? ''} ",
-                                  style: GoogleFonts.poppins(
-                                    color: kcBlack,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
+                                  const SizedBox(width: 20),
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        categoryProducts[index].count = 1;
+                                        final token = await getSavedToken();
+                                        if (token != null) {
+                                          final res = await addToNewOrderField(
+                                            token,
+                                            [categoryProducts[index].toJson()],
+                                          );
+                                          if (res) {
+                                            widget.goHome;
+                                          } else {
+                                            widget.goLogin;
+                                          }
+                                        } else {
+                                          widget.goLogin;
+                                        }
+                                      },
+                                      child: Container(
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            border: Border.all(
+                                              color: kcPrimaryColor,
+                                            )),
+                                        child: Center(
+                                          child: Text(
+                                            'В корзину',
+                                            style: GoogleFonts.montserrat(
+                                              color: kcPrimaryColor,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             )
                           ],
                         ),

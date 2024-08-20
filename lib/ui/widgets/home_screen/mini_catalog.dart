@@ -1,3 +1,4 @@
+import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/models/product.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
@@ -10,8 +11,15 @@ typedef FutureCallbackFunction = Future Function(
     {required ProductModel product});
 
 class MiniCatalog extends StatefulWidget {
-  const MiniCatalog({super.key, required this.showProduct});
+  const MiniCatalog({
+    super.key,
+    required this.showProduct,
+    required this.goHome,
+    required this.goLogin,
+  });
   final FutureCallbackFunction showProduct;
+  final Function goLogin;
+  final Function goHome;
   @override
   State<MiniCatalog> createState() => _MiniCatalogState();
 }
@@ -92,7 +100,7 @@ class _MiniCatalogState extends State<MiniCatalog> {
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
-                              offset: const Offset(0, 40),
+                              offset: const Offset(0, 20),
                               color: kcBlack.withOpacity(0.06),
                               blurRadius: 90,
                             )
@@ -179,7 +187,7 @@ class _MiniCatalogState extends State<MiniCatalog> {
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
-                              offset: const Offset(0, 40),
+                              offset: const Offset(0, 20),
                               color: kcBlack.withOpacity(0.06),
                               blurRadius: 90,
                             )
@@ -242,27 +250,66 @@ class _MiniCatalogState extends State<MiniCatalog> {
                                       ),
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "${categoryProducts[index].price ?? ''} ₸",
-                                        style: GoogleFonts.poppins(
-                                          color: kcPrimaryColor,
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600,
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "${categoryProducts[index].price ?? ''} ₸",
+                                          style: GoogleFonts.poppins(
+                                            color: kcPrimaryColor,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        "Осталось: ${categoryProducts[index].numberLeft ?? ''}",
-                                        style: GoogleFonts.poppins(
-                                          color: kcBlack,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
+                                        const SizedBox(width: 40),
+                                        GestureDetector(
+                                          onTap: () async {
+                                            categoryProducts[index].count = 1;
+                                            final token = await getSavedToken();
+                                            if (token != null) {
+                                              final res =
+                                                  await addToNewOrderField(
+                                                token,
+                                                [
+                                                  categoryProducts[index]
+                                                      .toJson()
+                                                ],
+                                              );
+                                              if (res) {
+                                                widget.goHome;
+                                              } else {
+                                                widget.goLogin;
+                                              }
+                                            } else {
+                                              widget.goLogin;
+                                            }
+                                          },
+                                          child: Container(
+                                            height: 38,
+                                            width: 132,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                border: Border.all(
+                                                  color: kcPrimaryColor,
+                                                )),
+                                            child: Center(
+                                              child: Text(
+                                                'В корзину',
+                                                style: GoogleFonts.montserrat(
+                                                  color: kcPrimaryColor,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
@@ -311,8 +358,8 @@ class _MiniCatalogState extends State<MiniCatalog> {
           boxShadow: selescted == index
               ? [
                   BoxShadow(
-                    offset: const Offset(0, 20),
-                    color: kcBlack.withOpacity(0.15),
+                    offset: const Offset(0, 10),
+                    color: kcBlack.withOpacity(0.05),
                     blurRadius: 15,
                   ),
                 ]
