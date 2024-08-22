@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomFooter extends StatelessWidget {
   const CustomFooter({super.key});
@@ -27,9 +26,10 @@ class CustomFooter extends StatelessWidget {
               CupertinoButton(
                 padding: const EdgeInsets.all(0),
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'Поддержка',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     fontSize: 16,
                     color: Colors.black87,
                   ),
@@ -39,9 +39,10 @@ class CustomFooter extends StatelessWidget {
               CupertinoButton(
                 padding: const EdgeInsets.all(0),
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'Оплата',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     fontSize: 16,
                     color: Colors.black87,
                   ),
@@ -51,9 +52,10 @@ class CustomFooter extends StatelessWidget {
               CupertinoButton(
                 padding: const EdgeInsets.all(0),
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'Контакты',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     fontSize: 16,
                     color: Colors.black87,
                   ),
@@ -62,9 +64,10 @@ class CustomFooter extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 40),
-          Text(
+          const Text(
             'Copyright © 2024 galab.kz . All Rights Reseved.',
-            style: GoogleFonts.poppins(
+            style: TextStyle(
+              fontFamily: 'Montserrat',
               fontSize: 12,
               color: Colors.black87,
             ),

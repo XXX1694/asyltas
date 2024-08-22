@@ -4,7 +4,6 @@ import 'package:asyltas/ui/widgets/login_screen/email_field_mobile.dart';
 import 'package:asyltas/ui/widgets/login_screen/password_field_mobile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginFormMobile extends StatefulWidget {
   const LoginFormMobile({
@@ -42,9 +41,10 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Spacer(),
-        Text(
+        const Text(
           'Войти',
-          style: GoogleFonts.montserrat(
+          style: TextStyle(
+            fontFamily: 'Montserrat',
             color: kcPrimaryColor,
             fontSize: 24,
             fontWeight: FontWeight.w600,
@@ -86,10 +86,11 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
                 ),
               ],
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'Войти',
-                style: GoogleFonts.montserrat(
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 12,
@@ -112,10 +113,11 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: kcPrimaryColor, width: 1),
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'Регистрация',
-                style: GoogleFonts.montserrat(
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
                   color: kcPrimaryColor,
                   fontWeight: FontWeight.w500,
                   fontSize: 12,

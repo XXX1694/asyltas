@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 
@@ -18,11 +17,11 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
   @override
   Widget build(BuildContext context, CartViewModel viewModel) {
     ValueNotifier<num> overall = ValueNotifier<num>(0);
-    void _incrementOverall(int price) {
+    void incrementOverall(int price) {
       overall.value += price;
     }
 
-    void _decreaceOverall(int price) {
+    void decreaceOverall(int price) {
       overall.value -= price;
     }
 
@@ -57,13 +56,14 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
               ),
             ),
             const SizedBox(height: 40),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 'Корзина',
-                style: GoogleFonts.montserrat(
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
                   color: kcPrimaryColor,
-                  fontSize: 20,
+                  fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -90,9 +90,10 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
                           'Всего ${snapshot.data?.length ?? 0} товаров',
-                          style: GoogleFonts.montserrat(
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
                             color: Colors.black54,
-                            fontSize: 13,
+                            fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -134,25 +135,28 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                       children: [
                                         Text(
                                           snapshot.data?[index]['name'],
-                                          style: GoogleFonts.montserrat(
+                                          style: const TextStyle(
+                                            fontFamily: 'Montserrat',
                                             color: Colors.black,
-                                            fontSize: 14,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                         const SizedBox(height: 8),
-                                        Text(
+                                        const Text(
                                           'Неизвестно / Неизвестно',
-                                          style: GoogleFonts.montserrat(
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
                                             color: Colors.black54,
-                                            fontSize: 12,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                         const SizedBox(height: 16),
                                         Text(
                                           '${snapshot.data?[index]['price']} ₸',
-                                          style: GoogleFonts.montserrat(
+                                          style: const TextStyle(
+                                            fontFamily: 'Montserrat',
                                             color: kcPrimaryColor,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w700,
@@ -177,31 +181,36 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      _decreaceOverall(
-                                                        snapshot.data?[index]
-                                                            ['price'],
-                                                      );
-                                                      if (snapshot.data?[index]
-                                                              ['count'] >
-                                                          1) {
-                                                        setState(
-                                                          () {
-                                                            snapshot.data?[
-                                                                    index]
-                                                                ['count']--;
-                                                          },
+                                                  Expanded(
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        decreaceOverall(
+                                                          snapshot.data?[index]
+                                                              ['price'],
                                                         );
-                                                      }
-                                                    },
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 6),
-                                                      child: SvgPicture.asset(
-                                                        'assets/minus_mobile.svg',
-                                                        width: 12,
+                                                        if (snapshot.data?[
+                                                                    index]
+                                                                ['count'] >
+                                                            1) {
+                                                          setState(
+                                                            () {
+                                                              snapshot.data?[
+                                                                      index]
+                                                                  ['count']--;
+                                                            },
+                                                          );
+                                                        }
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                          horizontal: 6,
+                                                        ),
+                                                        child: SvgPicture.asset(
+                                                          'assets/minus_mobile.svg',
+                                                          width: 12,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -211,32 +220,36 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                                         horizontal: 4),
                                                     child: Text(
                                                       '${snapshot.data?[index]['count']}',
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              fontSize: 18),
+                                                      style: const TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat',
+                                                          fontSize: 18),
                                                       textAlign:
                                                           TextAlign.center,
                                                     ),
                                                   ),
-                                                  GestureDetector(
-                                                    onTap: () {
-                                                      _incrementOverall(
-                                                        snapshot.data?[index]
-                                                            ['price'],
-                                                      );
-                                                      setState(() {
-                                                        snapshot.data?[index]
-                                                            ['count']++;
-                                                      });
-                                                    },
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 6),
-                                                      child: SvgPicture.asset(
-                                                        'assets/plus_mobile.svg',
-                                                        height: 14,
-                                                        width: 12,
+                                                  Expanded(
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        incrementOverall(
+                                                          snapshot.data?[index]
+                                                              ['price'],
+                                                        );
+                                                        setState(() {
+                                                          snapshot.data?[index]
+                                                              ['count']++;
+                                                        });
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 6),
+                                                        child: SvgPicture.asset(
+                                                          'assets/plus_mobile.svg',
+                                                          height: 14,
+                                                          width: 12,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -254,45 +267,16 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                           },
                         ),
                       ),
-                      // const SizedBox(height: 14),
-                      // const Padding(
-                      //   padding: EdgeInsets.symmetric(horizontal: 20),
-                      //   child: Divider(height: 1),
-                      // ),
-                      // const SizedBox(height: 16),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(horizontal: 20),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: [
-                      //       Text(
-                      //         'Итого:',
-                      //         style: GoogleFonts.montserrat(
-                      //           color: Colors.black,
-                      //           fontSize: 18,
-                      //           fontWeight: FontWeight.w500,
-                      //         ),
-                      //       ),
-                      //       Text(
-                      //         'Итого:',
-                      //         style: GoogleFonts.montserrat(
-                      //           color: kcPrimaryColor,
-                      //           fontSize: 18,
-                      //           fontWeight: FontWeight.w600,
-                      //         ),
-                      //       )
-                      //     ],
-                      //   ),
-                      // ),
                       ValueListenableBuilder<num>(
                         builder: (context, value, child) => Row(
                           children: [
                             const Spacer(
                               flex: 10,
                             ),
-                            Text(
+                            const Text(
                               'Итого: ',
-                              style: GoogleFonts.montserrat(
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -300,7 +284,8 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                             ),
                             Text(
                               "${overall.value} ₸",
-                              style: GoogleFonts.montserrat(
+                              style: const TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -340,10 +325,11 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                               color: kcPrimaryColor,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 'Оплатить',
-                                style: GoogleFonts.montserrat(
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
                                   color: Colors.white,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,

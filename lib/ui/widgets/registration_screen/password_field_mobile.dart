@@ -1,7 +1,6 @@
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class PasswordFieldMobile extends StatefulWidget {
   const PasswordFieldMobile({super.key, required this.controller});
@@ -21,7 +20,8 @@ class _PasswordFieldMobileState extends State<PasswordFieldMobile> {
         controller: widget.controller,
         obscureText: _obscureText,
         obscuringCharacter: '*',
-        style: GoogleFonts.montserrat(
+        style: const TextStyle(
+          fontFamily: 'Montserrat',
           color: Colors.black,
           fontSize: 14,
         ),
@@ -40,7 +40,8 @@ class _PasswordFieldMobileState extends State<PasswordFieldMobile> {
             ),
           ),
           hintText: 'Пароль',
-          hintStyle: GoogleFonts.montserrat(
+          hintStyle: const TextStyle(
+            fontFamily: 'Montserrat',
             color: Colors.black54,
             fontSize: 14,
           ),

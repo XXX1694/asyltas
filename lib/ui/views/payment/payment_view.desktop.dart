@@ -3,7 +3,6 @@ import 'package:asyltas/ui/widgets/home_screen/features.dart';
 import 'package:asyltas/ui/widgets/home_screen/footer.dart';
 import 'package:asyltas/ui/widgets/home_screen/top_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'payment_viewmodel.dart';
@@ -56,15 +55,17 @@ class PaymentViewDesktop extends ViewModelWidget<PaymentViewModel> {
                 children: [
                   Text(
                     'К оплате: ${viewModel.price}',
-                    style: GoogleFonts.montserrat(
+                    style: const TextStyle(
+                      fontFamily: 'Montserrat',
                       color: Colors.black,
                       fontSize: 42,
                     ),
                   ),
                   const SizedBox(height: 24),
-                  Text(
+                  const Text(
                     'Оплатите полную сумму через каспи и отправьте чек на ватсап',
-                    style: GoogleFonts.montserrat(
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
                       color: Colors.black,
                       fontSize: 16,
                     ),

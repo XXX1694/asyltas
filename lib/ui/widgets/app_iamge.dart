@@ -39,9 +39,10 @@ class _AppImageState extends State<AppImage> {
       future: _imageBytesFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const ShrimerPlaceholder(
-            height: double.infinity,
+          return Container(
             width: double.infinity,
+            height: double.infinity,
+            color: Colors.grey.shade300,
           );
         } else if (snapshot.hasError) {
           return const ErrorPlaceholder(

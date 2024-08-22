@@ -4,7 +4,6 @@ import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'product_viewmodel.dart';
@@ -52,7 +51,8 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                   children: [
                     Text(
                       'Главная / Каталог / ${viewModel.product.category_name}',
-                      style: GoogleFonts.montserrat(
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black54,
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
@@ -88,16 +88,18 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                     const SizedBox(height: 20),
                     Text(
                       viewModel.product.name ?? '',
-                      style: GoogleFonts.montserrat(
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
+                    const Text(
                       'Неизвестно / Неизвестно',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black54,
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -106,7 +108,8 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                     const SizedBox(height: 20),
                     Text(
                       '${viewModel.product.price} ₸',
-                      style: GoogleFonts.montserrat(
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -139,10 +142,11 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                             border: Border.all(
                               color: kcPrimaryColor,
                             )),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'В корзину',
-                            style: GoogleFonts.montserrat(
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
                               color: kcPrimaryColor,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
@@ -152,9 +156,10 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       ),
                     ),
                     const SizedBox(height: 32),
-                    Text(
+                    const Text(
                       'Описание',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black54,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -163,7 +168,8 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                     const SizedBox(height: 8),
                     Text(
                       viewModel.product.description ?? '',
-                      style: GoogleFonts.montserrat(
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,

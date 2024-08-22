@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartBlock extends StatelessWidget {
@@ -18,11 +17,11 @@ class CartBlock extends StatelessWidget {
     // double deviceWidth = MediaQuery.of(context).size.width;
 
     ValueNotifier<num> overall = ValueNotifier<num>(0);
-    void _incrementOverall(int price) {
+    void incrementOverall(int price) {
       overall.value += price;
     }
 
-    void _decreaceOverall(int price) {
+    void decreaceOverall(int price) {
       overall.value -= price;
     }
 
@@ -41,13 +40,14 @@ class CartBlock extends StatelessWidget {
         return Column(
           children: [
             DataTable(
-              columns: [
+              columns: const [
                 DataColumn(
                   label: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       'Продукт',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontSize: 22,
                       ),
@@ -57,10 +57,11 @@ class CartBlock extends StatelessWidget {
                 ),
                 DataColumn(
                   label: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       'Цена',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontSize: 22,
                       ),
@@ -70,10 +71,11 @@ class CartBlock extends StatelessWidget {
                 ),
                 DataColumn(
                   label: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       'Количество',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontSize: 22,
                       ),
@@ -83,10 +85,11 @@ class CartBlock extends StatelessWidget {
                 ),
                 DataColumn(
                   label: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       'Итого',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black,
                         fontSize: 22,
                       ),
@@ -121,15 +124,17 @@ class CartBlock extends StatelessWidget {
                               children: [
                                 Text(
                                   order['name'].toString(),
-                                  style: GoogleFonts.montserrat(
+                                  style: const TextStyle(
+                                    fontFamily: 'Montserrat',
                                     color: Colors.black,
                                     fontSize: 22,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
-                                Text(
+                                const Text(
                                   'Цвет: Неизвестный',
-                                  style: GoogleFonts.montserrat(
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
                                     color: Colors.black54,
                                     fontSize: 22,
                                   ),
@@ -137,9 +142,10 @@ class CartBlock extends StatelessWidget {
                                 const SizedBox(height: 12),
                                 CupertinoButton(
                                   padding: const EdgeInsets.all(0),
-                                  child: Text(
+                                  child: const Text(
                                     'Удалить',
-                                    style: GoogleFonts.montserrat(
+                                    style: TextStyle(
+                                      fontFamily: 'Montserrat',
                                       color: Colors.red,
                                       fontSize: 22,
                                       decoration: TextDecoration.underline,
@@ -159,7 +165,8 @@ class CartBlock extends StatelessWidget {
                         child: Text(
                           '${order['price']} ₸',
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.montserrat(
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
                             color: Colors.black,
                             fontSize: 22,
                             fontWeight: FontWeight.w500,
@@ -191,7 +198,7 @@ class CartBlock extends StatelessWidget {
                                         () {
                                           if (order['count'] > 1) {
                                             order['count']--;
-                                            _decreaceOverall(order['price']);
+                                            decreaceOverall(order['price']);
                                             total.value =
                                                 order['count'] * order['price'];
                                           }
@@ -211,13 +218,15 @@ class CartBlock extends StatelessWidget {
                                         horizontal: 4),
                                     child: Text(
                                       '${order['count']}',
-                                      style: GoogleFonts.poppins(fontSize: 24),
+                                      style: const TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          fontSize: 24),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      _incrementOverall(order['price']);
+                                      incrementOverall(order['price']);
 
                                       setState(() {
                                         order['count']++;
@@ -247,7 +256,8 @@ class CartBlock extends StatelessWidget {
                           builder: (context, value, child) => Text(
                             "${total.value.toString()} ₸",
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.montserrat(
+                            style: const TextStyle(
+                              fontFamily: 'Montserrat',
                               color: Colors.black,
                               fontSize: 22,
                               fontWeight: FontWeight.w500,
@@ -268,9 +278,10 @@ class CartBlock extends StatelessWidget {
                   const Spacer(
                     flex: 10,
                   ),
-                  Text(
+                  const Text(
                     'Итого: ',
-                    style: GoogleFonts.montserrat(
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
                       color: Colors.black,
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
@@ -278,7 +289,8 @@ class CartBlock extends StatelessWidget {
                   ),
                   Text(
                     "${overall.value} ₸",
-                    style: GoogleFonts.montserrat(
+                    style: const TextStyle(
+                      fontFamily: 'Montserrat',
                       color: Colors.black,
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
@@ -314,10 +326,11 @@ class CartBlock extends StatelessWidget {
                   color: kcPrimaryColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Оплатить',
-                    style: GoogleFonts.montserrat(
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
                       color: Colors.white,
                       fontSize: 18,
                     ),

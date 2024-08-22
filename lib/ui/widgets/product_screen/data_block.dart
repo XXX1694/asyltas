@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DataBlock extends StatelessWidget {
   const DataBlock({
@@ -23,17 +22,19 @@ class DataBlock extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             '%МАТЕРИАЛ%',
-            style: GoogleFonts.montserrat(
-              color: const Color(0xFF666666),
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              color: Color(0xFF666666),
               fontSize: 14,
             ),
           ),
           const SizedBox(height: 6),
           Text(
             product.name ?? '',
-            style: GoogleFonts.montserrat(
+            style: const TextStyle(
+              fontFamily: 'Montserrat',
               color: Colors.black,
               fontSize: 30,
             ),
@@ -44,14 +45,16 @@ class DataBlock extends StatelessWidget {
               children: [
                 TextSpan(
                   text: '${product.price} ₸ ',
-                  style: GoogleFonts.montserrat(
+                  style: const TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.black,
                     fontSize: 24,
                   ),
                 ),
                 TextSpan(
                   text: '${product.price! + 300} ₸ ',
-                  style: GoogleFonts.montserrat(
+                  style: const TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.black54,
                     fontSize: 24,
                     decoration: TextDecoration.lineThrough,
@@ -69,9 +72,10 @@ class DataBlock extends StatelessWidget {
                 width: 20,
               ),
               const SizedBox(width: 10),
-              Text(
+              const Text(
                 '24 человек смотрят сейчас',
-                style: GoogleFonts.montserrat(
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
                   color: Colors.black54,
                   fontSize: 16,
                 ),
@@ -82,24 +86,27 @@ class DataBlock extends StatelessWidget {
           RichText(
             text: TextSpan(
               children: [
-                TextSpan(
+                const TextSpan(
                   text: 'Только ',
-                  style: GoogleFonts.montserrat(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.black54,
                     fontSize: 16,
                   ),
                 ),
                 TextSpan(
                   text: product.numberLeft.toString(),
-                  style: GoogleFonts.montserrat(
+                  style: const TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.black54,
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                TextSpan(
+                const TextSpan(
                   text: ' шт в пачке',
-                  style: GoogleFonts.montserrat(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.black54,
                     fontSize: 16,
                   ),
@@ -145,10 +152,11 @@ class DataBlock extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'В корзину',
-                  style: GoogleFonts.montserrat(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

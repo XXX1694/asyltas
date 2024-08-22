@@ -1,7 +1,6 @@
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FeaturesBlock extends StatelessWidget {
   const FeaturesBlock({super.key});
@@ -34,13 +33,14 @@ class FeaturesBlock extends StatelessWidget {
               children: [
                 SvgPicture.asset('assets/quality.svg'),
                 const SizedBox(width: 12),
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       'Качество',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -48,7 +48,8 @@ class FeaturesBlock extends StatelessWidget {
                     ),
                     Text(
                       'Качественные товары',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -63,13 +64,14 @@ class FeaturesBlock extends StatelessWidget {
               children: [
                 SvgPicture.asset('assets/garanty.svg'),
                 const SizedBox(width: 12),
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       'Гарантия',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -77,7 +79,8 @@ class FeaturesBlock extends StatelessWidget {
                     ),
                     Text(
                       'Более 2 лет',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -92,13 +95,14 @@ class FeaturesBlock extends StatelessWidget {
               children: [
                 SvgPicture.asset('assets/delivery.svg'),
                 const SizedBox(width: 12),
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       'Бесплатная доставка',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -106,7 +110,8 @@ class FeaturesBlock extends StatelessWidget {
                     ),
                     Text(
                       'Свыше 5000 тг',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -121,13 +126,14 @@ class FeaturesBlock extends StatelessWidget {
               children: [
                 SvgPicture.asset('assets/support.svg'),
                 const SizedBox(width: 12),
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       '24 / 7 Поддержка',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -135,7 +141,8 @@ class FeaturesBlock extends StatelessWidget {
                     ),
                     Text(
                       'Всегда на связи',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w400,

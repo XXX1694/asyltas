@@ -2,7 +2,6 @@ import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'catalog_viewmodel.dart';
@@ -129,9 +128,10 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
-                    Text(
+                    const Text(
                       'Каталог',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
@@ -154,7 +154,8 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
                             },
                             child: Text(
                               category[index]['name'].toString(),
-                              style: GoogleFonts.montserrat(
+                              style: const TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: kcPrimaryColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,

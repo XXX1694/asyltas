@@ -2,7 +2,6 @@ import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -50,16 +49,18 @@ class PaymentViewMobile extends ViewModelWidget<PaymentViewModel> {
                   const SizedBox(height: 40),
                   Text(
                     'К оплате: ${viewModel.price}',
-                    style: GoogleFonts.montserrat(
+                    style: const TextStyle(
+                      fontFamily: 'Montserrat',
                       color: kcPrimaryColor,
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Text(
+                  const Text(
                     'Оплатите полную сумму через каспи и отправьте чек на ватсап',
-                    style: GoogleFonts.montserrat(
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
                       color: Colors.black,
                       fontSize: 14,
                     ),

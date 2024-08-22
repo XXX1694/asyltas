@@ -4,7 +4,6 @@ import 'package:asyltas/ui/widgets/login_screen/email_field.dart';
 import 'package:asyltas/ui/widgets/login_screen/password_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
@@ -47,18 +46,20 @@ class _LoginFormState extends State<LoginForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RichText(
-            text: TextSpan(
+            text: const TextSpan(
               children: [
                 TextSpan(
                   text: 'Войти в ',
-                  style: GoogleFonts.volkhov(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.black,
                     fontSize: 30,
                   ),
                 ),
                 TextSpan(
                   text: 'Asyltas',
-                  style: GoogleFonts.volkhov(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.black,
                     fontSize: 30,
                   ),
@@ -102,10 +103,11 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ],
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Войти',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -128,10 +130,11 @@ class _LoginFormState extends State<LoginForm> {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: kcPrimaryColor, width: 1),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Регистрация',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: kcPrimaryColor,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,

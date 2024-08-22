@@ -3,7 +3,6 @@ import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 typedef FutureCallbackFunction = Future Function(
     {required ProductModel product});
@@ -36,17 +35,19 @@ class AdBanner extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Spacer(flex: 60),
-                    Text(
+                    const Text(
                       'Хрусталь',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         fontSize: 15,
                         color: Colors.black54,
                       ),
                     ),
                     const Spacer(flex: 24),
-                    Text(
+                    const Text(
                       'Хрусталь 8мм',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         fontSize: 42,
                         color: kcPrimaryColor,
                         fontWeight: FontWeight.w600,
@@ -54,18 +55,20 @@ class AdBanner extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const Spacer(flex: 24),
-                    Text(
+                    const Text(
                       'Описание',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         fontSize: 15,
                         color: Colors.black,
                         decoration: TextDecoration.underline,
                       ),
                     ),
                     const Spacer(flex: 24),
-                    Text(
+                    const Text(
                       'Хрустальные бусины 8 мм от бренда ASYL TAS – это идеальный выбор для любителей рукоделия и создания уникальных украшений. Каждая бусина изготовлена из высококачественного хрусталя, что обеспечивает их блеск и прозрачность. Размер бусин составляет 8 мм, длина нитки 45 см, в одной нитке 60-65 шт. Это все делает их универсальными для различных видов работ: от браслетов до ожерелий. Благодаря своей прочности и изяществу, эти бусины станут отличным дополнением к любому проекту. Используйте их для создания элегантных и изысканных украшений, которые будут отражать ваш стиль и вкус.',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         fontSize: 15,
                         color: Colors.black54,
                       ),
@@ -76,9 +79,10 @@ class AdBanner extends StatelessWidget {
                       height: 26,
                       child: Row(
                         children: [
-                          Text(
+                          const Text(
                             'Размер: ',
-                            style: GoogleFonts.montserrat(
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
                               fontSize: 15,
                               color: Colors.black54,
                             ),
@@ -90,10 +94,11 @@ class AdBanner extends StatelessWidget {
                               color: kcPrimaryColor,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 '8мм',
-                                style: GoogleFonts.montserrat(
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
                                   fontSize: 15,
                                   color: Colors.white,
                                 ),
@@ -104,9 +109,10 @@ class AdBanner extends StatelessWidget {
                       ),
                     ),
                     const Spacer(flex: 24),
-                    Text(
+                    const Text(
                       '1400 ₸',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         fontSize: 28,
                         color: kcPrimaryColor,
                         fontWeight: FontWeight.w700,
@@ -139,10 +145,11 @@ class AdBanner extends StatelessWidget {
                         ),
                         height: 52,
                         width: 190,
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Купить сейчас',
-                            style: GoogleFonts.poppins(
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
                               fontSize: 16,
                               color: Colors.white,
                             ),

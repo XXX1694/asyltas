@@ -1,7 +1,6 @@
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class PasswordFieldCopy extends StatefulWidget {
   const PasswordFieldCopy({super.key, required this.controller});
@@ -21,7 +20,8 @@ class _PasswordFieldCopyState extends State<PasswordFieldCopy> {
         controller: widget.controller,
         obscureText: _obscureText,
         obscuringCharacter: '*',
-        style: GoogleFonts.montserrat(
+        style: const TextStyle(
+          fontFamily: 'Montserrat',
           color: Colors.black,
           fontSize: 16,
         ),
@@ -40,7 +40,8 @@ class _PasswordFieldCopyState extends State<PasswordFieldCopy> {
             ),
           ),
           hintText: 'Подтвердить пароль',
-          hintStyle: GoogleFonts.montserrat(
+          hintStyle: const TextStyle(
+            fontFamily: 'Montserrat',
             color: Colors.black54,
             fontSize: 16,
           ),

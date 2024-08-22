@@ -3,7 +3,6 @@ import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'profile_viewmodel.dart';
@@ -48,9 +47,10 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 40),
-                  Text(
+                  const Text(
                     'Профиль',
-                    style: GoogleFonts.montserrat(
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
                       color: kcPrimaryColor,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
@@ -82,7 +82,8 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                               children: [
                                 Text(
                                   snapshot.data?['name'],
-                                  style: GoogleFonts.montserrat(
+                                  style: const TextStyle(
+                                    fontFamily: 'Montserrat',
                                     color: Colors.black,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -92,9 +93,10 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                                 RichText(
                                   text: TextSpan(
                                     children: [
-                                      TextSpan(
+                                      const TextSpan(
                                         text: 'Почта: ',
-                                        style: GoogleFonts.montserrat(
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
                                           color: Colors.black,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 14,
@@ -102,7 +104,8 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                                       ),
                                       TextSpan(
                                         text: snapshot.data?['email'],
-                                        style: GoogleFonts.montserrat(
+                                        style: const TextStyle(
+                                          fontFamily: 'Montserrat',
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 14,
@@ -115,9 +118,10 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                                 RichText(
                                   text: TextSpan(
                                     children: [
-                                      TextSpan(
+                                      const TextSpan(
                                         text: 'Номер: ',
-                                        style: GoogleFonts.montserrat(
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
                                           color: Colors.black,
                                           fontWeight: FontWeight.w500,
                                           fontSize: 14,
@@ -125,7 +129,8 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                                       ),
                                       TextSpan(
                                         text: snapshot.data?['phoneNumber'],
-                                        style: GoogleFonts.montserrat(
+                                        style: const TextStyle(
+                                          fontFamily: 'Montserrat',
                                           color: Colors.black54,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 14,

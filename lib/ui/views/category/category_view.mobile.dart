@@ -3,7 +3,6 @@ import 'package:asyltas/ui/widgets/catalog_screen/catalog_mobile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'category_viewmodel.dart';
@@ -51,7 +50,8 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                     const SizedBox(height: 40),
                     Text(
                       'Катаегория: ${viewModel.categoryName}',
-                      style: GoogleFonts.montserrat(
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -60,7 +60,8 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                     const SizedBox(height: 12),
                     Text(
                       'Главная / Каталог / ${viewModel.categoryName}',
-                      style: GoogleFonts.montserrat(
+                      style: const TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.black54,
                         fontSize: 13,
                         fontWeight: FontWeight.w500,

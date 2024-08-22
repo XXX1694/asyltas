@@ -8,7 +8,7 @@ class ContactsViewMobile extends ViewModelWidget<ContactsViewModel> {
 
   @override
   Widget build(BuildContext context, ContactsViewModel viewModel) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.grey,
       body: SafeArea(
         child: Padding(

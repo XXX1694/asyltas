@@ -5,7 +5,6 @@ import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 typedef FutureCallbackFunction = Future Function(
     {required ProductModel product});
@@ -222,7 +221,8 @@ class _MiniCatalogState extends State<MiniCatalog> {
                                 children: [
                                   Text(
                                     categoryProducts[index].name ?? '',
-                                    style: GoogleFonts.montserrat(
+                                    style: const TextStyle(
+                                      fontFamily: 'Montserrat',
                                       color: kcBlack,
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600,
@@ -231,18 +231,20 @@ class _MiniCatalogState extends State<MiniCatalog> {
                                   const SizedBox(height: 2),
                                   Text(
                                     categoryProducts[index].name ?? '',
-                                    style: GoogleFonts.montserrat(
+                                    style: TextStyle(
+                                      fontFamily: 'Montserrat',
                                       color: kcBlack.withOpacity(0.54),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  Expanded(
+                                  const Expanded(
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
                                         'Цвет: Неизвестно',
-                                        style: GoogleFonts.montserrat(
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
                                           color: kcPrimaryColor,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
@@ -257,7 +259,8 @@ class _MiniCatalogState extends State<MiniCatalog> {
                                       children: [
                                         Text(
                                           "${categoryProducts[index].price ?? ''} ₸",
-                                          style: GoogleFonts.poppins(
+                                          style: const TextStyle(
+                                            fontFamily: 'Montserrat',
                                             color: kcPrimaryColor,
                                             fontSize: 24,
                                             fontWeight: FontWeight.w600,
@@ -296,10 +299,11 @@ class _MiniCatalogState extends State<MiniCatalog> {
                                                 border: Border.all(
                                                   color: kcPrimaryColor,
                                                 )),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'В корзину',
-                                                style: GoogleFonts.montserrat(
+                                                style: TextStyle(
+                                                  fontFamily: 'Montserrat',
                                                   color: kcPrimaryColor,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500,
@@ -368,7 +372,8 @@ class _MiniCatalogState extends State<MiniCatalog> {
         child: Center(
           child: Text(
             category[index]['name'] ?? '',
-            style: GoogleFonts.montserrat(
+            style: TextStyle(
+              fontFamily: 'Montserrat',
               color: selescted == index ? kcWhite : kcLightGrey,
               fontSize: 16,
             ),

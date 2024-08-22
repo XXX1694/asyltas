@@ -3,7 +3,6 @@ import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'menu_viewmodel.dart';
@@ -49,9 +48,10 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
-                    Text(
+                    const Text(
                       'Меню',
-                      style: GoogleFonts.montserrat(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
@@ -62,9 +62,10 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                       onTap: () {
                         viewModel.goToMainPage();
                       },
-                      child: Text(
+                      child: const Text(
                         'Главная',
-                        style: GoogleFonts.montserrat(
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
                           color: kcPrimaryColor,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
@@ -72,26 +73,14 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    // CupertinoButton(
-                    //   padding: const EdgeInsets.all(0),
-                    //   onPressed: () {},
-                    //   child: Text(
-                    //     'Поиск',
-                    //     style: GoogleFonts.montserrat(
-                    //       color: kcPrimaryColor,
-                    //       fontSize: 18,
-                    //       fontWeight: FontWeight.w400,
-                    //     ),
-                    //   ),
-                    // ),
-                    // const SizedBox(height: 12),
                     GestureDetector(
                       onTap: () {
                         viewModel.goToCatalogPage();
                       },
-                      child: Text(
+                      child: const Text(
                         'Каталог',
-                        style: GoogleFonts.montserrat(
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
                           color: kcPrimaryColor,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
@@ -99,19 +88,6 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    // CupertinoButton(
-                    //   padding: const EdgeInsets.all(0),
-                    //   onPressed: () {},
-                    //   child: Text(
-                    //     'Скидки',
-                    //     style: GoogleFonts.montserrat(
-                    //       color: kcPrimaryColor,
-                    //       fontSize: 18,
-                    //       fontWeight: FontWeight.w400,
-                    //     ),
-                    //   ),
-                    // ),
-                    // const SizedBox(height: 12),
                     GestureDetector(
                       onTap: () async {
                         bool res = await checkAuth();
@@ -121,9 +97,10 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                           viewModel.goToLoginPage();
                         }
                       },
-                      child: Text(
+                      child: const Text(
                         'Корзина',
-                        style: GoogleFonts.montserrat(
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
                           color: kcPrimaryColor,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
@@ -140,9 +117,10 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                           viewModel.goToLoginPage();
                         }
                       },
-                      child: Text(
+                      child: const Text(
                         'Профиль',
-                        style: GoogleFonts.montserrat(
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
                           color: kcPrimaryColor,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
@@ -161,7 +139,8 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                             },
                             child: Text(
                               'Выйти',
-                              style: GoogleFonts.montserrat(
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: Colors.red.shade400,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
@@ -173,19 +152,6 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         }
                       },
                     ),
-                    // const SizedBox(height: 12),
-                    // CupertinoButton(
-                    //   padding: const EdgeInsets.all(0),
-                    //   onPressed: () {},
-                    //   child: Text(
-                    //     'Контакты',
-                    //     style: GoogleFonts.montserrat(
-                    //       color: kcPrimaryColor,
-                    //       fontSize: 18,
-                    //       fontWeight: FontWeight.w400,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

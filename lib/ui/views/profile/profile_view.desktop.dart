@@ -6,7 +6,6 @@ import 'package:asyltas/ui/widgets/home_screen/top_bar.dart';
 import 'package:asyltas/ui/widgets/home_screen/top_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'profile_viewmodel.dart';
@@ -76,10 +75,11 @@ class ProfileViewDesktop extends ViewModelWidget<ProfileViewModel> {
                       )
                     ],
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'Показать все',
-                      style: GoogleFonts.poppins(
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
                         color: Colors.white,
                         fontSize: 16,
                       ),

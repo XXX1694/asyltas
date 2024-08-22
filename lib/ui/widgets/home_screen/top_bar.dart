@@ -3,7 +3,6 @@ import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({
@@ -121,10 +120,11 @@ class _TopBarState extends State<TopBar> {
                             horizontal: 25,
                             vertical: 13,
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'Главная',
-                              style: GoogleFonts.montserrat(
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: kcPrimaryColor,
                                 fontSize: 16,
                               ),
@@ -142,10 +142,11 @@ class _TopBarState extends State<TopBar> {
                             horizontal: 25,
                             vertical: 13,
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               'Каталог',
-                              style: GoogleFonts.montserrat(
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
                                 color: kcPrimaryColor,
                                 fontSize: 16,
                               ),
@@ -181,10 +182,11 @@ class _TopBarState extends State<TopBar> {
                         horizontal: 25,
                         vertical: 13,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Главная',
-                          style: GoogleFonts.montserrat(
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
                             color: kcPrimaryColor,
                             fontSize: 16,
                           ),
@@ -202,10 +204,11 @@ class _TopBarState extends State<TopBar> {
                         horizontal: 25,
                         vertical: 13,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Каталог',
-                          style: GoogleFonts.montserrat(
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
                             color: kcPrimaryColor,
                             fontSize: 16,
                           ),
@@ -213,24 +216,6 @@ class _TopBarState extends State<TopBar> {
                       ),
                     ),
                   ),
-                  // GestureDetector(
-                  //   onTap: () {},
-                  //   child: Container(
-                  //     padding: const EdgeInsets.symmetric(
-                  //       horizontal: 25,
-                  //       vertical: 13,
-                  //     ),
-                  //     child: Center(
-                  //       child: Text(
-                  //         'Скидки',
-                  //         style: GoogleFonts.montserrat(
-                  //           color: kcPrimaryColor,
-                  //           fontSize: 16,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   CupertinoButton(
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
@@ -241,10 +226,11 @@ class _TopBarState extends State<TopBar> {
                         horizontal: 25,
                         vertical: 13,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Войти',
-                          style: GoogleFonts.montserrat(
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
                             color: kcPrimaryColor,
                             fontSize: 16,
                           ),
@@ -275,10 +261,11 @@ class _TopBarState extends State<TopBar> {
                         ],
                         color: kcPrimaryColor,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Регестрация',
-                          style: GoogleFonts.montserrat(
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
                             color: kcWhite,
                             fontSize: 16,
                           ),

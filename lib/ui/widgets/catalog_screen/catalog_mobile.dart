@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:asyltas/models/product.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 typedef FutureCallbackFunction = Future Function({
   required ProductModel product,
@@ -38,8 +37,160 @@ class _CatalogMobileState extends State<CatalogMobile> {
       stream: FirebaseFirestore.instance.collection('products').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                'Представлено 0 товаров',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  color: Colors.black54,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(height: 28),
+              GridView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(0),
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 16,
+                  mainAxisExtent: 245,
+                ),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 1 / 1,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Товар',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: kcBlack,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.41,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              'Категория',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: kcBlack.withOpacity(0.54),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: -0.41,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    '999 ₸',
+                                    style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      color: kcPrimaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: -0.41,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: CupertinoButton(
+                                      padding: const EdgeInsets.all(0),
+                                      onPressed: () async {
+                                        categoryProducts[index].count = 1;
+                                        final token = await getSavedToken();
+                                        if (token != null) {
+                                          final res = await addToNewOrderField(
+                                            token,
+                                            [categoryProducts[index].toJson()],
+                                          );
+                                          if (res) {
+                                            // ignore: use_build_context_synchronously
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                backgroundColor: Colors.white,
+                                                content: Text(
+                                                  'Товар добавлен в корзину',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Montserrat',
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          } else {
+                                            widget.goLogin();
+                                          }
+                                        } else {
+                                          widget.goLogin();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: kcPrimaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          // border: Border.all(
+                                          //   color: kcPrimaryColor,
+                                          // ),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            'В корзину',
+                                            style: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              letterSpacing: -0.41,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
           );
         }
         if (snapshot.hasError) {
@@ -67,36 +218,36 @@ class _CatalogMobileState extends State<CatalogMobile> {
           children: [
             Text(
               'Представлено ${categoryProducts.length} товаров',
-              style: GoogleFonts.montserrat(
+              style: const TextStyle(
+                fontFamily: 'Montserrat',
                 color: Colors.black54,
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 28),
             GridView.builder(
               shrinkWrap: true,
               padding: const EdgeInsets.all(0),
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 162 / 245,
                 crossAxisCount: 2,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 16,
-                // mainAxisExtent: 438,
+                mainAxisExtent: 245,
               ),
               itemCount: categoryProducts.length,
               itemBuilder: (context, index) {
-                return CupertinoButton(
-                  padding: const EdgeInsets.all(0),
-                  onPressed: () {
-                    widget.showProduct(product: categoryProducts[index]);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AspectRatio(
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CupertinoButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
+                        widget.showProduct(product: categoryProducts[index]);
+                      },
+                      child: AspectRatio(
                         aspectRatio: 1 / 1,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(14),
@@ -112,93 +263,114 @@ class _CatalogMobileState extends State<CatalogMobile> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              categoryProducts[index].name ?? '',
-                              style: GoogleFonts.montserrat(
-                                color: kcBlack,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                    ),
+                    const SizedBox(height: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            categoryProducts[index].name ?? '',
+                            style: const TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: kcBlack,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: -0.41,
                             ),
-                            const SizedBox(height: 2),
-                            Text(
-                              categoryProducts[index].name ?? '',
-                              style: GoogleFonts.montserrat(
-                                color: kcBlack.withOpacity(0.54),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            categoryProducts[index].name ?? '',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              color: kcBlack.withOpacity(0.54),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: -0.41,
                             ),
-                            const SizedBox(height: 12),
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "${categoryProducts[index].price ?? ''} ₸",
-                                    style: GoogleFonts.poppins(
-                                      color: kcPrimaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                          ),
+                          const SizedBox(height: 12),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "${categoryProducts[index].price ?? ''} ₸",
+                                  style: const TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: kcPrimaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: -0.41,
                                   ),
-                                  const SizedBox(width: 20),
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () async {
-                                        categoryProducts[index].count = 1;
-                                        final token = await getSavedToken();
-                                        if (token != null) {
-                                          final res = await addToNewOrderField(
-                                            token,
-                                            [categoryProducts[index].toJson()],
-                                          );
-                                          if (res) {
-                                            widget.goHome;
-                                          } else {
-                                            widget.goLogin;
-                                          }
-                                        } else {
-                                          widget.goLogin;
-                                        }
-                                      },
-                                      child: Container(
-                                        height: double.infinity,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            border: Border.all(
-                                              color: kcPrimaryColor,
-                                            )),
-                                        child: Center(
-                                          child: Text(
-                                            'В корзину',
-                                            style: GoogleFonts.montserrat(
-                                              color: kcPrimaryColor,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: CupertinoButton(
+                                    padding: const EdgeInsets.all(0),
+                                    onPressed: () async {
+                                      categoryProducts[index].count = 1;
+                                      final token = await getSavedToken();
+                                      if (token != null) {
+                                        final res = await addToNewOrderField(
+                                          token,
+                                          [categoryProducts[index].toJson()],
+                                        );
+                                        if (res) {
+                                          // ignore: use_build_context_synchronously
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              backgroundColor: Colors.white,
+                                              content: Text(
+                                                'Товар добавлен в корзину',
+                                                style: TextStyle(
+                                                  fontFamily: 'Montserrat',
+                                                  color: Colors.black,
+                                                  letterSpacing: -0.41,
+                                                ),
+                                              ),
                                             ),
+                                          );
+                                        } else {
+                                          widget.goLogin();
+                                        }
+                                      } else {
+                                        widget.goLogin();
+                                      }
+                                    },
+                                    child: Container(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: kcPrimaryColor,
+                                        borderRadius: BorderRadius.circular(8),
+                                        // border: Border.all(
+                                        //   color: kcPrimaryColor,
+                                        // ),
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          'В корзину',
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               },
             ),

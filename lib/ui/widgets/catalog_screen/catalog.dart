@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:asyltas/models/product.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 typedef FutureCallbackFunction = Future Function(
     {required ProductModel product});
@@ -123,9 +122,10 @@ class _CatalogState extends State<Catalog> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Категория',
-                style: GoogleFonts.montserrat(
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
                   fontSize: 30,
                   color: Colors.black,
                 ),
@@ -166,7 +166,8 @@ class _CatalogState extends State<Catalog> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           category[index]['name']!,
-                          style: GoogleFonts.montserrat(
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
                             color: selescted == index
                                 ? const Color(0xFF4F6D9F)
                                 : Colors.black54,
@@ -332,7 +333,8 @@ class _CatalogState extends State<Catalog> {
                               children: [
                                 Text(
                                   categoryProducts[index].name ?? '',
-                                  style: GoogleFonts.montserrat(
+                                  style: const TextStyle(
+                                    fontFamily: 'Montserrat',
                                     color: kcBlack,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -345,7 +347,8 @@ class _CatalogState extends State<Catalog> {
                                   children: [
                                     Text(
                                       "${categoryProducts[index].price ?? ''} ₸",
-                                      style: GoogleFonts.poppins(
+                                      style: const TextStyle(
+                                        fontFamily: 'Montserrat',
                                         color: kcPrimaryColor,
                                         fontSize: 24,
                                         fontWeight: FontWeight.w600,
@@ -380,10 +383,11 @@ class _CatalogState extends State<Catalog> {
                                             border: Border.all(
                                               color: kcPrimaryColor,
                                             )),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text(
                                             'В корзину',
-                                            style: GoogleFonts.montserrat(
+                                            style: TextStyle(
+                                              fontFamily: 'Montserrat',
                                               color: kcPrimaryColor,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,

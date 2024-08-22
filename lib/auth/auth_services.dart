@@ -179,7 +179,9 @@ Future<Map<String, dynamic>?> getUserData() async {
     // Return the user data
     return userDoc.data();
   } catch (e) {
-    print('Error getting user data: $e');
+    if (kDebugMode) {
+      print('Error getting user data: $e');
+    }
     return null;
   }
 }

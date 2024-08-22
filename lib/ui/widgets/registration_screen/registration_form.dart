@@ -8,7 +8,6 @@ import 'package:asyltas/ui/widgets/registration_screen/phone_field.dart';
 import 'package:asyltas/ui/widgets/registration_screen/surname_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({
@@ -62,9 +61,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Создать аккаунт',
-            style: GoogleFonts.volkhov(
+            style: TextStyle(
+              fontFamily: 'Montserrat',
               color: Colors.black,
               fontSize: 30,
               fontWeight: FontWeight.w400,
@@ -140,10 +140,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   ),
                 ],
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Создать аккаунт',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -156,9 +157,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Уже есть аккаунт ',
-                style: GoogleFonts.poppins(
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
                   color: Colors.black,
                   fontSize: 16,
                 ),
@@ -168,10 +170,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 onPressed: () {
                   widget.toLogin();
                 },
-                child: Text(
+                child: const Text(
                   'Войти',
-                  style: GoogleFonts.poppins(
-                    color: const Color(0xFF4F6D9F),
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Color(0xFF4F6D9F),
                     fontSize: 16,
                     decoration: TextDecoration.underline,
                   ),

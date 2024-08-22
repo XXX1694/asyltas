@@ -1,6 +1,5 @@
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NameFieldMobile extends StatelessWidget {
   const NameFieldMobile({super.key, required this.controller});
@@ -11,19 +10,20 @@ class NameFieldMobile extends StatelessWidget {
       height: 48,
       child: TextField(
         controller: controller,
-        style: GoogleFonts.montserrat(
+        style: const TextStyle(
+          fontFamily: 'Montserrat',
           color: Colors.black,
           fontSize: 14,
         ),
-        decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
+        decoration: const InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 4, vertical: 12),
           hintText: 'Имя',
-          hintStyle: GoogleFonts.montserrat(
+          hintStyle: TextStyle(
+            fontFamily: 'Montserrat',
             color: Colors.black54,
             fontSize: 14,
           ),
-          focusedBorder: const UnderlineInputBorder(
+          focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
               color: kcPrimaryColor,
             ),
