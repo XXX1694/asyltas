@@ -32,7 +32,7 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 28),
             SizedBox(
               height: 30,
               width: double.infinity,

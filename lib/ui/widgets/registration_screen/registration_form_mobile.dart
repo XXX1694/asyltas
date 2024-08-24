@@ -101,7 +101,7 @@ class _RegistrationFormMobileState extends State<RegistrationFormMobile> {
             height: 44,
             decoration: BoxDecoration(
               color: kcPrimaryColor,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(2),
               boxShadow: const [
                 BoxShadow(
                   offset: Offset(0, 10),

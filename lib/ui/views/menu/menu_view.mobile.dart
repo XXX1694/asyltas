@@ -18,7 +18,7 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 28),
             SizedBox(
               height: 30,
               width: double.infinity,
@@ -43,7 +43,7 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                padding: const EdgeInsets.symmetric(horizontal: 28.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -58,8 +58,12 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () {
+                    CupertinoButton(
+                      padding: const EdgeInsets.only(
+                        bottom: 20,
+                        top: 0,
+                      ),
+                      onPressed: () {
                         viewModel.goToMainPage();
                       },
                       child: const Text(
@@ -72,9 +76,12 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () {
+                    CupertinoButton(
+                      padding: const EdgeInsets.only(
+                        bottom: 20,
+                        top: 0,
+                      ),
+                      onPressed: () {
                         viewModel.goToCatalogPage();
                       },
                       child: const Text(
@@ -87,9 +94,12 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () async {
+                    CupertinoButton(
+                      padding: const EdgeInsets.only(
+                        bottom: 20,
+                        top: 0,
+                      ),
+                      onPressed: () async {
                         bool res = await checkAuth();
                         if (res) {
                           viewModel.goToCartPage();
@@ -107,9 +117,12 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () async {
+                    CupertinoButton(
+                      padding: const EdgeInsets.only(
+                        bottom: 20,
+                        top: 0,
+                      ),
+                      onPressed: () async {
                         bool res = await checkAuth();
                         if (res) {
                           viewModel.goToProfilePage();
@@ -127,13 +140,16 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
                     FutureBuilder(
                       future: checkAuth(),
                       builder: (context, snapshot) {
                         if (snapshot.data == true) {
-                          return GestureDetector(
-                            onTap: () async {
+                          return CupertinoButton(
+                            padding: const EdgeInsets.only(
+                              bottom: 20,
+                              top: 0,
+                            ),
+                            onPressed: () async {
                               await deleteToken();
                               viewModel.goToMainPage();
                             },

@@ -19,7 +19,7 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 28),
               SizedBox(
                 height: 30,
                 width: double.infinity,
@@ -31,19 +31,32 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                     ),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: CupertinoButton(
-                        padding: const EdgeInsets.only(right: 20),
-                        onPressed: () {
-                          viewModel.goToMenu();
-                        },
-                        child: SvgPicture.asset('assets/burger.svg'),
+                      child: Row(
+                        children: [
+                          const Spacer(),
+                          CupertinoButton(
+                            padding: const EdgeInsets.only(right: 20),
+                            onPressed: () {
+                              viewModel.goToCartPage();
+                            },
+                            child: SvgPicture.asset('assets/cart.svg'),
+                          ),
+                          // const SizedBox(width: 12),
+                          CupertinoButton(
+                            padding: const EdgeInsets.only(right: 20),
+                            onPressed: () {
+                              viewModel.goToMenu();
+                            },
+                            child: SvgPicture.asset('assets/burger.svg'),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -53,7 +66,7 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                       style: const TextStyle(
                         fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
-                        fontSize: 20,
+                        fontSize: 22,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -63,7 +76,7 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                       style: const TextStyle(
                         fontFamily: 'Montserrat',
                         color: Colors.black54,
-                        fontSize: 13,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

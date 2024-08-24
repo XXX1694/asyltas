@@ -98,7 +98,7 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 28),
             SizedBox(
               height: 30,
               width: double.infinity,
@@ -123,7 +123,7 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                padding: const EdgeInsets.symmetric(horizontal: 28.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -145,12 +145,13 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
                           alignment: Alignment.centerLeft,
                           child: CupertinoButton(
                             padding: EdgeInsets.only(
-                                bottom: index == category.length - 1 ? 40 : 16,
-                                top: index == 0 ? 16 : 0),
+                                bottom: index == category.length - 1 ? 40 : 20,
+                                top: index == 0 ? 20 : 0),
                             onPressed: () {
                               viewModel.goToCategoryPage(
-                                  category[index]['id'].toString(),
-                                  category[index]['name'].toString());
+                                category[index]['id'].toString(),
+                                category[index]['name'].toString(),
+                              );
                             },
                             child: Text(
                               category[index]['name'].toString(),

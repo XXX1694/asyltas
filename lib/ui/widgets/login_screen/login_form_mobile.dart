@@ -77,7 +77,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
             height: 44,
             decoration: BoxDecoration(
               color: kcPrimaryColor,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(2),
               boxShadow: const [
                 BoxShadow(
                   offset: Offset(0, 10),
@@ -110,7 +110,7 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
             height: 44,
             decoration: BoxDecoration(
               color: Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(2),
               border: Border.all(color: kcPrimaryColor, width: 1),
             ),
             child: const Center(

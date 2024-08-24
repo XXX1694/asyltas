@@ -113,10 +113,11 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                       physics: const NeverScrollableScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 140 / 245,
                         crossAxisCount: 2,
                         crossAxisSpacing: 12,
                         mainAxisSpacing: 16,
-                        mainAxisExtent: 255,
+                        // mainAxisExtent: 255,
                       ),
                       itemCount: 10,
                       itemBuilder: (context, index) {
@@ -134,7 +135,7 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                               child: AspectRatio(
                                 aspectRatio: 1 / 1,
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(2),
                                   child: Container(
                                     width: double.infinity,
                                     height: double.infinity,
@@ -153,7 +154,7 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       color: kcBlack,
-                                      fontSize: 14,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                       letterSpacing: -0.41,
                                     ),
@@ -164,97 +165,82 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',
                                       color: kcBlack.withOpacity(0.54),
-                                      fontSize: 12,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       letterSpacing: -0.41,
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(height: 8),
+                                  const Text(
+                                    '999 ₸',
+                                    style: TextStyle(
+                                      fontFamily: 'Montserrat',
+                                      color: kcPrimaryColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: -0.41,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
                                   Expanded(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Text(
-                                          '999 ₸',
-                                          style: TextStyle(
-                                            fontFamily: 'Montserrat',
-                                            color: kcPrimaryColor,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            letterSpacing: -0.41,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 16),
-                                        Expanded(
-                                          child: CupertinoButton(
-                                            padding: const EdgeInsets.all(0),
-                                            onPressed: () async {
-                                              categoryProducts[index].count = 1;
-                                              final token =
-                                                  await getSavedToken();
-                                              if (token != null) {
-                                                final res =
-                                                    await addToNewOrderField(
-                                                  token,
-                                                  [
-                                                    categoryProducts[index]
-                                                        .toJson()
-                                                  ],
-                                                );
-                                                if (res) {
-                                                  // ignore: use_build_context_synchronously
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    const SnackBar(
-                                                      backgroundColor:
-                                                          Colors.white,
-                                                      content: Text(
-                                                        'Товар добавлен в корзину',
-                                                        style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat',
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                } else {
-                                                  widget.goLogin();
-                                                }
-                                              } else {
-                                                widget.goLogin();
-                                              }
-                                            },
-                                            child: Container(
-                                              height: double.infinity,
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                color: kcPrimaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                // border: Border.all(
-                                                //   color: kcPrimaryColor,
-                                                // ),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  'В корзину',
+                                    child: CupertinoButton(
+                                      padding: const EdgeInsets.all(0),
+                                      onPressed: () async {
+                                        categoryProducts[index].count = 1;
+                                        final token = await getSavedToken();
+                                        if (token != null) {
+                                          final res = await addToNewOrderField(
+                                            token,
+                                            [categoryProducts[index].toJson()],
+                                          );
+                                          if (res) {
+                                            // ignore: use_build_context_synchronously
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                backgroundColor: Colors.white,
+                                                content: Text(
+                                                  'Товар добавлен в корзину',
                                                   style: TextStyle(
                                                     fontFamily: 'Montserrat',
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.black,
                                                     letterSpacing: -0.41,
                                                   ),
                                                 ),
                                               ),
+                                            );
+                                          } else {
+                                            widget.goLogin();
+                                          }
+                                        } else {
+                                          widget.goLogin();
+                                        }
+                                      },
+                                      child: Container(
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: kcPrimaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          // border: Border.all(
+                                          //   color: kcPrimaryColor,
+                                          // ),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            'В корзину',
+                                            style: TextStyle(
+                                              fontFamily: 'Montserrat',
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -268,17 +254,18 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                       shrinkWrap: true,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 140 / 245,
                         crossAxisCount: 2,
                         crossAxisSpacing: 12,
                         mainAxisSpacing: 16,
-                        mainAxisExtent: 255,
+                        // mainAxisExtent: 255,
                       ),
-                      itemCount: 9,
+                      itemCount: 10,
                       itemBuilder: (context, index) {
                         return Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(2),
                           ),
                           child: const Text(''),
                         );
@@ -308,11 +295,11 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      // childAspectRatio: 165 / 245,
+                      childAspectRatio: 140 / 245,
                       crossAxisCount: 2,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 16,
-                      mainAxisExtent: 255,
+                      // mainAxisExtent: 290,
                     ),
                     itemCount: categoryProducts.length > 10
                         ? 10
@@ -331,11 +318,11 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                             child: AspectRatio(
                               aspectRatio: 1 / 1,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(2),
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
+                                    borderRadius: BorderRadius.circular(2),
                                   ),
                                   child: AppImage(
                                     imageUrl:
@@ -356,7 +343,7 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                                   style: const TextStyle(
                                     fontFamily: 'Montserrat',
                                     color: kcBlack,
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: -0.41,
                                   ),
@@ -367,96 +354,81 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     color: kcBlack.withOpacity(0.54),
-                                    fontSize: 12,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     letterSpacing: -0.41,
                                   ),
                                 ),
-                                const SizedBox(height: 12),
+                                const SizedBox(height: 8),
+                                Text(
+                                  "${categoryProducts[index].price ?? ''} ₸",
+                                  style: const TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    color: kcPrimaryColor,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: -0.41,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
                                 Expanded(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "${categoryProducts[index].price ?? ''} ₸",
-                                        style: const TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          color: kcPrimaryColor,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: -0.41,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 16),
-                                      Expanded(
-                                        child: CupertinoButton(
-                                          padding: const EdgeInsets.all(0),
-                                          onPressed: () async {
-                                            categoryProducts[index].count = 1;
-                                            final token = await getSavedToken();
-                                            if (token != null) {
-                                              final res =
-                                                  await addToNewOrderField(
-                                                token,
-                                                [
-                                                  categoryProducts[index]
-                                                      .toJson()
-                                                ],
-                                              );
-                                              if (res) {
-                                                // ignore: use_build_context_synchronously
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                    backgroundColor:
-                                                        Colors.white,
-                                                    content: Text(
-                                                      'Товар добавлен в корзину',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color: Colors.black,
-                                                        letterSpacing: -0.41,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              } else {
-                                                widget.goLogin();
-                                              }
-                                            } else {
-                                              widget.goLogin();
-                                            }
-                                          },
-                                          child: Container(
-                                            height: double.infinity,
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: kcPrimaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              // border: Border.all(
-                                              //   color: kcPrimaryColor,
-                                              // ),
-                                            ),
-                                            child: const Center(
-                                              child: Text(
-                                                'В корзину',
+                                  child: CupertinoButton(
+                                    padding: const EdgeInsets.all(0),
+                                    onPressed: () async {
+                                      categoryProducts[index].count = 1;
+                                      final token = await getSavedToken();
+                                      if (token != null) {
+                                        final res = await addToNewOrderField(
+                                          token,
+                                          [categoryProducts[index].toJson()],
+                                        );
+                                        if (res) {
+                                          // ignore: use_build_context_synchronously
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              backgroundColor: Colors.white,
+                                              content: Text(
+                                                'Товар добавлен в корзину',
                                                 style: TextStyle(
                                                   fontFamily: 'Montserrat',
-                                                  color: Colors.white,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.black,
+                                                  letterSpacing: -0.41,
                                                 ),
                                               ),
                                             ),
+                                          );
+                                        } else {
+                                          widget.goLogin();
+                                        }
+                                      } else {
+                                        widget.goLogin();
+                                      }
+                                    },
+                                    child: Container(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: kcPrimaryColor,
+                                        borderRadius: BorderRadius.circular(2),
+                                        // border: Border.all(
+                                        //   color: kcPrimaryColor,
+                                        // ),
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          'В корзину',
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            color: Colors.white,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -505,7 +477,7 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(2),
             child: Image.asset(
               images[index],
               height: 60,
