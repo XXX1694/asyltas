@@ -145,8 +145,9 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
                           alignment: Alignment.centerLeft,
                           child: CupertinoButton(
                             padding: EdgeInsets.only(
-                                bottom: index == category.length - 1 ? 40 : 20,
-                                top: index == 0 ? 20 : 0),
+                              bottom: index == category.length - 1 ? 40 : 20,
+                              top: index == 0 ? 20 : 0,
+                            ),
                             onPressed: () {
                               viewModel.goToCategoryPage(
                                 category[index]['id'].toString(),
