@@ -18,7 +18,7 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 28),
             SizedBox(
               height: 30,
               width: double.infinity,
@@ -30,12 +30,25 @@ class ProfileViewMobile extends ViewModelWidget<ProfileViewModel> {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: CupertinoButton(
-                      padding: const EdgeInsets.only(right: 20),
-                      onPressed: () {
-                        viewModel.goToMenu();
-                      },
-                      child: SvgPicture.asset('assets/burger.svg'),
+                    child: Row(
+                      children: [
+                        const Spacer(),
+                        CupertinoButton(
+                          padding: const EdgeInsets.only(right: 20),
+                          onPressed: () {
+                            viewModel.goToCartPage();
+                          },
+                          child: SvgPicture.asset('assets/cart.svg'),
+                        ),
+                        // const SizedBox(width: 12),
+                        CupertinoButton(
+                          padding: const EdgeInsets.only(right: 20),
+                          onPressed: () {
+                            viewModel.goToMenu();
+                          },
+                          child: SvgPicture.asset('assets/burger.svg'),
+                        ),
+                      ],
                     ),
                   ),
                 ],

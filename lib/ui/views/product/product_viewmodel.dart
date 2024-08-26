@@ -6,6 +6,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class ProductViewmodel extends BaseViewModel {
   final ProductModel product;
+  final List<ProductModel> categoryProducts;
   final _routerService = locator<RouterService>();
   Future goToMainPage() async {
     await _routerService.navigateTo(const HomeViewRoute());
@@ -23,8 +24,16 @@ class ProductViewmodel extends BaseViewModel {
     await _routerService.navigateTo(const CatalogViewRoute());
   }
 
-  Future goToProductPage({required ProductModel product}) async {
-    await _routerService.navigateTo(ProductViewRoute(product: product));
+  Future goToProductPage({
+    required ProductModel product,
+    required List<ProductModel> categoryProducts,
+  }) async {
+    await _routerService.navigateTo(
+      ProductViewRoute(
+        product: product,
+        categoryProducts: categoryProducts,
+      ),
+    );
   }
 
   Future goToProfilePage() async {
@@ -39,5 +48,8 @@ class ProductViewmodel extends BaseViewModel {
     await _routerService.navigateTo(const MenuViewRoute());
   }
 
-  ProductViewmodel({required this.product});
+  ProductViewmodel({
+    required this.product,
+    required this.categoryProducts,
+  });
 }

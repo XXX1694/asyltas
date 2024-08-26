@@ -8,8 +8,10 @@ import 'package:asyltas/models/product.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-typedef FutureCallbackFunction = Future Function(
-    {required ProductModel product});
+typedef FutureCallbackFunction = Future Function({
+  required ProductModel product,
+  required List<ProductModel> categoryProducts,
+});
 
 class Catalog extends StatefulWidget {
   const Catalog({
@@ -287,7 +289,10 @@ class _CatalogState extends State<Catalog> {
                   return CupertinoButton(
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
-                      widget.showProduct(product: categoryProducts[index]);
+                      widget.showProduct(
+                        product: categoryProducts[index],
+                        categoryProducts: categoryProducts,
+                      );
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),

@@ -128,6 +128,7 @@ class StackedRouterWeb extends _i14.RootStackRouter {
         child: _i11.ProductView(
           key: args.key,
           product: args.product,
+          categoryProducts: args.categoryProducts,
         ),
         opaque: true,
         barrierDismissible: false,
@@ -377,12 +378,14 @@ class ProductViewRoute extends _i14.PageRouteInfo<ProductViewArgs> {
   ProductViewRoute({
     _i15.Key? key,
     required _i16.ProductModel product,
+    required List<_i16.ProductModel> categoryProducts,
   }) : super(
           ProductViewRoute.name,
           path: 'catalog/:productId',
           args: ProductViewArgs(
             key: key,
             product: product,
+            categoryProducts: categoryProducts,
           ),
         );
 
@@ -393,15 +396,18 @@ class ProductViewArgs {
   const ProductViewArgs({
     this.key,
     required this.product,
+    required this.categoryProducts,
   });
 
   final _i15.Key? key;
 
   final _i16.ProductModel product;
 
+  final List<_i16.ProductModel> categoryProducts;
+
   @override
   String toString() {
-    return 'ProductViewArgs{key: $key, product: $product}';
+    return 'ProductViewArgs{key: $key, product: $product, categoryProducts: $categoryProducts}';
   }
 }
 
@@ -515,12 +521,14 @@ extension RouterStateExtension on _i13.RouterService {
   Future<dynamic> navigateToProductView({
     _i15.Key? key,
     required _i16.ProductModel product,
+    required List<_i16.ProductModel> categoryProducts,
     void Function(_i14.NavigationFailure)? onFailure,
   }) async {
     return navigateTo(
       ProductViewRoute(
         key: key,
         product: product,
+        categoryProducts: categoryProducts,
       ),
       onFailure: onFailure,
     );
@@ -631,12 +639,14 @@ extension RouterStateExtension on _i13.RouterService {
   Future<dynamic> replaceWithProductView({
     _i15.Key? key,
     required _i16.ProductModel product,
+    required List<_i16.ProductModel> categoryProducts,
     void Function(_i14.NavigationFailure)? onFailure,
   }) async {
     return replaceWith(
       ProductViewRoute(
         key: key,
         product: product,
+        categoryProducts: categoryProducts,
       ),
       onFailure: onFailure,
     );

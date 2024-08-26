@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-typedef FutureCallbackFunction = Future Function(
-    {required ProductModel product});
+typedef FutureCallbackFunction = Future Function({
+  required ProductModel product,
+  required List<ProductModel> categoryProducts,
+});
 
 class AdBanner extends StatelessWidget {
   const AdBanner({super.key, required this.showProduct});
@@ -136,6 +138,7 @@ class AdBanner extends StatelessWidget {
                             1400,
                             1,
                           ),
+                          categoryProducts: [],
                         );
                       },
                       child: Container(

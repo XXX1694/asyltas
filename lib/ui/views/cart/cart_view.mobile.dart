@@ -140,6 +140,7 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                             color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         const SizedBox(height: 8),
@@ -150,6 +151,7 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                             color: Colors.black54,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         const SizedBox(height: 16),
@@ -162,7 +164,7 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
-                                        const SizedBox(height: 32),
+                                        const Spacer(),
                                         StatefulBuilder(
                                           builder: (context, setState) {
                                             return Container(
@@ -170,8 +172,9 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                               width: 100,
                                               decoration: BoxDecoration(
                                                 border: Border.all(
-                                                    color: Colors.black45,
-                                                    width: 1),
+                                                  color: Colors.black45,
+                                                  width: 1,
+                                                ),
                                                 borderRadius:
                                                     BorderRadius.circular(4),
                                               ),
@@ -181,75 +184,79 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Expanded(
-                                                    child: GestureDetector(
-                                                      onTap: () {
-                                                        decreaceOverall(
-                                                          snapshot.data?[index]
-                                                              ['price'],
-                                                        );
-                                                        if (snapshot.data?[
+                                                  CupertinoButton(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                      0,
+                                                    ),
+                                                    onPressed: () {
+                                                      decreaceOverall(
+                                                        snapshot.data?[index]
+                                                            ['price'],
+                                                      );
+                                                      if (snapshot.data?[index]
+                                                              ['count'] >
+                                                          1) {
+                                                        setState(
+                                                          () {
+                                                            snapshot.data?[
                                                                     index]
-                                                                ['count'] >
-                                                            1) {
-                                                          setState(
-                                                            () {
-                                                              snapshot.data?[
-                                                                      index]
-                                                                  ['count']--;
-                                                            },
-                                                          );
-                                                        }
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          horizontal: 6,
-                                                        ),
-                                                        child: SvgPicture.asset(
-                                                          'assets/minus_mobile.svg',
-                                                          width: 12,
-                                                        ),
+                                                                ['count']--;
+                                                          },
+                                                        );
+                                                      }
+                                                    },
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                        horizontal: 6,
+                                                      ),
+                                                      child: SvgPicture.asset(
+                                                        'assets/minus_mobile.svg',
+                                                        width: 12,
                                                       ),
                                                     ),
                                                   ),
-                                                  Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 4),
-                                                    child: Text(
-                                                      '${snapshot.data?[index]['count']}',
-                                                      style: const TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat',
-                                                          fontSize: 18),
-                                                      textAlign:
-                                                          TextAlign.center,
+                                                  Expanded(
+                                                    child: Container(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 4),
+                                                      child: Text(
+                                                        '${snapshot.data?[index]['count']}',
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                'Montserrat',
+                                                            fontSize: 18),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
                                                     ),
                                                   ),
-                                                  Expanded(
-                                                    child: GestureDetector(
-                                                      onTap: () {
-                                                        incrementOverall(
-                                                          snapshot.data?[index]
-                                                              ['price'],
-                                                        );
-                                                        setState(() {
-                                                          snapshot.data?[index]
-                                                              ['count']++;
-                                                        });
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 6),
-                                                        child: SvgPicture.asset(
-                                                          'assets/plus_mobile.svg',
-                                                          height: 14,
-                                                          width: 12,
-                                                        ),
+                                                  CupertinoButton(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                      0,
+                                                    ),
+                                                    onPressed: () {
+                                                      incrementOverall(
+                                                        snapshot.data?[index]
+                                                            ['price'],
+                                                      );
+                                                      setState(() {
+                                                        snapshot.data?[index]
+                                                            ['count']++;
+                                                      });
+                                                    },
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                        horizontal: 6,
+                                                      ),
+                                                      child: SvgPicture.asset(
+                                                        'assets/plus_mobile.svg',
+                                                        height: 14,
+                                                        width: 12,
                                                       ),
                                                     ),
                                                   ),
@@ -323,7 +330,7 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
                             height: 44,
                             decoration: BoxDecoration(
                               color: kcPrimaryColor,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(2),
                             ),
                             child: const Center(
                               child: Text(

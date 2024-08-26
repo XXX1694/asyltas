@@ -6,8 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-typedef FutureCallbackFunction = Future Function(
-    {required ProductModel product});
+typedef FutureCallbackFunction = Future Function({
+  required ProductModel product,
+  required List<ProductModel> categoryProducts,
+});
 
 class MiniCatalogMobile extends StatefulWidget {
   const MiniCatalogMobile({
@@ -130,6 +132,7 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                               onPressed: () {
                                 widget.showProduct(
                                   product: categoryProducts[index],
+                                  categoryProducts: categoryProducts,
                                 );
                               },
                               child: AspectRatio(
@@ -313,7 +316,9 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                             padding: const EdgeInsets.all(0),
                             onPressed: () {
                               widget.showProduct(
-                                  product: categoryProducts[index]);
+                                product: categoryProducts[index],
+                                categoryProducts: categoryProducts,
+                              );
                             },
                             child: AspectRatio(
                               aspectRatio: 1 / 1,
@@ -346,6 +351,7 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: -0.41,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                                 const SizedBox(height: 2),
@@ -357,6 +363,7 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
                                     letterSpacing: -0.41,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                                 const SizedBox(height: 8),

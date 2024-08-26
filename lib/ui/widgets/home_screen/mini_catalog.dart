@@ -6,8 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-typedef FutureCallbackFunction = Future Function(
-    {required ProductModel product});
+typedef FutureCallbackFunction = Future Function({
+  required ProductModel product,
+  required List<ProductModel> categoryProducts,
+});
 
 class MiniCatalog extends StatefulWidget {
   const MiniCatalog({
@@ -178,7 +180,10 @@ class _MiniCatalogState extends State<MiniCatalog> {
                     return CupertinoButton(
                       padding: const EdgeInsets.all(0),
                       onPressed: () {
-                        widget.showProduct(product: categoryProducts[index]);
+                        widget.showProduct(
+                          product: categoryProducts[index],
+                          categoryProducts: categoryProducts,
+                        );
                       },
                       child: Container(
                         padding: const EdgeInsets.all(25),

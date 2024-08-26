@@ -1,6 +1,7 @@
 import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
+import 'package:asyltas/ui/widgets/product_screen/other_products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,7 +21,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 28),
               SizedBox(
                 height: 30,
                 width: double.infinity,
@@ -32,12 +33,25 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                     ),
                     Align(
                       alignment: Alignment.centerRight,
-                      child: CupertinoButton(
-                        padding: const EdgeInsets.only(right: 20),
-                        onPressed: () {
-                          viewModel.goToMenu();
-                        },
-                        child: SvgPicture.asset('assets/burger.svg'),
+                      child: Row(
+                        children: [
+                          const Spacer(),
+                          CupertinoButton(
+                            padding: const EdgeInsets.only(right: 20),
+                            onPressed: () {
+                              viewModel.goToCartPage();
+                            },
+                            child: SvgPicture.asset('assets/cart.svg'),
+                          ),
+                          // const SizedBox(width: 12),
+                          CupertinoButton(
+                            padding: const EdgeInsets.only(right: 20),
+                            onPressed: () {
+                              viewModel.goToMenu();
+                            },
+                            child: SvgPicture.asset('assets/burger.svg'),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -54,7 +68,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       style: const TextStyle(
                         fontFamily: 'Montserrat',
                         color: Colors.black54,
-                        fontSize: 13,
+                        fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -62,7 +76,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                     AspectRatio(
                       aspectRatio: 1 / 1,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(2),
                         child: AppImage(
                           imageUrl: viewModel.product.images?[0] ?? '',
                         ),
@@ -77,7 +91,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                         itemBuilder: (context, index) => AspectRatio(
                           aspectRatio: 1 / 1,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6),
+                            borderRadius: BorderRadius.circular(2),
                             child: AppImage(
                               imageUrl: viewModel.product.images?[index] ?? '',
                             ),
@@ -91,7 +105,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       style: const TextStyle(
                         fontFamily: 'Montserrat',
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -101,7 +115,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         color: Colors.black54,
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -111,7 +125,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       style: const TextStyle(
                         fontFamily: 'Montserrat',
                         color: kcPrimaryColor,
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -138,7 +152,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                         ),
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(6),
+                            borderRadius: BorderRadius.circular(2),
                             border: Border.all(
                               color: kcPrimaryColor,
                             )),
@@ -175,10 +189,15 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    const SizedBox(height: 32),
                   ],
                 ),
               ),
+              const SizedBox(height: 32),
+              OtherProducts(
+                products: viewModel.categoryProducts,
+                showProduct: viewModel.goToProductPage,
+              ),
+              const SizedBox(height: 40),
             ],
           ),
         ),

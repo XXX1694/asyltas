@@ -9,9 +9,11 @@ import 'product_viewmodel.dart';
 
 class ProductView extends StackedView<ProductViewmodel> {
   final ProductModel product;
+  final List<ProductModel> categoryProducts;
   const ProductView({
     super.key,
     required this.product,
+    required this.categoryProducts,
   });
 
   @override
@@ -31,5 +33,8 @@ class ProductView extends StackedView<ProductViewmodel> {
   ProductViewmodel viewModelBuilder(
     BuildContext context,
   ) =>
-      ProductViewmodel(product: product);
+      ProductViewmodel(
+        product: product,
+        categoryProducts: categoryProducts,
+      );
 }

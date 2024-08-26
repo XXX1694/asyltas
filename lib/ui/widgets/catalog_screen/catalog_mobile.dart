@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 typedef FutureCallbackFunction = Future Function({
   required ProductModel product,
+  required List<ProductModel> categoryProducts,
 });
 
 class CatalogMobile extends StatefulWidget {
@@ -89,7 +90,7 @@ class _CatalogMobileState extends State<CatalogMobile> {
                               style: TextStyle(
                                 fontFamily: 'Montserrat',
                                 color: kcBlack,
-                                fontSize: 14,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: -0.41,
                               ),
@@ -100,90 +101,81 @@ class _CatalogMobileState extends State<CatalogMobile> {
                               style: TextStyle(
                                 fontFamily: 'Montserrat',
                                 color: kcBlack.withOpacity(0.54),
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 letterSpacing: -0.41,
                               ),
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 8),
+                            const Text(
+                              '999 ₸',
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: kcPrimaryColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: -0.41,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
                             Expanded(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    '999 ₸',
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      color: kcPrimaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: -0.41,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: CupertinoButton(
-                                      padding: const EdgeInsets.all(0),
-                                      onPressed: () async {
-                                        categoryProducts[index].count = 1;
-                                        final token = await getSavedToken();
-                                        if (token != null) {
-                                          final res = await addToNewOrderField(
-                                            token,
-                                            [categoryProducts[index].toJson()],
-                                          );
-                                          if (res) {
-                                            // ignore: use_build_context_synchronously
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                backgroundColor: Colors.white,
-                                                content: Text(
-                                                  'Товар добавлен в корзину',
-                                                  style: TextStyle(
-                                                    fontFamily: 'Montserrat',
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          } else {
-                                            widget.goLogin();
-                                          }
-                                        } else {
-                                          widget.goLogin();
-                                        }
-                                      },
-                                      child: Container(
-                                        height: double.infinity,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: kcPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(2),
-                                          // border: Border.all(
-                                          //   color: kcPrimaryColor,
-                                          // ),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'В корзину',
+                              child: CupertinoButton(
+                                padding: const EdgeInsets.all(0),
+                                onPressed: () async {
+                                  categoryProducts[index].count = 1;
+                                  final token = await getSavedToken();
+                                  if (token != null) {
+                                    final res = await addToNewOrderField(
+                                      token,
+                                      [categoryProducts[index].toJson()],
+                                    );
+                                    if (res) {
+                                      // ignore: use_build_context_synchronously
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          backgroundColor: Colors.white,
+                                          content: Text(
+                                            'Товар добавлен в корзину',
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black,
                                               letterSpacing: -0.41,
                                             ),
                                           ),
                                         ),
+                                      );
+                                    } else {
+                                      widget.goLogin();
+                                    }
+                                  } else {
+                                    widget.goLogin();
+                                  }
+                                },
+                                child: Container(
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: kcPrimaryColor,
+                                    borderRadius: BorderRadius.circular(2),
+                                    // border: Border.all(
+                                    //   color: kcPrimaryColor,
+                                    // ),
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      'В корзину',
+                                      style: TextStyle(
+                                        fontFamily: 'Montserrat',
+                                        color: Colors.white,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
                                       ),
                                     ),
                                   ),
-                                ],
+                                ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -247,7 +239,10 @@ class _CatalogMobileState extends State<CatalogMobile> {
                     CupertinoButton(
                       padding: const EdgeInsets.all(0),
                       onPressed: () {
-                        widget.showProduct(product: categoryProducts[index]);
+                        widget.showProduct(
+                          product: categoryProducts[index],
+                          categoryProducts: categoryProducts,
+                        );
                       },
                       child: AspectRatio(
                         aspectRatio: 1 / 1,
@@ -280,6 +275,7 @@ class _CatalogMobileState extends State<CatalogMobile> {
                               fontWeight: FontWeight.w600,
                               letterSpacing: -0.41,
                             ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 2),
                           Text(
@@ -291,6 +287,7 @@ class _CatalogMobileState extends State<CatalogMobile> {
                               fontWeight: FontWeight.w400,
                               letterSpacing: -0.41,
                             ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 8),
                           Text(
