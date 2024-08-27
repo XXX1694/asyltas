@@ -158,10 +158,11 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
                               category[index]['name'].toString(),
                               style: const TextStyle(
                                 fontFamily: 'Montserrat',
-                                color: kcPrimaryColor,
+                                color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
                               ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),

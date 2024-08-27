@@ -154,6 +154,41 @@ Future<bool> addDataToOrdersCollection(
   }
 }
 
+Future<bool> deleteElementFromList(int index) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? idToken = prefs.getString('idToken');
+  try {
+    // Reference to the document in the 'users' collection
+    DocumentReference docRef =
+        FirebaseFirestore.instance.collection('users').doc(idToken);
+
+    // Fetch the current document
+    DocumentSnapshot docSnapshot = await docRef.get();
+    if (!docSnapshot.exists) {
+      throw Exception("Document does not exist");
+    }
+
+    // Get the current list and cast it to Map<String, dynamic>
+    Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+    List<dynamic> newOrder = data['newOrder'] ?? [];
+
+    if (index < 0 || index >= newOrder.length) {
+      throw Exception("Index out of range");
+    }
+
+    // Remove the element from the list
+    newOrder.removeAt(index);
+
+    // Update the document with the new list
+    await docRef.update({'newOrder': newOrder});
+    print("Element removed successfully");
+    return true;
+  } catch (e) {
+    print("Error: $e");
+    return false;
+  }
+}
+
 Future<Map<String, dynamic>?> getUserData() async {
   try {
     // Get the SharedPreferences instance

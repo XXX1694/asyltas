@@ -70,7 +70,7 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         'Главная',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: kcPrimaryColor,
+                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
@@ -88,7 +88,7 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         'Каталог',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: kcPrimaryColor,
+                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
@@ -111,7 +111,7 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         'Корзина',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: kcPrimaryColor,
+                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
@@ -134,7 +134,7 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         'Профиль',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: kcPrimaryColor,
+                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),

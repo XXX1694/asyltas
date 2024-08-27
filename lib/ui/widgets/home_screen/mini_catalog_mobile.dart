@@ -63,232 +63,42 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
   List<ProductModel> categoryProducts = [];
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 178,
-            width: double.infinity,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(child: categoryItem(0)),
-                      Expanded(child: categoryItem(1)),
-                      Expanded(child: categoryItem(2)),
-                      Expanded(child: categoryItem(3)),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(child: categoryItem(4)),
-                    Expanded(child: categoryItem(5)),
-                    Expanded(child: categoryItem(6)),
-                    Expanded(child: categoryItem(7)),
-                  ],
-                ),
-              ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 180,
+          width: double.infinity,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: category.length,
+            itemBuilder: (context, index) => Container(
+              padding: EdgeInsets.only(
+                left: index == 0 ? 12 : 0,
+                right: 12,
+              ),
+              child: categoryItem(index),
             ),
           ),
-          const SizedBox(height: 20),
-          Flexible(
-            child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('products')
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return GridView.builder(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(0),
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 140 / 245,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 16,
-                        // mainAxisExtent: 255,
-                      ),
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CupertinoButton(
-                              padding: const EdgeInsets.all(0),
-                              onPressed: () {
-                                widget.showProduct(
-                                  product: categoryProducts[index],
-                                );
-                              },
-                              child: AspectRatio(
-                                aspectRatio: 1 / 1,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(2),
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    color: Colors.grey.shade300,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'Товар',
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      color: kcBlack,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: -0.41,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    'Категория',
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      color: kcBlack.withOpacity(0.54),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      letterSpacing: -0.41,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  const Text(
-                                    '999 ₸',
-                                    style: TextStyle(
-                                      fontFamily: 'Montserrat',
-                                      color: kcPrimaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: -0.41,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Expanded(
-                                    child: CupertinoButton(
-                                      padding: const EdgeInsets.all(0),
-                                      onPressed: () async {
-                                        categoryProducts[index].count = 1;
-                                        final token = await getSavedToken();
-                                        if (token != null) {
-                                          final res = await addToNewOrderField(
-                                            token,
-                                            [categoryProducts[index].toJson()],
-                                          );
-                                          if (res) {
-                                            // ignore: use_build_context_synchronously
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                backgroundColor: Colors.white,
-                                                content: Text(
-                                                  'Товар добавлен в корзину',
-                                                  style: TextStyle(
-                                                    fontFamily: 'Montserrat',
-                                                    color: Colors.black,
-                                                    letterSpacing: -0.41,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          } else {
-                                            widget.goLogin();
-                                          }
-                                        } else {
-                                          widget.goLogin();
-                                        }
-                                      },
-                                      child: Container(
-                                        height: double.infinity,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: kcPrimaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(2),
-                                          // border: Border.all(
-                                          //   color: kcPrimaryColor,
-                                          // ),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'В корзину',
-                                            style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
-                  if (snapshot.hasError) {
-                    return GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 140 / 245,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 16,
-                        // mainAxisExtent: 255,
-                      ),
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                          child: const Text(''),
-                        );
-                      },
-                    );
-                  }
-                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                    return const Center(child: Text('No products available.'));
-                  }
-                  products = snapshot.data!.docs;
-                  categoryProducts = [];
-                  for (int i = 0; i < products.length; i++) {
-                    final product = products[i].data() as Map<String, dynamic>;
-                    String productCategoryId =
-                        (product['category_id'] ?? '').toString();
-                    String selectedCategoryId =
-                        (category[selescted]['id'] ?? '').toString();
-
-                    if (productCategoryId == selectedCategoryId) {
-                      categoryProducts.add(ProductModel.fromJson(product));
-                      categoryProducts.last.id = snapshot.data!.docs[i].id;
-                    }
-                  }
+        ),
+        const SizedBox(height: 16),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12),
+          child: Divider(
+            height: 1,
+            color: Colors.black12,
+          ),
+        ),
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('products').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
                   return GridView.builder(
                     shrinkWrap: true,
                     padding: const EdgeInsets.all(0),
@@ -299,11 +109,9 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                       crossAxisCount: 2,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 16,
-                      // mainAxisExtent: 290,
+                      // mainAxisExtent: 255,
                     ),
-                    itemCount: categoryProducts.length > 10
-                        ? 10
-                        : categoryProducts.length,
+                    itemCount: 10,
                     itemBuilder: (context, index) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -313,22 +121,17 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                             padding: const EdgeInsets.all(0),
                             onPressed: () {
                               widget.showProduct(
-                                  product: categoryProducts[index]);
+                                product: categoryProducts[index],
+                              );
                             },
                             child: AspectRatio(
                               aspectRatio: 1 / 1,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(2),
+                                borderRadius: BorderRadius.circular(4),
                                 child: Container(
                                   width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(2),
-                                  ),
-                                  child: AppImage(
-                                    imageUrl:
-                                        categoryProducts[index].images?[0] ??
-                                            '',
-                                  ),
+                                  height: double.infinity,
+                                  color: Colors.grey.shade300,
                                 ),
                               ),
                             ),
@@ -338,9 +141,9 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  categoryProducts[index].name ?? '',
-                                  style: const TextStyle(
+                                const Text(
+                                  'Товар',
+                                  style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     color: kcBlack,
                                     fontSize: 16,
@@ -350,7 +153,7 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  categoryProducts[index].name ?? '',
+                                  'Категория',
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     color: kcBlack.withOpacity(0.54),
@@ -360,9 +163,9 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                Text(
-                                  "${categoryProducts[index].price ?? ''} ₸",
-                                  style: const TextStyle(
+                                const Text(
+                                  '999 ₸',
+                                  style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     color: kcPrimaryColor,
                                     fontSize: 18,
@@ -436,10 +239,199 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
                       );
                     },
                   );
-                }),
-          ),
-        ],
-      ),
+                }
+                if (snapshot.hasError) {
+                  return GridView.builder(
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 140 / 245,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 16,
+                      // mainAxisExtent: 255,
+                    ),
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Text(''),
+                      );
+                    },
+                  );
+                }
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return const Center(child: Text('No products available.'));
+                }
+                products = snapshot.data!.docs;
+                categoryProducts = [];
+                for (int i = 0; i < products.length; i++) {
+                  final product = products[i].data() as Map<String, dynamic>;
+                  String productCategoryId =
+                      (product['category_id'] ?? '').toString();
+                  String selectedCategoryId =
+                      (category[selescted]['id'] ?? '').toString();
+
+                  if (productCategoryId == selectedCategoryId) {
+                    categoryProducts.add(ProductModel.fromJson(product));
+
+                    categoryProducts.last.id = snapshot.data!.docs[i].id;
+                  }
+                }
+
+                return GridView.builder(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(0),
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 140 / 245,
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 16,
+                    // mainAxisExtent: 290,
+                  ),
+                  itemCount: categoryProducts.length > 10
+                      ? 10
+                      : categoryProducts.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CupertinoButton(
+                          padding: const EdgeInsets.all(0),
+                          onPressed: () {
+                            widget.showProduct(
+                                product: categoryProducts[index]);
+                          },
+                          child: AspectRatio(
+                            aspectRatio: 1 / 1,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: AppImage(
+                                  imageUrl:
+                                      categoryProducts[index].images?[0] ?? '',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                categoryProducts[index].name ?? '',
+                                style: const TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: kcBlack,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: -0.41,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'В пачке: ${categoryProducts[index].numberLeft} шт',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: kcBlack.withOpacity(0.54),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  letterSpacing: -0.41,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                "${categoryProducts[index].price ?? ''} ₸",
+                                style: const TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  color: kcPrimaryColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: -0.41,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Expanded(
+                                child: CupertinoButton(
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () async {
+                                    categoryProducts[index].count = 1;
+                                    final token = await getSavedToken();
+                                    if (token != null) {
+                                      final res = await addToNewOrderField(
+                                        token,
+                                        [categoryProducts[index].toJson()],
+                                      );
+                                      if (res) {
+                                        // ignore: use_build_context_synchronously
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            backgroundColor: Colors.white,
+                                            content: Text(
+                                              'Товар добавлен в корзину',
+                                              style: TextStyle(
+                                                fontFamily: 'Montserrat',
+                                                color: Colors.black,
+                                                letterSpacing: -0.41,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      } else {
+                                        widget.goLogin();
+                                      }
+                                    } else {
+                                      widget.goLogin();
+                                    }
+                                  },
+                                  child: Container(
+                                    height: double.infinity,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: kcPrimaryColor,
+                                      borderRadius: BorderRadius.circular(4),
+                                      // border: Border.all(
+                                      //   color: kcPrimaryColor,
+                                      // ),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        'В корзину',
+                                        style: TextStyle(
+                                          fontFamily: 'Montserrat',
+                                          color: Colors.white,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }),
+        ),
+      ],
     );
   }
 
@@ -477,21 +469,23 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile> {
       child: Column(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(2),
+            borderRadius: BorderRadius.circular(1000),
             child: Image.asset(
               images[index],
-              height: 60,
-              width: 60,
+              height: 160,
+              width: 115,
               fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(height: 2),
+          const SizedBox(height: 4),
           Text(
             category[index]['name'] ?? '',
             style: TextStyle(
               fontFamily: 'Montserrat',
               color: selescted == index ? kcPrimaryColor : Colors.black54,
-              fontSize: 11,
+              fontSize: 13,
+              fontWeight:
+                  selescted == index ? FontWeight.w600 : FontWeight.w500,
             ),
             textAlign: TextAlign.center,
           ),

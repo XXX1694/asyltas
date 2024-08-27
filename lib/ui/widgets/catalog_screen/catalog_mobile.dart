@@ -210,6 +210,7 @@ class _CatalogMobileState extends State<CatalogMobile> {
 
           if (productCategoryId == widget.categoryId) {
             categoryProducts.add(ProductModel.fromJson(product));
+
             categoryProducts.last.id = products[i].id;
           }
         }
@@ -280,10 +281,11 @@ class _CatalogMobileState extends State<CatalogMobile> {
                               fontWeight: FontWeight.w600,
                               letterSpacing: -0.41,
                             ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            categoryProducts[index].name ?? '',
+                            'В пачке: ${categoryProducts[index].numberLeft} шт',
                             style: TextStyle(
                               fontFamily: 'Montserrat',
                               color: kcBlack.withOpacity(0.54),
@@ -291,6 +293,7 @@ class _CatalogMobileState extends State<CatalogMobile> {
                               fontWeight: FontWeight.w400,
                               letterSpacing: -0.41,
                             ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 8),
                           Text(
@@ -302,6 +305,7 @@ class _CatalogMobileState extends State<CatalogMobile> {
                               fontWeight: FontWeight.w600,
                               letterSpacing: -0.41,
                             ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 8),
                           Expanded(
