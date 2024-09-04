@@ -111,8 +111,12 @@ class _CartMobileNewState extends State<CartMobileNew> {
                                   ),
                                 ),
                               ),
-                              context.read<FavoritesProvider>().items.isNotEmpty
-                                  ? Align(
+                              Consumer<FavoritesProvider>(
+                                builder: (context, favorites, child) {
+                                  if (favorites.items.isEmpty) {
+                                    return const SizedBox();
+                                  } else {
+                                    return Align(
                                       alignment: Alignment.topRight,
                                       child: Container(
                                         height: 18,
@@ -124,11 +128,7 @@ class _CartMobileNewState extends State<CartMobileNew> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            context
-                                                .read<FavoritesProvider>()
-                                                .items
-                                                .length
-                                                .toString(),
+                                            favorites.items.length.toString(),
                                             style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 11,
@@ -138,8 +138,10 @@ class _CartMobileNewState extends State<CartMobileNew> {
                                           ),
                                         ),
                                       ),
-                                    )
-                                  : const SizedBox(),
+                                    );
+                                  }
+                                },
+                              )
                             ],
                           ),
                         ),
@@ -227,6 +229,7 @@ class _CartMobileNewState extends State<CartMobileNew> {
                         child: ListView.builder(
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: cart.items.length,
                           itemBuilder: (context, index) {
                             return Container(

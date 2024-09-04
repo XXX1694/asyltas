@@ -138,11 +138,12 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                                         ),
                                       ),
                                     ),
-                                    context
-                                            .read<CartProvider>()
-                                            .items
-                                            .isNotEmpty
-                                        ? Align(
+                                    Consumer<CartProvider>(
+                                      builder: (context, cart, child) {
+                                        if (cart.items.isEmpty) {
+                                          return const SizedBox();
+                                        } else {
+                                          return Align(
                                             alignment: Alignment.topRight,
                                             child: Container(
                                               height: 18,
@@ -154,11 +155,7 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  context
-                                                      .read<CartProvider>()
-                                                      .items
-                                                      .length
-                                                      .toString(),
+                                                  cart.items.length.toString(),
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 11,
@@ -168,8 +165,10 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                                                 ),
                                               ),
                                             ),
-                                          )
-                                        : const SizedBox(),
+                                          );
+                                        }
+                                      },
+                                    )
                                   ],
                                 ),
                               ),
@@ -257,6 +256,7 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                             const SizedBox(height: 16),
                             Flexible(
                               child: ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
                                 itemCount: favorites.items.length,

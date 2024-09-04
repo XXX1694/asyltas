@@ -76,11 +76,12 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
                                       ),
                                     ),
                                   ),
-                                  context
-                                          .read<FavoritesProvider>()
-                                          .items
-                                          .isNotEmpty
-                                      ? Align(
+                                  Consumer<FavoritesProvider>(
+                                    builder: (context, favorites, child) {
+                                      if (favorites.items.isEmpty) {
+                                        return const SizedBox();
+                                      } else {
+                                        return Align(
                                           alignment: Alignment.topRight,
                                           child: Container(
                                             height: 18,
@@ -92,10 +93,7 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                context
-                                                    .read<FavoritesProvider>()
-                                                    .items
-                                                    .length
+                                                favorites.items.length
                                                     .toString(),
                                                 style: const TextStyle(
                                                   color: Colors.white,
@@ -106,8 +104,10 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
                                               ),
                                             ),
                                           ),
-                                        )
-                                      : const SizedBox(),
+                                        );
+                                      }
+                                    },
+                                  )
                                 ],
                               ),
                             ),
@@ -127,8 +127,12 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
                                       'assets/cart1.svg',
                                     ),
                                   ),
-                                  context.read<CartProvider>().items.isNotEmpty
-                                      ? Align(
+                                  Consumer<CartProvider>(
+                                    builder: (context, cart, child) {
+                                      if (cart.items.isEmpty) {
+                                        return const SizedBox();
+                                      } else {
+                                        return Align(
                                           alignment: Alignment.topRight,
                                           child: Container(
                                             height: 18,
@@ -140,11 +144,7 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                context
-                                                    .read<CartProvider>()
-                                                    .items
-                                                    .length
-                                                    .toString(),
+                                                cart.items.length.toString(),
                                                 style: const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 11,
@@ -154,8 +154,10 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
                                               ),
                                             ),
                                           ),
-                                        )
-                                      : const SizedBox(),
+                                        );
+                                      }
+                                    },
+                                  ),
                                 ],
                               ),
                             ),

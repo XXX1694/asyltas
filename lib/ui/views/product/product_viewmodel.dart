@@ -24,6 +24,10 @@ class ProductViewmodel extends BaseViewModel {
     await _routerService.navigateTo(const CatalogViewRoute());
   }
 
+  Future goToFavoritesPage() async {
+    await _routerService.navigateTo(const FavoritesViewRoute());
+  }
+
   Future goToProductPage({
     required ProductModel product,
     required List<ProductModel> categoryProducts,

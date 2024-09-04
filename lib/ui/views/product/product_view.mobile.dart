@@ -1,10 +1,14 @@
 import 'package:asyltas/auth/auth_services.dart';
+import 'package:asyltas/provider/cart_provider.dart';
+import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
+import 'package:asyltas/ui/common/placeholder.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:asyltas/ui/widgets/product_screen/other_products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import 'product_viewmodel.dart';
@@ -14,6 +18,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
 
   @override
   Widget build(BuildContext context, ProductViewmodel viewModel) {
+    int currentImage = 0;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -23,34 +28,150 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
             children: [
               const SizedBox(height: 28),
               SizedBox(
-                height: 30,
+                height: 40,
                 width: double.infinity,
                 child: Stack(
                   children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Image.asset('assets/images/logo_small.png'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: GestureDetector(
+                          onTap: () {
+                            viewModel.goToMainPage();
+                          },
+                          child: SvgPicture.asset(
+                            'assets/logo.svg',
+                            height: 28,
+                          ),
+                        ),
+                      ),
                     ),
                     Align(
                       alignment: Alignment.centerRight,
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Spacer(),
-                          CupertinoButton(
-                            padding: const EdgeInsets.only(right: 20),
-                            onPressed: () {
+                          GestureDetector(
+                            onTap: () {
+                              viewModel.goToFavoritesPage();
+                            },
+                            child: SizedBox(
+                              width: 42,
+                              height: 40,
+                              child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(5),
+                                      height: 32,
+                                      width: 32,
+                                      decoration: BoxDecoration(
+                                        color: kcPrimaryColor.withOpacity(0.2),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      child: SvgPicture.asset(
+                                        'assets/like.svg',
+                                      ),
+                                    ),
+                                  ),
+                                  Consumer<FavoritesProvider>(
+                                    builder: (context, favorites, child) {
+                                      if (favorites.items.isEmpty) {
+                                        return const SizedBox();
+                                      } else {
+                                        return Align(
+                                          alignment: Alignment.topRight,
+                                          child: Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: BoxDecoration(
+                                              color: kcPrimaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                favorites.items.length
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
                               viewModel.goToCartPage();
                             },
-                            child: SvgPicture.asset('assets/cart.svg'),
+                            child: SizedBox(
+                              width: 42,
+                              height: 40,
+                              child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: SvgPicture.asset(
+                                      'assets/cart1.svg',
+                                    ),
+                                  ),
+                                  Consumer<CartProvider>(
+                                    builder: (context, cart, child) {
+                                      if (cart.items.isEmpty) {
+                                        return const SizedBox();
+                                      } else {
+                                        return Align(
+                                          alignment: Alignment.topRight,
+                                          child: Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: BoxDecoration(
+                                              color: kcPrimaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                cart.items.length.toString(),
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          // const SizedBox(width: 12),
-                          CupertinoButton(
-                            padding: const EdgeInsets.only(right: 20),
-                            onPressed: () {
+                          const SizedBox(width: 8),
+                          GestureDetector(
+                            onTap: () {
                               viewModel.goToMenu();
                             },
                             child: SvgPicture.asset('assets/burger.svg'),
                           ),
+                          const SizedBox(width: 12)
                         ],
                       ),
                     ),
@@ -73,30 +194,70 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    AspectRatio(
-                      aspectRatio: 1 / 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(2),
-                        child: AppImage(
-                          imageUrl: viewModel.product.images?[0] ?? '',
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    SizedBox(
-                      height: 75,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: viewModel.product.images?.length ?? 0,
-                        itemBuilder: (context, index) => AspectRatio(
-                          aspectRatio: 1 / 1,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(2),
-                            child: AppImage(
-                              imageUrl: viewModel.product.images?[index] ?? '',
+                    StatefulBuilder(
+                      builder: (context, setState) => Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 4 / 3,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4),
+                              child: Image.network(
+                                viewModel.product.images?[currentImage] ?? '',
+                                fit: BoxFit.cover,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  } else {
+                                    return const ShrimerPlaceholder(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                    );
+                                  }
+                                },
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const ShrimerPlaceholder(
+                                    height: double.infinity,
+                                    width: double.infinity,
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            height: 75,
+                            width: double.infinity,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: viewModel.product.images?.length ?? 0,
+                              itemBuilder: (context, index) => Container(
+                                height: 74,
+                                margin: const EdgeInsets.only(right: 8),
+                                child: CupertinoButton(
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () {
+                                    setState(() {
+                                      currentImage = index;
+                                    });
+                                  },
+                                  child: AspectRatio(
+                                    aspectRatio: 1 / 1,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(4),
+                                      child: AppImage(
+                                        imageUrl:
+                                            viewModel.product.images?[index] ??
+                                                '',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -120,14 +281,28 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Text(
-                      '${viewModel.product.price} ₸',
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: kcPrimaryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${viewModel.product.price} ₸',
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: kcPrimaryColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          'В пачке: ${viewModel.product.numberLeft} шт',
+                          style: const TextStyle(
+                            fontFamily: 'Montserrat',
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 18),
                     GestureDetector(
