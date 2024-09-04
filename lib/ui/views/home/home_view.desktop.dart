@@ -83,7 +83,7 @@ class HomeViewDesktop extends ViewModelWidget<HomeViewModel> {
                         offset: const Offset(0, 10),
                         color: kcBlack.withOpacity(0.05),
                         blurRadius: 35,
-                      )
+                      ),
                     ],
                   ),
                   child: const Center(

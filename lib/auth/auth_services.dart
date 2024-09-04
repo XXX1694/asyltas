@@ -102,43 +102,72 @@ Future<bool> addToNewOrderField(
   }
 }
 
+Future<bool> addToFavoritesField(List<Map<String, dynamic>> newData) async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final prefs = await SharedPreferences.getInstance();
+  String? docID = prefs.getString('idToken');
+  try {
+    // Reference to the user document
+    DocumentReference userRef = firestore.collection('users').doc(docID);
+
+    // Update the newOrder field by appending newData
+    await userRef.update({'favorites': FieldValue.arrayUnion(newData)});
+
+    if (kDebugMode) {
+      print('Data added to newOrder successfully');
+    }
+    return true;
+  } catch (e) {
+    if (kDebugMode) {
+      print('Error adding data to newOrder: $e');
+    }
+    return false;
+    // Handle any errors here
+  }
+}
+
 Future<bool> addDataToOrdersCollection(
   List<Map<String, dynamic>> newData,
+  String comment,
+  String name,
+  String phoneNumber,
 ) async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   try {
     // Reference to the orders collection
-    final prefs = await SharedPreferences.getInstance();
-    String? docID = prefs.getString('idToken');
+    // final prefs = await SharedPreferences.getInstance();
+    // String? docID = prefs.getString('idToken');
 
     CollectionReference ordersRef = firestore.collection('orders');
-    final docRef = FirebaseFirestore.instance.collection('users').doc(docID);
+    // final docRef = FirebaseFirestore.instance.collection('users').doc(docID);
 
-    final docSnapshot = await docRef.get();
-    Map<String, dynamic> data = {};
-    if (docSnapshot.exists) {
-      data = docSnapshot.data() ?? {};
-    } else {
-      if (kDebugMode) {
-        print('Document does not exist');
-      }
-    }
+    // final docSnapshot = await docRef.get();
+    // Map<String, dynamic> data = {};
+    // if (docSnapshot.exists) {
+    //   data = docSnapshot.data() ?? {};
+    // } else {
+    //   if (kDebugMode) {
+    //     print('Document does not exist');
+    //   }
+    // }
     // Add newData to the orders collection
     await ordersRef.add(
       {
         'data': newData,
-        'user_info': data,
-        'status': 'new',
+        'name': name,
+        'phoneNumber': phoneNumber,
+        'status': 'Не обработан',
+        'comment': comment,
         'timestamp': DateTime.now(),
       },
     );
 
-    DocumentReference docRefUser =
-        FirebaseFirestore.instance.collection('users').doc(docID);
+    // DocumentReference docRefUser =
+    //     FirebaseFirestore.instance.collection('users').doc(docID);
 
-    await docRefUser.update({
-      'newOrder': FieldValue.delete(),
-    });
+    // await docRefUser.update({
+    //   'newOrder': FieldValue.delete(),
+    // });
 
     if (kDebugMode) {
       print('Field newOrder deleted successfully.');
@@ -151,6 +180,45 @@ Future<bool> addDataToOrdersCollection(
     }
     return false;
     // Handle any errors here
+  }
+}
+
+Future<bool> deleteElementFromList(int index) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? idToken = prefs.getString('idToken');
+  try {
+    // Reference to the document in the 'users' collection
+    DocumentReference docRef =
+        FirebaseFirestore.instance.collection('users').doc(idToken);
+
+    // Fetch the current document
+    DocumentSnapshot docSnapshot = await docRef.get();
+    if (!docSnapshot.exists) {
+      throw Exception("Document does not exist");
+    }
+
+    // Get the current list and cast it to Map<String, dynamic>
+    Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
+    List<dynamic> newOrder = data['newOrder'] ?? [];
+
+    if (index < 0 || index >= newOrder.length) {
+      throw Exception("Index out of range");
+    }
+
+    // Remove the element from the list
+    newOrder.removeAt(index);
+
+    // Update the document with the new list
+    await docRef.update({'newOrder': newOrder});
+    if (kDebugMode) {
+      print("Element removed successfully");
+    }
+    return true;
+  } catch (e) {
+    if (kDebugMode) {
+      print("Error: $e");
+    }
+    return false;
   }
 }
 

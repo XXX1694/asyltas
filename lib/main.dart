@@ -1,8 +1,11 @@
 import 'dart:ui';
 
 import 'package:asyltas/firebase_options.dart';
+import 'package:asyltas/provider/cart_provider.dart';
+import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:asyltas/app/app.bottomsheets.dart';
 import 'package:asyltas/app/app.dialogs.dart';
@@ -28,17 +31,23 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveApp(
-      builder: (_) => MaterialApp.router(
-        scrollBehavior: NoThumbScrollBehavior().copyWith(scrollbars: false),
-        debugShowCheckedModeBanner: false,
-        routerDelegate: stackedRouter.delegate(),
-        routeInformationParser: stackedRouter.defaultRouteParser(),
-      ),
-    ).animate().fadeIn(
-          delay: const Duration(milliseconds: 50),
-          duration: const Duration(milliseconds: 400),
-        );
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => FavoritesProvider()),
+      ],
+      child: ResponsiveApp(
+        builder: (_) => MaterialApp.router(
+          scrollBehavior: NoThumbScrollBehavior().copyWith(scrollbars: false),
+          debugShowCheckedModeBanner: false,
+          routerDelegate: stackedRouter.delegate(),
+          routeInformationParser: stackedRouter.defaultRouteParser(),
+        ),
+      ).animate().fadeIn(
+            delay: const Duration(milliseconds: 50),
+            duration: const Duration(milliseconds: 400),
+          ),
+    );
   }
 }
 

@@ -40,6 +40,10 @@ class CategoryViewModel extends BaseViewModel {
     await _routerService.navigateTo(const ProfileViewRoute());
   }
 
+  Future goToFavoritesPage() async {
+    await _routerService.navigateTo(const FavoritesViewRoute());
+  }
+
   Future goToCartPage() async {
     await _routerService.navigateTo(const CartViewRoute());
   }

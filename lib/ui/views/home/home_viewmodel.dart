@@ -38,6 +38,10 @@ class HomeViewModel extends BaseViewModel {
     await _routerService.navigateTo(const CartViewRoute());
   }
 
+  Future goFavoritesPage() async {
+    await _routerService.navigateTo(const FavoritesViewRoute());
+  }
+
   Future goToProfilePage() async {
     await _routerService.navigateTo(const ProfileViewRoute());
   }

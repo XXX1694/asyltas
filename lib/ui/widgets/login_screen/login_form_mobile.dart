@@ -1,9 +1,9 @@
-import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
-import 'package:asyltas/ui/widgets/login_screen/email_field_mobile.dart';
 import 'package:asyltas/ui/widgets/login_screen/password_field_mobile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'phone_field_mobile.dart';
 
 class LoginFormMobile extends StatefulWidget {
   const LoginFormMobile({
@@ -18,19 +18,19 @@ class LoginFormMobile extends StatefulWidget {
 }
 
 class _LoginFormMobileState extends State<LoginFormMobile> {
-  late TextEditingController emailController;
+  late TextEditingController phoneController;
   late TextEditingController passwordController;
 
   @override
   void initState() {
-    emailController = TextEditingController();
+    phoneController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    emailController.dispose();
+    phoneController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -51,8 +51,8 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
           ),
         ),
         const SizedBox(height: 20),
-        EmailFieldMobile(
-          controller: emailController,
+        PhoneFieldMobile(
+          controller: phoneController,
         ),
         const SizedBox(height: 20),
         PasswordFieldMobile(
@@ -62,15 +62,28 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
         CupertinoButton(
           padding: const EdgeInsets.all(0),
           onPressed: () async {
-            final res = await signInAndSaveToken(
-              emailController.text,
-              passwordController.text,
-            );
-            if (res) {
-              widget.toMainPage();
-            } else {
-              // show error
-            }
+            // FirebaseAuth auth = FirebaseAuth.instance;
+            // ConfirmationResult confirmationResult =
+            //     await auth.signInWithPhoneNumber(
+            //   '+44 7123 123 456',
+            //   RecaptchaVerifier(
+            //     container: 'recaptcha',
+            //     size: RecaptchaVerifierSize.compact,
+            //     theme: RecaptchaVerifierTheme.dark,
+            //     auth: ,
+            //   ),
+            // );
+            // UserCredential userCredential =
+            //     await confirmationResult.confirm('123456');
+            // final res = await signInAndSaveToken(
+            //   emailController.text,
+            //   passwordController.text,
+            // );
+            // if (res) {
+            //   widget.toMainPage();
+            // } else {
+            //   // show error
+            // }
           },
           child: Container(
             width: double.infinity,
@@ -100,32 +113,32 @@ class _LoginFormMobileState extends State<LoginFormMobile> {
           ),
         ),
         const SizedBox(height: 20),
-        CupertinoButton(
-          padding: const EdgeInsets.all(0),
-          onPressed: () {
-            widget.toRegistration();
-          },
-          child: Container(
-            width: double.infinity,
-            height: 44,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(2),
-              border: Border.all(color: kcPrimaryColor, width: 1),
-            ),
-            child: const Center(
-              child: Text(
-                'Регистрация',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  color: kcPrimaryColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-          ),
-        )
+        // CupertinoButton(
+        //   padding: const EdgeInsets.all(0),
+        //   onPressed: () {
+        //     widget.toRegistration();
+        //   },
+        //   child: Container(
+        //     width: double.infinity,
+        //     height: 44,
+        //     decoration: BoxDecoration(
+        //       color: Colors.transparent,
+        //       borderRadius: BorderRadius.circular(2),
+        //       border: Border.all(color: kcPrimaryColor, width: 1),
+        //     ),
+        //     child: const Center(
+        //       child: Text(
+        //         'Регистрация',
+        //         style: TextStyle(
+        //           fontFamily: 'Montserrat',
+        //           color: kcPrimaryColor,
+        //           fontWeight: FontWeight.w500,
+        //           fontSize: 12,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // )
       ],
     );
   }

@@ -106,7 +106,15 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: Image.asset('assets/images/logo_small.png'),
+                    child: GestureDetector(
+                      onTap: () {
+                        viewModel.goToMainPage();
+                      },
+                      child: SvgPicture.asset(
+                        'assets/logo.svg',
+                        height: 38,
+                      ),
+                    ),
                   ),
                   Align(
                     alignment: Alignment.centerRight,
@@ -145,8 +153,9 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
                           alignment: Alignment.centerLeft,
                           child: CupertinoButton(
                             padding: EdgeInsets.only(
-                                bottom: index == category.length - 1 ? 40 : 20,
-                                top: index == 0 ? 20 : 0),
+                              bottom: index == category.length - 1 ? 40 : 20,
+                              top: index == 0 ? 20 : 0,
+                            ),
                             onPressed: () {
                               viewModel.goToCategoryPage(
                                 category[index]['id'].toString(),
@@ -157,10 +166,11 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
                               category[index]['name'].toString(),
                               style: const TextStyle(
                                 fontFamily: 'Montserrat',
-                                color: kcPrimaryColor,
+                                color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
                               ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),

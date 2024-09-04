@@ -20,13 +20,21 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
           children: [
             const SizedBox(height: 28),
             SizedBox(
-              height: 30,
+              height: 40,
               width: double.infinity,
               child: Stack(
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: Image.asset('assets/images/logo_small.png'),
+                    child: GestureDetector(
+                      onTap: () {
+                        viewModel.goToMainPage();
+                      },
+                      child: SvgPicture.asset(
+                        'assets/logo.svg',
+                        height: 34,
+                      ),
+                    ),
                   ),
                   Align(
                     alignment: Alignment.centerRight,
@@ -70,7 +78,7 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         'Главная',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: kcPrimaryColor,
+                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
@@ -88,7 +96,7 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         'Каталог',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: kcPrimaryColor,
+                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
@@ -100,18 +108,13 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         top: 0,
                       ),
                       onPressed: () async {
-                        bool res = await checkAuth();
-                        if (res) {
-                          viewModel.goToCartPage();
-                        } else {
-                          viewModel.goToLoginPage();
-                        }
+                        viewModel.goToCartPage();
                       },
                       child: const Text(
                         'Корзина',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: kcPrimaryColor,
+                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
@@ -123,23 +126,41 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
                         top: 0,
                       ),
                       onPressed: () async {
-                        bool res = await checkAuth();
-                        if (res) {
-                          viewModel.goToProfilePage();
-                        } else {
-                          viewModel.goToLoginPage();
-                        }
+                        viewModel.goToFavoritesPage();
                       },
                       child: const Text(
-                        'Профиль',
+                        'Избранные',
                         style: TextStyle(
                           fontFamily: 'Montserrat',
-                          color: kcPrimaryColor,
+                          color: Colors.black,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
+                    // CupertinoButton(
+                    //   padding: const EdgeInsets.only(
+                    //     bottom: 20,
+                    //     top: 0,
+                    //   ),
+                    //   onPressed: () async {
+                    //     bool res = await checkAuth();
+                    //     if (res) {
+                    //       viewModel.goToProfilePage();
+                    //     } else {
+                    //       viewModel.goToLoginPage();
+                    //     }
+                    //   },
+                    //   child: const Text(
+                    //     'Профиль',
+                    //     style: TextStyle(
+                    //       fontFamily: 'Montserrat',
+                    //       color: Colors.black,
+                    //       fontSize: 18,
+                    //       fontWeight: FontWeight.w400,
+                    //     ),
+                    //   ),
+                    // ),
                     FutureBuilder(
                       future: checkAuth(),
                       builder: (context, snapshot) {

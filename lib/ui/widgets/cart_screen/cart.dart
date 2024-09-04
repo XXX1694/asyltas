@@ -314,6 +314,9 @@ class CartBlock extends StatelessWidget {
                     [];
                 bool res = await addDataToOrdersCollection(
                   sendData,
+                  '',
+                  '',
+                  '',
                 );
                 if (res) {
                   toPayment(overall.value.toString());

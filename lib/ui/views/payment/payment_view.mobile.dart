@@ -86,7 +86,10 @@ class PaymentViewMobile extends ViewModelWidget<PaymentViewModel> {
                         color: const Color(0xFFF14635),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Text('Kaspi'),
+                      child: const Text(
+                        'Kaspi',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),

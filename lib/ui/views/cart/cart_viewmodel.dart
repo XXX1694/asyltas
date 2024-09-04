@@ -34,6 +34,10 @@ class CartViewModel extends BaseViewModel {
     );
   }
 
+  Future goFavoritesPage() async {
+    await _routerService.navigateTo(const FavoritesViewRoute());
+  }
+
   Future goToProfilePage() async {
     await _routerService.navigateTo(const ProfileViewRoute());
   }

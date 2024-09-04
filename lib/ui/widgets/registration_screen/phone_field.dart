@@ -1,5 +1,6 @@
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PhoneField extends StatelessWidget {
   const PhoneField({super.key, required this.controller});
@@ -30,7 +31,11 @@ class PhoneField extends StatelessWidget {
           ),
         ),
         keyboardType: TextInputType.phone,
+        inputFormatters: [maskFormatter],
       ),
     );
   }
 }
+
+var maskFormatter = MaskTextInputFormatter(
+    mask: '+7##########', filter: {"#": RegExp(r'[0-9]')});

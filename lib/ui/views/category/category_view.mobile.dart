@@ -1,8 +1,14 @@
+import 'package:asyltas/provider/cart_provider.dart';
+import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/catalog_screen/catalog_mobile.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:asyltas/ui/widgets/home_screen/home_bottom.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 
 import 'category_viewmodel.dart';
@@ -21,34 +27,147 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
             children: [
               const SizedBox(height: 28),
               SizedBox(
-                height: 30,
+                height: 40,
                 width: double.infinity,
                 child: Stack(
                   children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Image.asset('assets/images/logo_small.png'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: GestureDetector(
+                          onTap: () {
+                            viewModel.goToMainPage();
+                          },
+                          child: SvgPicture.asset(
+                            'assets/logo.svg',
+                            height: 34,
+                          ),
+                        ),
+                      ),
                     ),
                     Align(
                       alignment: Alignment.centerRight,
                       child: Row(
                         children: [
                           const Spacer(),
-                          CupertinoButton(
-                            padding: const EdgeInsets.only(right: 20),
-                            onPressed: () {
+                          GestureDetector(
+                            onTap: () {
+                              viewModel.goToFavoritesPage();
+                            },
+                            child: SizedBox(
+                              width: 42,
+                              height: 40,
+                              child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(5),
+                                      height: 32,
+                                      width: 32,
+                                      decoration: BoxDecoration(
+                                        color: kcPrimaryColor.withOpacity(0.2),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      child: SvgPicture.asset(
+                                        'assets/like.svg',
+                                      ),
+                                    ),
+                                  ),
+                                  context
+                                          .read<FavoritesProvider>()
+                                          .items
+                                          .isNotEmpty
+                                      ? Align(
+                                          alignment: Alignment.topRight,
+                                          child: Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: BoxDecoration(
+                                              color: kcPrimaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                context
+                                                    .read<FavoritesProvider>()
+                                                    .items
+                                                    .length
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                ],
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
                               viewModel.goToCartPage();
                             },
-                            child: SvgPicture.asset('assets/cart.svg'),
+                            child: SizedBox(
+                              width: 42,
+                              height: 40,
+                              child: Stack(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: SvgPicture.asset(
+                                      'assets/cart1.svg',
+                                    ),
+                                  ),
+                                  context.read<CartProvider>().items.isNotEmpty
+                                      ? Align(
+                                          alignment: Alignment.topRight,
+                                          child: Container(
+                                            height: 18,
+                                            width: 18,
+                                            decoration: BoxDecoration(
+                                              color: kcPrimaryColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                context
+                                                    .read<CartProvider>()
+                                                    .items
+                                                    .length
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                ],
+                              ),
+                            ),
                           ),
-                          // const SizedBox(width: 12),
-                          CupertinoButton(
-                            padding: const EdgeInsets.only(right: 20),
-                            onPressed: () {
+                          const SizedBox(width: 8),
+                          GestureDetector(
+                            onTap: () {
                               viewModel.goToMenu();
                             },
                             child: SvgPicture.asset('assets/burger.svg'),
                           ),
+                          const SizedBox(width: 12)
                         ],
                       ),
                     ),
@@ -56,7 +175,7 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -86,7 +205,30 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                       categoryId: viewModel.categoryId,
                       goHome: viewModel.goToMainPage,
                       goLogin: viewModel.goToLoginPage,
-                    )
+                    ),
+                    const SizedBox(height: 16),
+                    const HomeBottom(),
+                    const SizedBox(height: 16),
+                    const Divider(
+                      color: Colors.black12,
+                      height: 1,
+                    ),
+                    const SizedBox(height: 16),
+                    const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '© 2024 Asyltas Разработано galab.kz',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: Colors.black54,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: -0.41,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
@@ -95,5 +237,42 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
         ),
       ),
     );
+  }
+
+  Future<List<dynamic>> getNewOrderFromFirestore(String docID) async {
+    try {
+      final docRef = FirebaseFirestore.instance.collection('users').doc(docID);
+      final docSnapshot = await docRef.get();
+
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data();
+        return data?['newOrder'] as List<dynamic>;
+      } else {
+        if (kDebugMode) {
+          print('Document does not exist');
+        }
+        return [];
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error fetching document: $e');
+      }
+      return [];
+    }
+  }
+
+  Future<String?> getDocIDFromSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('idToken'); // Replace 'docID' with your actual key
+  }
+
+  Future<List<dynamic>> _loadData() async {
+    final docID = await getDocIDFromSharedPreferences();
+    if (docID != null) {
+      List<dynamic>? orders = await getNewOrderFromFirestore(docID);
+      return orders;
+    } else {
+      return [];
+    }
   }
 }

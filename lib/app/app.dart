@@ -4,6 +4,7 @@ import 'package:asyltas/ui/views/cart/cart_view.dart';
 import 'package:asyltas/ui/views/catalog/catalog_view.dart';
 import 'package:asyltas/ui/views/category/category_view.dart';
 import 'package:asyltas/ui/views/contacts/contacts_view.dart';
+import 'package:asyltas/ui/views/favorites/favorites_view.dart';
 import 'package:asyltas/ui/views/home/home_view.dart';
 import 'package:asyltas/ui/views/login/login_view.dart';
 import 'package:asyltas/ui/views/menu/menu_view.dart';
@@ -22,6 +23,7 @@ import 'package:stacked_services/stacked_services.dart';
     CustomRoute(
       page: HomeView,
       path: '/home',
+      initial: true,
     ),
     CustomRoute(page: LoginView, path: '/login'),
     CustomRoute(page: RegistrationView, path: '/registration'),
@@ -32,6 +34,7 @@ import 'package:stacked_services/stacked_services.dart';
     CustomRoute(page: MenuView, path: '/menu'),
     CustomRoute(page: CategoryView, path: '/category'),
     CustomRoute(page: ContactsView, path: '/contacts'),
+    CustomRoute(page: FavoritesView, path: '/favorites'),
     CustomRoute(
       page: ProductView,
       path: 'catalog/:productId',

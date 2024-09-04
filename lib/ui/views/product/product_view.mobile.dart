@@ -132,6 +132,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                     const SizedBox(height: 18),
                     GestureDetector(
                       onTap: () async {
+                        viewModel.product.count = 1;
                         final token = await getSavedToken();
                         if (token != null) {
                           final res = await addToNewOrderField(

@@ -30,6 +30,10 @@ class MenuViewmodel extends BaseViewModel {
     await _routerService.navigateTo(const CartViewRoute());
   }
 
+  Future goToFavoritesPage() async {
+    await _routerService.navigateTo(const FavoritesViewRoute());
+  }
+
   Future goBack() async {
     _routerService.back();
   }
