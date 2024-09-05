@@ -32,8 +32,7 @@ class _CartButtonState extends State<CartButton> with TickerProviderStateMixin {
           vertical: 8,
         ),
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(2),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: newBlack,
             )),
@@ -41,7 +40,7 @@ class _CartButtonState extends State<CartButton> with TickerProviderStateMixin {
           child: Text(
             'В корзину',
             style: TextStyle(
-              fontFamily: 'Montserrat',
+              fontFamily: 'Gilroy',
               color: newBlack,
               fontSize: 14,
               fontWeight: FontWeight.w500,

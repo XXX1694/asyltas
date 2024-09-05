@@ -2,6 +2,7 @@ import 'package:asyltas/models/product.dart';
 import 'package:asyltas/provider/cart_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/home_screen/mini_catalog_placegolder.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -249,8 +250,8 @@ class _MiniCatalogMobileState extends State<MiniCatalogMobile>
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              child: Image.network(
-                                item.images?[0] ?? '',
+                              child: CachedNetworkImage(
+                                imageUrl: item.images?[0] ?? '',
                                 fit: BoxFit.cover,
                               ),
                             ),

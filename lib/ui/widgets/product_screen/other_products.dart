@@ -1,4 +1,5 @@
 import 'package:asyltas/models/product.dart';
+import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,8 @@ class OtherProducts extends StatelessWidget {
           child: Text(
             'Похожие товары',
             style: TextStyle(
-              fontFamily: 'Montserrat',
-              color: Colors.black,
-              letterSpacing: -0.41,
+              fontFamily: 'Gilroy',
+              color: newBlack,
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
@@ -64,11 +64,11 @@ class OtherProducts extends StatelessWidget {
                       AspectRatio(
                         aspectRatio: 1 / 1,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(2),
+                          borderRadius: BorderRadius.circular(8),
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: AppImage(
                               imageUrl: products[index].images?[0] ?? '',
@@ -80,8 +80,8 @@ class OtherProducts extends StatelessWidget {
                       Text(
                         products[index].name ?? 'Без имени',
                         style: const TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black,
+                          fontFamily: 'Gilroy',
+                          color: newBlack,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -90,9 +90,9 @@ class OtherProducts extends StatelessWidget {
                       const SizedBox(height: 2),
                       Text(
                         products[index].name ?? 'Без категории',
-                        style: const TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black54,
+                        style: TextStyle(
+                          fontFamily: 'Gilroy',
+                          color: newBlack54,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
@@ -102,8 +102,8 @@ class OtherProducts extends StatelessWidget {
                       Text(
                         ' ${products[index].price} ₸',
                         style: const TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black,
+                          fontFamily: 'Gilroy',
+                          color: newBlack,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
