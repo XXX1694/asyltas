@@ -1,9 +1,9 @@
-import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/provider/cart_provider.dart';
 import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/common/placeholder.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
+import 'package:asyltas/ui/widgets/product_screen/cart_button.dart';
 import 'package:asyltas/ui/widgets/product_screen/other_products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -305,45 +305,8 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                       ],
                     ),
                     const SizedBox(height: 18),
-                    GestureDetector(
-                      onTap: () async {
-                        viewModel.product.count = 1;
-                        final token = await getSavedToken();
-                        if (token != null) {
-                          final res = await addToNewOrderField(
-                            token,
-                            [viewModel.product.toJson()],
-                          );
-                          if (res) {
-                            viewModel.goToCartPage();
-                          }
-                        } else {
-                          viewModel.goToLoginPage();
-                        }
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 22,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(2),
-                            border: Border.all(
-                              color: kcPrimaryColor,
-                            )),
-                        child: const Center(
-                          child: Text(
-                            'В корзину',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: kcPrimaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
+                    CartButton(
+                      viewModel: viewModel,
                     ),
                     const SizedBox(height: 32),
                     const Text(

@@ -266,6 +266,7 @@ class _CartMobileNewState extends State<CartMobileNew> {
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                           ),
+                                          overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 8),
                                         const Text(

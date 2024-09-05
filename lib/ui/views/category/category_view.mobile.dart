@@ -16,21 +16,21 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
   @override
   Widget build(BuildContext context, CategoryViewModel viewModel) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: newWhite,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 28),
-              SizedBox(
-                height: 40,
-                width: double.infinity,
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12),
-                      child: Align(
+              const SizedBox(height: 27),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: SizedBox(
+                  height: 40,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      Align(
                         alignment: Alignment.centerLeft,
                         child: GestureDetector(
                           onTap: () {
@@ -42,163 +42,154 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                           ),
                         ),
                       ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Row(
-                        children: [
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              viewModel.goToFavoritesPage();
-                            },
-                            child: SizedBox(
-                              width: 42,
-                              height: 40,
-                              child: Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(5),
-                                      height: 32,
-                                      width: 32,
-                                      decoration: BoxDecoration(
-                                        color: kcPrimaryColor.withOpacity(0.2),
-                                        borderRadius:
-                                            BorderRadius.circular(100),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          children: [
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                viewModel.goToFavoritesPage();
+                              },
+                              child: SizedBox(
+                                width: 42,
+                                height: 40,
+                                child: Stack(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(5),
+                                        height: 32,
+                                        width: 32,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              kcPrimaryColor.withOpacity(0.2),
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        child: SvgPicture.asset(
+                                          'assets/like.svg',
+                                        ),
                                       ),
+                                    ),
+                                    Consumer<FavoritesProvider>(
+                                      builder: (context, favorites, child) {
+                                        if (favorites.items.isEmpty) {
+                                          return const SizedBox();
+                                        } else {
+                                          return Align(
+                                            alignment: Alignment.topRight,
+                                            child: Container(
+                                              height: 18,
+                                              width: 18,
+                                              decoration: BoxDecoration(
+                                                color: kcPrimaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  favorites.items.length
+                                                      .toString(),
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                viewModel.goToCartPage();
+                              },
+                              child: SizedBox(
+                                width: 42,
+                                height: 40,
+                                child: Stack(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.center,
                                       child: SvgPicture.asset(
-                                        'assets/like.svg',
+                                        'assets/cart1.svg',
                                       ),
                                     ),
-                                  ),
-                                  Consumer<FavoritesProvider>(
-                                    builder: (context, favorites, child) {
-                                      if (favorites.items.isEmpty) {
-                                        return const SizedBox();
-                                      } else {
-                                        return Align(
-                                          alignment: Alignment.topRight,
-                                          child: Container(
-                                            height: 18,
-                                            width: 18,
-                                            decoration: BoxDecoration(
-                                              color: kcPrimaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                favorites.items.length
-                                                    .toString(),
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w600,
+                                    Consumer<CartProvider>(
+                                      builder: (context, cart, child) {
+                                        if (cart.items.isEmpty) {
+                                          return const SizedBox();
+                                        } else {
+                                          return Align(
+                                            alignment: Alignment.topRight,
+                                            child: Container(
+                                              height: 18,
+                                              width: 18,
+                                              decoration: BoxDecoration(
+                                                color: kcPrimaryColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  cart.items.length.toString(),
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  textAlign: TextAlign.center,
                                                 ),
-                                                textAlign: TextAlign.center,
                                               ),
                                             ),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              viewModel.goToCartPage();
-                            },
-                            child: SizedBox(
-                              width: 42,
-                              height: 40,
-                              child: Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: SvgPicture.asset(
-                                      'assets/cart1.svg',
+                                          );
+                                        }
+                                      },
                                     ),
-                                  ),
-                                  Consumer<CartProvider>(
-                                    builder: (context, cart, child) {
-                                      if (cart.items.isEmpty) {
-                                        return const SizedBox();
-                                      } else {
-                                        return Align(
-                                          alignment: Alignment.topRight,
-                                          child: Container(
-                                            height: 18,
-                                            width: 18,
-                                            decoration: BoxDecoration(
-                                              color: kcPrimaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                cart.items.length.toString(),
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 8),
-                          GestureDetector(
-                            onTap: () {
-                              viewModel.goToMenu();
-                            },
-                            child: SvgPicture.asset('assets/burger.svg'),
-                          ),
-                          const SizedBox(width: 12)
-                        ],
+                            const SizedBox(width: 8),
+                            GestureDetector(
+                              onTap: () {
+                                viewModel.goToMenu();
+                              },
+                              child: SvgPicture.asset('assets/burger.svg'),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 40),
-                    Text(
-                      'Катаегория: ${viewModel.categoryName}',
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: kcPrimaryColor,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 32),
                     Text(
                       'Главная / Каталог / ${viewModel.categoryName}',
-                      style: const TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: Colors.black54,
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
+                        color: newBlack54,
+                        fontFamily: 'Gilroy',
+                        letterSpacing: 1,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
                     CatalogMobile(
                       showProduct: viewModel.goToProductPage,
                       categoryId: viewModel.categoryId,

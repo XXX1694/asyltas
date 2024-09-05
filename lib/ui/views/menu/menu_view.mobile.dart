@@ -12,12 +12,12 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
   @override
   Widget build(BuildContext context, MenuViewmodel viewModel) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: newWhite,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 27),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(

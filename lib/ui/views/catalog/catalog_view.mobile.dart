@@ -94,90 +94,81 @@ class CatalogViewMobile extends ViewModelWidget<CatalogViewmodel> {
       },
     ];
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: newWhite,
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 28),
-            SizedBox(
-              height: 30,
-              width: double.infinity,
-              child: Stack(
+            const SizedBox(height: 27),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
                 children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: () {
-                        viewModel.goToMainPage();
-                      },
-                      child: SvgPicture.asset(
-                        'assets/logo.svg',
-                        height: 38,
+                  GestureDetector(
+                    onTap: () {
+                      viewModel.goToMainPage();
+                    },
+                    child: const Text(
+                      'ASYLTAS',
+                      style: TextStyle(
+                        color: newBlack,
+                        fontSize: 17,
+                        fontFamily: 'Gilroy',
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: CupertinoButton(
-                      padding: const EdgeInsets.only(right: 20),
-                      onPressed: () {
-                        viewModel.goToMenu();
-                      },
-                      child: SvgPicture.asset('assets/burger.svg'),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      viewModel.goBack();
+                    },
+                    child: SvgPicture.asset(
+                      'assets/сlose.svg',
                     ),
                   ),
                 ],
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 40),
-                    const Text(
-                      'Каталог',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: kcPrimaryColor,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: category.length,
-                        itemBuilder: (context, index) => Align(
-                          alignment: Alignment.centerLeft,
-                          child: CupertinoButton(
-                            padding: EdgeInsets.only(
-                              bottom: index == category.length - 1 ? 40 : 20,
-                              top: index == 0 ? 20 : 0,
-                            ),
-                            onPressed: () {
-                              viewModel.goToCategoryPage(
-                                category[index]['id'].toString(),
-                                category[index]['name'].toString(),
-                              );
-                            },
-                            child: Text(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: category.length,
+                      itemBuilder: (context, index) => Align(
+                        alignment: Alignment.center,
+                        child: CupertinoButton(
+                          padding: EdgeInsets.only(
+                            bottom: index == category.length - 1 ? 40 : 20,
+                            top: index == 0 ? 40 : 0,
+                          ),
+                          onPressed: () {
+                            viewModel.goToCategoryPage(
+                              category[index]['id'].toString(),
                               category[index]['name'].toString(),
-                              style: const TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              overflow: TextOverflow.ellipsis,
+                            );
+                          },
+                          child: Text(
+                            category[index]['name'].toString(),
+                            style: const TextStyle(
+                              color: newBlack,
+                              fontSize: 18,
+                              fontFamily: 'Gilroy',
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 1,
                             ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

@@ -41,21 +41,22 @@ class _CatalogMobileState extends State<CatalogMobile> {
       stream: FirebaseFirestore.instance.collection('products').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Column(
+          return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
                 'Представлено 0 товаров',
                 style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  color: Colors.black54,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
+                  color: newBlack54,
+                  fontFamily: 'Gilroy',
+                  letterSpacing: 1,
                 ),
               ),
-              SizedBox(height: 28),
-              CatalogPlacegolder(),
+              const SizedBox(height: 28),
+              const CatalogPlacegolder(),
             ],
           );
         }
