@@ -1,6 +1,5 @@
 import 'package:asyltas/provider/cart_provider.dart';
 import 'package:asyltas/provider/favorites_provider.dart';
-import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:asyltas/ui/widgets/catalog_screen/catalog_placegolder.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -154,15 +153,14 @@ class _CatalogMobileState extends State<CatalogMobile> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(4),
                           child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: AppImage(
-                              imageUrl:
-                                  categoryProducts[index].images?[0] ?? '',
-                            ),
-                          ),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Image.network(
+                                categoryProducts[index].images?[0] ?? '',
+                                fit: BoxFit.cover,
+                              )),
                         ),
                       ),
                     ),

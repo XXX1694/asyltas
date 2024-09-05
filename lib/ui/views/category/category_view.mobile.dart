@@ -3,12 +3,9 @@ import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/catalog_screen/catalog_mobile.dart';
 import 'package:asyltas/ui/widgets/home_screen/home_bottom.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 
 import 'category_viewmodel.dart';
@@ -239,42 +236,5 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
         ),
       ),
     );
-  }
-
-  Future<List<dynamic>> getNewOrderFromFirestore(String docID) async {
-    try {
-      final docRef = FirebaseFirestore.instance.collection('users').doc(docID);
-      final docSnapshot = await docRef.get();
-
-      if (docSnapshot.exists) {
-        final data = docSnapshot.data();
-        return data?['newOrder'] as List<dynamic>;
-      } else {
-        if (kDebugMode) {
-          print('Document does not exist');
-        }
-        return [];
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching document: $e');
-      }
-      return [];
-    }
-  }
-
-  Future<String?> getDocIDFromSharedPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('idToken'); // Replace 'docID' with your actual key
-  }
-
-  Future<List<dynamic>> _loadData() async {
-    final docID = await getDocIDFromSharedPreferences();
-    if (docID != null) {
-      List<dynamic>? orders = await getNewOrderFromFirestore(docID);
-      return orders;
-    } else {
-      return [];
-    }
   }
 }

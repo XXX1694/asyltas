@@ -13,7 +13,7 @@ class ShrimerPlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade400,
-      highlightColor: Colors.grey.shade200,
+      highlightColor: Colors.grey.shade300,
       child: Container(
         height: height,
         width: width,

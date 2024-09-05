@@ -1,4 +1,3 @@
-import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,176 +17,117 @@ class MenuViewMobile extends ViewModelWidget<MenuViewmodel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 28),
-            SizedBox(
-              height: 40,
-              width: double.infinity,
-              child: Stack(
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
                 children: [
-                  Align(
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: () {
-                        viewModel.goToMainPage();
-                      },
-                      child: SvgPicture.asset(
-                        'assets/logo.svg',
-                        height: 34,
+                  GestureDetector(
+                    onTap: () {
+                      viewModel.goToMainPage();
+                    },
+                    child: const Text(
+                      'ASYLTAS',
+                      style: TextStyle(
+                        color: newBlack,
+                        fontSize: 17,
+                        fontFamily: 'Gilroy',
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: CupertinoButton(
-                      padding: const EdgeInsets.only(right: 20),
-                      onPressed: () {
-                        viewModel.goBack();
-                      },
-                      child: SvgPicture.asset('assets/close.svg'),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () {
+                      viewModel.goBack();
+                    },
+                    child: SvgPicture.asset(
+                      'assets/сlose.svg',
                     ),
                   ),
                 ],
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28.0),
+              child: SizedBox(
+                height: double.infinity,
+                width: double.infinity,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 40),
-                    const Text(
-                      'Меню',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        color: kcPrimaryColor,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
                     CupertinoButton(
-                      padding: const EdgeInsets.only(
-                        bottom: 20,
-                        top: 0,
-                      ),
+                      padding: const EdgeInsets.all(0),
                       onPressed: () {
                         viewModel.goToMainPage();
                       },
                       child: const Text(
                         'Главная',
                         style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                          color: newBlack,
+                          fontSize: 28,
+                          fontFamily: 'Gilroy',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
+                    const SizedBox(height: 42),
                     CupertinoButton(
-                      padding: const EdgeInsets.only(
-                        bottom: 20,
-                        top: 0,
-                      ),
+                      padding: const EdgeInsets.all(0),
                       onPressed: () {
                         viewModel.goToCatalogPage();
                       },
                       child: const Text(
                         'Каталог',
                         style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                          color: newBlack,
+                          fontSize: 28,
+                          fontFamily: 'Gilroy',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
+                    const SizedBox(height: 40),
                     CupertinoButton(
-                      padding: const EdgeInsets.only(
-                        bottom: 20,
-                        top: 0,
-                      ),
+                      padding: const EdgeInsets.all(0),
                       onPressed: () async {
                         viewModel.goToCartPage();
                       },
                       child: const Text(
                         'Корзина',
                         style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                          color: newBlack,
+                          fontSize: 28,
+                          fontFamily: 'Gilroy',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
+                    const SizedBox(height: 40),
                     CupertinoButton(
-                      padding: const EdgeInsets.only(
-                        bottom: 20,
-                        top: 0,
-                      ),
+                      padding: const EdgeInsets.all(0),
                       onPressed: () async {
                         viewModel.goToFavoritesPage();
                       },
                       child: const Text(
                         'Избранные',
                         style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w400,
+                          color: newBlack,
+                          fontSize: 28,
+                          fontFamily: 'Gilroy',
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                    // CupertinoButton(
-                    //   padding: const EdgeInsets.only(
-                    //     bottom: 20,
-                    //     top: 0,
-                    //   ),
-                    //   onPressed: () async {
-                    //     bool res = await checkAuth();
-                    //     if (res) {
-                    //       viewModel.goToProfilePage();
-                    //     } else {
-                    //       viewModel.goToLoginPage();
-                    //     }
-                    //   },
-                    //   child: const Text(
-                    //     'Профиль',
-                    //     style: TextStyle(
-                    //       fontFamily: 'Montserrat',
-                    //       color: Colors.black,
-                    //       fontSize: 18,
-                    //       fontWeight: FontWeight.w400,
-                    //     ),
-                    //   ),
-                    // ),
-                    FutureBuilder(
-                      future: checkAuth(),
-                      builder: (context, snapshot) {
-                        if (snapshot.data == true) {
-                          return CupertinoButton(
-                            padding: const EdgeInsets.only(
-                              bottom: 20,
-                              top: 0,
-                            ),
-                            onPressed: () async {
-                              await deleteToken();
-                              viewModel.goToMainPage();
-                            },
-                            child: Text(
-                              'Выйти',
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                color: Colors.red.shade400,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
                     ),
                   ],
                 ),
