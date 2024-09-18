@@ -317,6 +317,7 @@ class CartBlock extends StatelessWidget {
                   '',
                   '',
                   '',
+                  0,
                 );
                 if (res) {
                   toPayment(overall.value.toString());

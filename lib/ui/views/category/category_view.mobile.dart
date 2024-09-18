@@ -24,7 +24,7 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 27),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Row(
@@ -128,36 +128,15 @@ class CategoryViewMobile extends ViewModelWidget<CategoryViewModel> {
                         const SizedBox(height: 16),
                         CatalogMobile(
                           showProduct: viewModel.goToProductPage,
-                          categoryId: viewModel.categoryId,
+                          categoryId: viewModel.categoryId ?? '',
                           goHome: viewModel.goToMainPage,
                           goLogin: viewModel.goToLoginPage,
-                        ),
-                        const SizedBox(height: 16),
-                        const HomeBottom(),
-                        const SizedBox(height: 16),
-                        const Divider(
-                          color: Colors.black12,
-                          height: 1,
-                        ),
-                        const SizedBox(height: 16),
-                        const Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            '© 2024 Asyltas Разработано galab.kz',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              color: Colors.black54,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: -0.41,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
                         ),
                         const SizedBox(height: 16),
                       ],
                     ),
                   ),
+                  const HomeBottom(),
                 ],
               ),
             ),

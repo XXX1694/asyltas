@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,71 +9,92 @@ class HomeBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.black12,
+    return Container(
+      color: newBlack,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Row(
+              children: [
+                const Text(
+                  'Северное кольцо 23, Алатау 4 блок',
+                  style: TextStyle(
+                    fontFamily: 'Gilroy',
+                    color: newWhite,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.41,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Spacer(),
+                CupertinoButton(
+                  padding: const EdgeInsets.all(0),
+                  child: SvgPicture.asset(
+                    'assets/inst.svg',
+                    height: 20,
+                    width: 20,
+                  ),
+                  onPressed: () async {
+                    const url =
+                        'https://www.instagram.com/furnitura_asyl_tas?igsh=MXFyeWN6bjYwc3FyOQ%3D%3D&utm_source=qr ';
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await launchUrl(
+                        Uri.parse(url),
+                        mode: LaunchMode.externalApplication,
+                      );
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                ),
+                CupertinoButton(
+                  padding: const EdgeInsets.all(0),
+                  child: SvgPicture.asset(
+                    'assets/whats.svg',
+                    height: 20,
+                    width: 20,
+                  ),
+                  onPressed: () async {
+                    const url = 'https://wa.me/message/PQBV66LSNTE6O1';
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await launchUrl(
+                        Uri.parse(url),
+                        mode: LaunchMode.externalApplication,
+                      );
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                )
+              ],
+            ),
           ),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            const Text(
-              'Северное кольцо 23, Алатау 4 блок',
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: Divider(
+              color: newWhite,
+              height: 0.33,
+            ),
+          ),
+          const SizedBox(height: 16),
+          const Align(
+            alignment: Alignment.center,
+            child: Text(
+              '© 2024 Asyltas Разработано galab.kz',
               style: TextStyle(
-                fontFamily: 'Montserrat',
-                color: Colors.black,
-                fontSize: 13,
+                fontFamily: 'Gilroy',
+                fontSize: 12,
                 fontWeight: FontWeight.w400,
                 letterSpacing: -0.41,
+                color: newWhite,
               ),
               overflow: TextOverflow.ellipsis,
             ),
-            const Spacer(),
-            CupertinoButton(
-              padding: const EdgeInsets.all(0),
-              child: SvgPicture.asset(
-                'assets/inst.svg',
-                height: 20,
-                width: 20,
-              ),
-              onPressed: () async {
-                const url =
-                    'https://www.instagram.com/furnitura_asyl_tas?igsh=MXFyeWN6bjYwc3FyOQ%3D%3D&utm_source=qr ';
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(
-                    Uri.parse(url),
-                    mode: LaunchMode.externalApplication,
-                  );
-                } else {
-                  throw 'Could not launch $url';
-                }
-              },
-            ),
-            CupertinoButton(
-              padding: const EdgeInsets.all(0),
-              child: SvgPicture.asset(
-                'assets/whats.svg',
-                height: 20,
-                width: 20,
-              ),
-              onPressed: () async {
-                const url = 'https://wa.me/message/PQBV66LSNTE6O1';
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(
-                    Uri.parse(url),
-                    mode: LaunchMode.externalApplication,
-                  );
-                } else {
-                  throw 'Could not launch $url';
-                }
-              },
-            )
-          ],
-        ),
+          ),
+          const SizedBox(height: 16),
+        ],
       ),
     );
   }

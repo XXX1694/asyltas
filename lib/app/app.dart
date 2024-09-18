@@ -13,6 +13,7 @@ import 'package:asyltas/ui/views/product/product_view.dart';
 import 'package:asyltas/ui/views/profile/profile_view.dart';
 import 'package:asyltas/ui/views/registration/registration_view.dart';
 import 'package:asyltas/ui/views/unknown/unknown_view.dart';
+import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 // @stacked-import
@@ -22,29 +23,52 @@ import 'package:stacked_services/stacked_services.dart';
     //CustomRoute(page: StartupView, initial: true),
     CustomRoute(
       page: HomeView,
-      path: '/home',
       initial: true,
+      path: '/',
+      transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
-    CustomRoute(page: LoginView, path: '/login'),
-    CustomRoute(page: RegistrationView, path: '/registration'),
-    CustomRoute(page: CatalogView, path: '/catalog'),
-    CustomRoute(page: CartView, path: '/cart'),
-    CustomRoute(page: ProfileView, path: '/profile'),
-    CustomRoute(page: PaymentView, path: '/payment'),
-    CustomRoute(page: MenuView, path: '/menu'),
-    CustomRoute(page: CategoryView, path: '/category'),
-    CustomRoute(page: ContactsView, path: '/contacts'),
-    CustomRoute(page: FavoritesView, path: '/favorites'),
+    CustomRoute(
+      page: LoginView,
+      transitionsBuilder: TransitionsBuilders.moveInLeft,
+    ),
+    CustomRoute(page: RegistrationView),
+    CustomRoute(
+      page: CatalogView,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+    ),
+    CustomRoute(
+      page: CartView,
+      transitionsBuilder: TransitionsBuilders.slideLeft,
+    ),
+    CustomRoute(page: ProfileView),
+    CustomRoute(
+      page: PaymentView,
+      transitionsBuilder: TransitionsBuilders.slideBottom,
+    ),
+    CustomRoute(
+      page: MenuView,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+    ),
+    CustomRoute(
+      page: CategoryView,
+      // transitionsBuilder: TransitionsBuilders.slideLeft,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+    ),
+    CustomRoute(page: ContactsView),
+    CustomRoute(
+      page: FavoritesView,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+    ),
     CustomRoute(
       page: ProductView,
-      path: 'catalog/:productId',
+      transitionsBuilder: TransitionsBuilders.fadeIn,
     ),
     // @stacked-route
 
     CustomRoute(page: UnknownView, path: '/404'),
 
     /// When none of the above routes match, redirect to UnknownView
-    RedirectRoute(path: '*', redirectTo: '/home'),
+    RedirectRoute(path: '*', redirectTo: '/'),
   ],
   dependencies: [
     LazySingleton(classType: BottomSheetService),

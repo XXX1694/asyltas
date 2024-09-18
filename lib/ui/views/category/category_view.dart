@@ -8,12 +8,12 @@ import 'category_view.mobile.dart';
 import 'category_viewmodel.dart';
 
 class CategoryView extends StackedView<CategoryViewModel> {
-  final String categoryId;
-  final String categoryName;
+  final String? categoryId;
+  final String? categoryName;
   const CategoryView({
     super.key,
-    required this.categoryId,
-    required this.categoryName,
+    this.categoryId,
+    this.categoryName,
   });
 
   @override
@@ -34,7 +34,7 @@ class CategoryView extends StackedView<CategoryViewModel> {
     BuildContext context,
   ) =>
       CategoryViewModel(
-        categoryId: categoryId,
-        categoryName: categoryName,
+        categoryId,
+        categoryName,
       );
 }

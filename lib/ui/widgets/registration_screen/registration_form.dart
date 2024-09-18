@@ -1,4 +1,3 @@
-import 'package:asyltas/auth/auth_services.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/login_screen/email_field.dart';
 import 'package:asyltas/ui/widgets/login_screen/password_field.dart';
@@ -112,19 +111,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
           CupertinoButton(
             padding: const EdgeInsets.all(0),
             onPressed: () async {
-              final bool res = await registerUser(
-                email: emailController.text,
-                password: passwordController.text,
-                name: nameController.text,
-                surname: surnameController.text,
-                phoneNumber: phoneController.text,
-              );
-              if (res) {
-                widget.toMainPage();
-                // go to main page
-              } else {
-                // show error
-              }
+              // final bool res = await registerUser(
+              //   email: emailController.text,
+              //   password: passwordController.text,
+              //   name: nameController.text,
+              //   surname: surnameController.text,
+              //   phoneNumber: phoneController.text,
+              // );
+              // if (res) {
+              //   widget.toMainPage();
+              //   // go to main page
+              // } else {
+              //   // show error
+              // }
             },
             child: Container(
               width: double.infinity,

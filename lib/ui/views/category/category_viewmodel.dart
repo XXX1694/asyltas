@@ -5,55 +5,51 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class CategoryViewModel extends BaseViewModel {
-  final String categoryId;
-  final String categoryName;
+  final String? categoryId;
+  final String? categoryName;
   final _routerService = locator<RouterService>();
   Future goToMainPage() async {
-    await _routerService.navigateTo(const HomeViewRoute());
+    await _routerService.replaceWithHomeView();
   }
 
   Future goToLoginPage() async {
-    await _routerService.navigateTo(const LoginViewRoute());
+    await _routerService.navigateToLoginView();
   }
 
   Future goToRegistrationPage() async {
-    await _routerService.navigateTo(const RegistrationViewRoute());
+    await _routerService.navigateToRegistrationView();
   }
 
   Future goToCatalogPage() async {
-    await _routerService.navigateTo(const CatalogViewRoute());
+    await _routerService.navigateToCatalogView();
   }
 
   Future goToProductPage({
     required ProductModel product,
     required List<ProductModel> categoryProducts,
   }) async {
-    await _routerService.navigateTo(
-      ProductViewRoute(
-        product: product,
-        categoryProducts: categoryProducts,
-      ),
-    );
-  }
-
-  Future goToProfilePage() async {
-    await _routerService.navigateTo(const ProfileViewRoute());
-  }
-
-  Future goToFavoritesPage() async {
-    await _routerService.navigateTo(const FavoritesViewRoute());
+    await _routerService.navigateToProductView(
+        product: product, categoryProducts: categoryProducts);
   }
 
   Future goToCartPage() async {
-    await _routerService.navigateTo(const CartViewRoute());
+    await _routerService.navigateToCartView();
+  }
+
+  Future goToFavoritesPage() async {
+    await _routerService.navigateToFavoritesView();
+  }
+
+  Future goToProfilePage() async {
+    await _routerService.navigateToProfileView();
   }
 
   Future goToMenu() async {
-    await _routerService.navigateTo(const MenuViewRoute());
+    await _routerService.navigateToMenuView();
   }
 
-  CategoryViewModel({
-    required this.categoryId,
-    required this.categoryName,
-  });
+  CategoryViewModel(
+    this.categoryId,
+    this.categoryName,
+  );
 }

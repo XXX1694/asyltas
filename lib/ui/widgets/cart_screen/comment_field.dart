@@ -14,37 +14,44 @@ class CommentTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       child: TextField(
         controller: controller,
-        maxLines: 3,
+        maxLines: 4,
+        style: const TextStyle(
+          fontFamily: 'Gilroy',
+          color: newBlack,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        ),
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(8.0),
             borderSide: const BorderSide(
               color: Colors.black38,
             ),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(8.0),
             borderSide: const BorderSide(
               color: Colors.black38,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(8.0),
             borderSide: const BorderSide(
-              color: kcPrimaryColor,
+              color: newMainColor,
             ),
           ),
           hintText: hintText,
-          hintStyle: const TextStyle(
-            fontFamily: 'Montserrat',
-            color: Colors.black54,
+          hintStyle: TextStyle(
+            fontFamily: 'Gilroy',
+            color: newBlack54,
             fontSize: 14,
-            letterSpacing: -0.41,
+            fontWeight: FontWeight.w500,
           ),
-          contentPadding: const EdgeInsets.all(12.0),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         ),
       ),
     );

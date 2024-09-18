@@ -68,7 +68,8 @@ class CatalogPlacegolder extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const ShrimerPlaceholder(
+                    child: Container(
+                      color: Colors.grey.shade200,
                       height: double.infinity,
                       width: double.infinity,
                     ),
@@ -80,27 +81,39 @@ class CatalogPlacegolder extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  'Имя товара',
-                  style: TextStyle(
-                    fontFamily: 'Gilroy',
-                    color: newBlack,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0,
+                // const Text(
+                //   'Имя товара',
+                //   style: TextStyle(
+                //     fontFamily: 'Gilroy',
+                //     color: newBlack,
+                //     fontSize: 15,
+                //     fontWeight: FontWeight.w600,
+                //   ),
+                //   textAlign: TextAlign.center,
+                //   // overflow: TextOverflow.ellipsis,
+                // ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: ShrimerPlaceholder(
+                    height: 17,
+                    width: double.infinity,
                   ),
-                  textAlign: TextAlign.center,
-                  // overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  "999,00 ₸",
-                  style: TextStyle(
-                    fontFamily: 'Gilroy',
-                    color: newBlack,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: 0,
+                // const Text(
+                //   "999,00 ₸",
+                //   style: TextStyle(
+                //     fontFamily: 'Gilroy',
+                //     color: newBlack,
+                //     fontSize: 13,
+                //     fontWeight: FontWeight.w400,
+                //   ),
+                // ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 48),
+                  child: ShrimerPlaceholder(
+                    height: 15,
+                    width: double.infinity,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -109,7 +122,7 @@ class CatalogPlacegolder extends StatelessWidget {
                   onPressed: () {},
                   child: Container(
                     decoration: BoxDecoration(
-                      color: newBlack,
+                      color: secondMain,
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(

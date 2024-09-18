@@ -1,3 +1,4 @@
+import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/cart_screen/cart_mobile_new.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -10,11 +11,12 @@ class CartViewMobile extends ViewModelWidget<CartViewModel> {
   @override
   Widget build(BuildContext context, CartViewModel viewModel) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: newWhite,
       body: CartMobileNew(
         goToFavoritesPage: viewModel.goFavoritesPage,
         goToMenu: viewModel.goToMenu,
         showPayment: viewModel.goToPaymentPage,
+        goToMainPage: viewModel.goToMainPage,
       ),
     );
   }

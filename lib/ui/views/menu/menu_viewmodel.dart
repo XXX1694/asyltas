@@ -7,7 +7,7 @@ class MenuViewmodel extends BaseViewModel {
   final _routerService = locator<RouterService>();
 
   Future goToMainPage() async {
-    await _routerService.navigateTo(const HomeViewRoute());
+    await _routerService.replaceWithHomeView();
   }
 
   Future goToLoginPage() async {

@@ -52,7 +52,7 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
                           const Spacer(),
                           GestureDetector(
                             onTap: () {
-                              viewModel.goFavoritesPage();
+                              viewModel.goToFavoritesPage();
                             },
                             child: SizedBox(
                               width: 31,
@@ -122,27 +122,10 @@ class HomeViewMobile extends ViewModelWidget<HomeViewModel> {
                     goHome: viewModel.goToMainPage,
                     goLogin: viewModel.goToLoginPage,
                     goCatalog: viewModel.goToCatalogPage,
+                    goCategory: viewModel.goToCategoryPage,
                   ),
                   const SizedBox(height: 16),
                   const HomeBottom(),
-                  const SizedBox(height: 16),
-                  const Divider(
-                    color: Colors.black12,
-                    height: 1,
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    '© 2024 Asyltas Разработано galab.kz',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.black54,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.41,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 16),
                 ],
               ),
             ),

@@ -2,7 +2,6 @@ import 'package:asyltas/models/product.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 typedef FutureCallbackFunction = Future Function({
   required ProductModel product,
@@ -42,8 +41,8 @@ class OtherProducts extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return CupertinoButton(
-                onPressed: () {
-                  showProduct(
+                onPressed: () async {
+                  await showProduct(
                     categoryProducts: products,
                     product: products[index],
                   );

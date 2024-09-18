@@ -3,9 +3,11 @@
 import 'package:asyltas/provider/cart_provider.dart';
 import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
+import 'package:asyltas/ui/widgets/favorites_screen/cart_button.dart';
 import 'package:asyltas/ui/widgets/home_screen/home_bottom.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -69,7 +71,7 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: newWhite,
       body: SafeArea(
         child: FutureBuilder<void>(
           future: loadData(),
@@ -85,116 +87,99 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: 28),
-                SizedBox(
-                  height: 40,
-                  width: double.infinity,
-                  child: Stack(
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: GestureDetector(
-                            onTap: () {
-                              viewModel.goToMainPage();
-                            },
-                            child: SvgPicture.asset(
-                              'assets/logo.svg',
-                              height: 28,
-                            ),
+                      GestureDetector(
+                        onTap: () {
+                          viewModel.goToMainPage();
+                        },
+                        child: const Text(
+                          'ASYLTAS',
+                          style: TextStyle(
+                            color: newBlack,
+                            fontSize: 17,
+                            fontFamily: 'Gilroy',
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Spacer(),
-                            GestureDetector(
-                              onTap: () {
-                                viewModel.goToCartPage();
-                              },
-                              child: SizedBox(
-                                width: 42,
-                                height: 40,
-                                child: Stack(
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.center,
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          viewModel.goToCartPage();
+                        },
+                        child: SizedBox(
+                          width: 31,
+                          height: 31,
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.bottomLeft,
+                                child: SvgPicture.asset(
+                                  'assets/cart1.svg',
+                                ),
+                              ),
+                              Consumer<CartProvider>(
+                                builder: (context, favorites, child) {
+                                  if (favorites.items.isEmpty) {
+                                    return const SizedBox();
+                                  } else {
+                                    return Align(
+                                      alignment: Alignment.topRight,
                                       child: Container(
-                                        padding: const EdgeInsets.all(4),
-                                        height: 32,
-                                        width: 32,
+                                        height: 16,
+                                        width: 16,
                                         decoration: BoxDecoration(
-                                          color:
-                                              kcPrimaryColor.withOpacity(0.2),
+                                          color: newMainColor,
                                           borderRadius:
                                               BorderRadius.circular(100),
                                         ),
-                                        child: SvgPicture.asset(
-                                          'assets/cart1.svg',
+                                        child: Center(
+                                          child: Text(
+                                            favorites.items.length.toString(),
+                                            style: const TextStyle(
+                                              color: newWhite,
+                                              fontSize: 11,
+                                              fontFamily: 'Gilroy',
+                                              fontWeight: FontWeight.w500,
+                                              letterSpacing: 0,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Consumer<CartProvider>(
-                                      builder: (context, cart, child) {
-                                        if (cart.items.isEmpty) {
-                                          return const SizedBox();
-                                        } else {
-                                          return Align(
-                                            alignment: Alignment.topRight,
-                                            child: Container(
-                                              height: 18,
-                                              width: 18,
-                                              decoration: BoxDecoration(
-                                                color: kcPrimaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  cart.items.length.toString(),
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 11,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                      },
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            GestureDetector(
-                              onTap: () {
-                                viewModel.goToMenu();
-                              },
-                              child: SvgPicture.asset('assets/burger.svg'),
-                            ),
-                            const SizedBox(width: 12)
-                          ],
+                                    );
+                                  }
+                                },
+                              )
+                            ],
+                          ),
                         ),
+                      ),
+                      const SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () {
+                          viewModel.goToMenu();
+                        },
+                        child: SvgPicture.asset('assets/menu.svg'),
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 40),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
                     'Избранные',
                     style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: kcPrimaryColor,
+                      fontFamily: 'Gilroy',
+                      color: newMainColor,
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                     ),
@@ -207,30 +192,13 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                       if (favorites.items.isEmpty) {
                         return const Column(
                           children: [
-                            Expanded(child: Center(child: Text('Пусто'))),
-                            SizedBox(height: 16),
-                            HomeBottom(),
-                            SizedBox(height: 16),
-                            Divider(
-                              color: Colors.black12,
-                              height: 1,
-                            ),
-                            SizedBox(height: 16),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                '© 2024 Asyltas Разработано galab.kz',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: -0.41,
+                            Expanded(
+                              child: Center(
+                                child: Text(
+                                  'Пусто',
                                 ),
-                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            SizedBox(height: 16),
                           ],
                         );
                       }
@@ -242,12 +210,12 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
+                                  const EdgeInsets.symmetric(horizontal: 24),
                               child: Text(
                                 'Всего ${favorites.items.length} товаров',
-                                style: const TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
+                                style: TextStyle(
+                                  fontFamily: 'Gilroy',
+                                  color: newBlack54,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -275,12 +243,24 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                                           width: 150,
                                           child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(4),
-                                            child: Image.network(
-                                              favorites.items[index]
+                                                BorderRadius.circular(8),
+                                            child: CachedNetworkImage(
+                                              fadeInDuration:
+                                                  const Duration(seconds: 0),
+                                              fadeOutDuration:
+                                                  const Duration(seconds: 0),
+                                              imageUrl: favorites.items[index]
                                                       .images?[0] ??
                                                   '',
                                               fit: BoxFit.cover,
+                                              progressIndicatorBuilder:
+                                                  (context, url, progress) {
+                                                return Container(
+                                                  color: Colors.grey.shade200,
+                                                  height: double.infinity,
+                                                  width: double.infinity,
+                                                );
+                                              },
                                             ),
                                           ),
                                         ),
@@ -294,79 +274,37 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                                                 favorites.items[index].name ??
                                                     'Без имени',
                                                 style: const TextStyle(
-                                                  fontFamily: 'Montserrat',
-                                                  color: Colors.black,
+                                                  fontFamily: 'Gilroy',
+                                                  color: newBlack,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
-                                              const SizedBox(height: 8),
+                                              const SizedBox(height: 4),
                                               Text(
                                                 'В пачке: ${favorites.items[index].numberLeft ?? 1} шт',
                                                 style: const TextStyle(
-                                                  fontFamily: 'Montserrat',
-                                                  color: Colors.black54,
+                                                  fontFamily: 'Gilroy',
+                                                  color: newBlack,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
-                                              const SizedBox(height: 16),
+                                              const SizedBox(height: 8),
                                               Text(
                                                 '${favorites.items[index].price} ₸',
                                                 style: const TextStyle(
-                                                  fontFamily: 'Montserrat',
-                                                  color: kcPrimaryColor,
+                                                  fontFamily: 'Gilroy',
+                                                  color: newMainColor,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w700,
                                                 ),
                                               ),
                                               const Spacer(),
-                                              CupertinoButton(
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                child: Container(
-                                                  height: 28,
-                                                  width: 112,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: Colors.black,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100),
-                                                  ),
-                                                  child: const Center(
-                                                    child: Text(
-                                                      'В корзину',
-                                                      style: TextStyle(
-                                                        fontFamily:
-                                                            'Montserrat',
-                                                        color: Colors.black,
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        letterSpacing: -0.41,
-                                                      ),
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  ),
-                                                ),
-                                                onPressed: () async {
-                                                  favorites.items[index].count =
-                                                      1;
-                                                  context
-                                                      .read<CartProvider>()
-                                                      .addItem(
-                                                        favorites.items[index],
-                                                      );
-                                                  favorites.removeItem(
-                                                      favorites.items[index]);
-                                                  _showTimedAlertDialog(
-                                                      context);
-                                                },
-                                              )
+                                              CartButton(
+                                                product: favorites.items[index],
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -376,35 +314,14 @@ class FavoritesViewMobile extends ViewModelWidget<FavoritesViewModel> {
                                 },
                               ),
                             ),
-                            const SizedBox(height: 16),
-                            const HomeBottom(),
-                            const SizedBox(height: 16),
-                            const Divider(
-                              color: Colors.black12,
-                              height: 1,
-                            ),
-                            const SizedBox(height: 16),
-                            const Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                '© 2024 Asyltas Разработано galab.kz',
-                                style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.black54,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: -0.41,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
                           ],
                         ),
                       );
                     },
                   ),
                 ),
+                const SizedBox(height: 16),
+                const HomeBottom(),
               ],
             );
           },

@@ -1,15 +1,17 @@
+import 'package:asyltas/models/product.dart';
 import 'package:asyltas/provider/cart_provider.dart';
+import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
-import 'package:asyltas/ui/views/product/product_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartButton extends StatefulWidget {
   const CartButton({
     super.key,
-    required this.viewModel,
+    required this.product,
   });
-  final ProductViewmodel viewModel;
+  final ProductModel product;
   @override
   State<CartButton> createState() => _CartButtonState();
 }
@@ -17,37 +19,37 @@ class CartButton extends StatefulWidget {
 class _CartButtonState extends State<CartButton> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        widget.viewModel.product.count = 1;
-        context.read<CartProvider>().addItem(
-              widget.viewModel.product,
-            );
-
-        showCustomSnackBar(context, 'Добавлен в корзину!');
-      },
+    return CupertinoButton(
+      padding: const EdgeInsets.all(0),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 22,
-          vertical: 8,
-        ),
+        height: 28,
+        width: 112,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: newBlack,
-            )),
+          border: Border.all(
+            color: Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: const Center(
           child: Text(
             'В корзину',
             style: TextStyle(
               fontFamily: 'Gilroy',
               color: newBlack,
-              fontSize: 14,
+              fontSize: 13,
               fontWeight: FontWeight.w500,
             ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),
+      onPressed: () async {
+        context.read<CartProvider>().addItem(
+              widget.product,
+            );
+        context.read<FavoritesProvider>().removeItem(widget.product);
+        showCustomSnackBar(context, 'Добавлен в корзину!');
+      },
     );
   }
 

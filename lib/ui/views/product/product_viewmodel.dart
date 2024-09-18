@@ -9,7 +9,7 @@ class ProductViewmodel extends BaseViewModel {
   final List<ProductModel> categoryProducts;
   final _routerService = locator<RouterService>();
   Future goToMainPage() async {
-    await _routerService.navigateTo(const HomeViewRoute());
+    await _routerService.replaceWithHomeView();
   }
 
   Future goToLoginPage() async {

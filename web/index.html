@@ -31,8 +31,6 @@
   <link rel="icon" type="image/png" href="favicon.png" />
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <title>Asyltas</title>
   <link rel="manifest" href="manifest.json">
@@ -62,7 +60,7 @@
       color: #fff;
     }
   </style>
-
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
   <script>
     window.addEventListener('load', function (ev) {
       var loaderContent = document.querySelector('#loader-content');
@@ -104,8 +102,7 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
   </script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+
   <!-- <script type="text/javascript" data-cmp-ab="1"
     src="https://cdn.consentmanager.net/delivery/autoblocking/a9cfdbab312cd.js"
     data-cmp-host="a.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="0"></script> -->
@@ -114,7 +111,6 @@
 <body>
   <!-- No loader content to display -->
 
-  <div id="recaptcha"></div>
 </body>
 
 </html>

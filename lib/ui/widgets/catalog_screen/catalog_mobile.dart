@@ -32,237 +32,258 @@ class CatalogMobile extends StatefulWidget {
 
 class _CatalogMobileState extends State<CatalogMobile>
     with TickerProviderStateMixin {
-  List products = [];
   List<ProductModel> categoryProducts = [];
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('products').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Представлено 0 товаров',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                  color: newBlack54,
-                  fontFamily: 'Gilroy',
-                  letterSpacing: 1,
-                ),
-              ),
-              const SizedBox(height: 28),
-              const CatalogPlacegolder(),
-            ],
-          );
+          return _buildPlaceholder();
         }
+
         if (snapshot.hasError) {
-          return const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Представлено 0 товаров',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  color: Colors.black54,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 28),
-              CatalogPlacegolder(),
-            ],
-          );
+          return _buildPlaceholder(error: true);
         }
+
         if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Представлено 0 товаров',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  color: Colors.black54,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(height: 28),
-              CatalogPlacegolder(),
-            ],
-          );
+          return _buildNoProducts();
         }
-        products = snapshot.data!.docs;
+
+        // Extract and filter products
+        List products = snapshot.data!.docs;
         categoryProducts = [];
+
+        List<ProductModel> tempCategoryProducts = [];
         for (int i = 0; i < products.length; i++) {
           final product = products[i].data() as Map<String, dynamic>;
           String productCategoryId = (product['category_id'] ?? '').toString();
 
           if (productCategoryId == widget.categoryId) {
-            categoryProducts.add(ProductModel.fromJson(product));
-
-            categoryProducts.last.id = products[i].id;
+            tempCategoryProducts.add(ProductModel.fromJson(product));
+            tempCategoryProducts.last.id = snapshot.data!.docs[i].id;
           }
         }
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Представлено ${categoryProducts.length} товаров',
-              style: const TextStyle(
-                fontFamily: 'Montserrat',
-                color: Colors.black54,
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
+        for (int i = 0; i < tempCategoryProducts.length; i++) {
+          categoryProducts.add(tempCategoryProducts[i]);
+        }
+
+        if (categoryProducts.isEmpty) {
+          return _buildNoProducts();
+        }
+
+        return _buildProductList();
+      },
+    );
+  }
+
+  Widget _buildPlaceholder({bool error = false}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          'Представлено 0 товаров',
+          style: TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+            color: newBlack54,
+            fontFamily: 'Gilroy',
+            letterSpacing: 1,
+          ),
+        ),
+        const SizedBox(height: 28),
+        const CatalogPlacegolder(),
+      ],
+    );
+  }
+
+  Widget _buildNoProducts() {
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          'Представлено 0 товаров',
+          style: TextStyle(
+            fontFamily: 'Montserrat',
+            color: Colors.black54,
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        SizedBox(height: 280),
+        Center(
+          child: Text('Нет товаров'),
+        ),
+        SizedBox(height: 280),
+      ],
+    );
+  }
+
+  Widget _buildProductList() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Представлено ${categoryProducts.length} товаров',
+          style: const TextStyle(
+            fontFamily: 'Montserrat',
+            color: Colors.black54,
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(height: 28),
+        StaggeredGrid.count(
+          mainAxisSpacing: 16,
+          crossAxisCount: 2,
+          crossAxisSpacing: 12,
+          children: categoryProducts.map((item) {
+            return _buildProductItem(item);
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProductItem(ProductModel item) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CupertinoButton(
+          padding: const EdgeInsets.all(0),
+          onPressed: () async {
+            await widget.showProduct(
+              product: item,
+              categoryProducts: categoryProducts,
+            );
+          },
+          child: AspectRatio(
+            aspectRatio: 1 / 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: CachedNetworkImage(
+                  fadeInDuration: const Duration(seconds: 0),
+                  fadeOutDuration: const Duration(seconds: 0),
+                  imageUrl: item.images?[0] ?? '',
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, progress) {
+                    return Container(
+                      color: Colors.grey.shade200,
+                      height: double.infinity,
+                      width: double.infinity,
+                    );
+                  },
+                ),
               ),
             ),
-            const SizedBox(height: 28),
-            StaggeredGrid.count(
-              mainAxisSpacing: 16,
-              crossAxisCount: 2,
-              crossAxisSpacing: 12,
-              children: categoryProducts.map((item) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CupertinoButton(
-                      padding: const EdgeInsets.all(0),
-                      onPressed: () {
-                        widget.showProduct(
-                          product: item,
-                          categoryProducts: categoryProducts,
-                        );
-                      },
-                      child: AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl: item.images?[0] ?? '',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          item.name ?? '',
-                          style: const TextStyle(
-                            fontFamily: 'Gilroy',
-                            color: newBlack,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0,
-                          ),
-                          textAlign: TextAlign.center,
-                          // overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          "${item.price},00 ₸",
-                          style: const TextStyle(
-                            fontFamily: 'Gilroy',
-                            color: newBlack,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 0,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        CupertinoButton(
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () {
-                            widget.showProduct(
-                              product: item,
-                              categoryProducts: categoryProducts,
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: newBlack,
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: const Offset(5, 5),
-                                  blurRadius: 15,
-                                  color: Colors.black.withOpacity(0.1),
-                                ),
-                              ],
-                            ),
-                            height: 32,
-                            width: double.infinity,
-                            child: const Center(
-                              child: Text(
-                                'Подробнее',
-                                style: TextStyle(
-                                  fontFamily: 'Gilroy',
-                                  color: newWhite,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        CupertinoButton(
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () {
-                            item.count = 1;
-                            context.read<CartProvider>().addItem(
-                                  item,
-                                );
-
-                            showCustomSnackBar(context, 'Добавлен в корзину!');
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: newBlack,
-                                width: 1,
-                              ),
-                            ),
-                            height: 32,
-                            width: double.infinity,
-                            child: const Center(
-                              child: Text(
-                                'В корзину',
-                                style: TextStyle(
-                                  fontFamily: 'Gilroy',
-                                  color: newBlack,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              item.name ?? '',
+              style: const TextStyle(
+                fontFamily: 'Gilroy',
+                color: newBlack,
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "${item.price},00 ₸",
+              style: const TextStyle(
+                fontFamily: 'Gilroy',
+                color: newBlack,
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0,
+              ),
+            ),
+            const SizedBox(height: 4),
+            CupertinoButton(
+              padding: const EdgeInsets.all(0),
+              onPressed: () {
+                widget.showProduct(
+                  product: item,
+                  categoryProducts: categoryProducts,
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: secondMain,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(5, 5),
+                      blurRadius: 15,
+                      color: Colors.black.withOpacity(0.1),
                     ),
                   ],
-                );
-              }).toList(),
+                ),
+                height: 32,
+                width: double.infinity,
+                child: const Center(
+                  child: Text(
+                    'Подробнее',
+                    style: TextStyle(
+                      fontFamily: 'Gilroy',
+                      color: newWhite,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 0,
+                    ),
+                  ),
+                ),
+              ),
             ),
+            CupertinoButton(
+              padding: const EdgeInsets.all(0),
+              onPressed: () {
+                item.count = 1;
+                context.read<CartProvider>().addItem(item);
+                showCustomSnackBar(context, 'Добавлен в корзину!');
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: newBlack,
+                    width: 1,
+                  ),
+                ),
+                height: 32,
+                width: double.infinity,
+                child: const Center(
+                  child: Text(
+                    'В корзину',
+                    style: TextStyle(
+                      fontFamily: 'Gilroy',
+                      color: newBlack,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: 0,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
-        );
-      },
+        ),
+      ],
     );
   }
 
@@ -300,14 +321,14 @@ class _CatalogMobileState extends State<CatalogMobile>
 
     overlay.insert(overlayEntry);
 
-    Future.delayed(const Duration(milliseconds: 1500), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
       overlayEntry.remove();
     });
   }
 
   Animation<Offset> _slideAnimation() {
     final animationController = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 400),
       vsync: this,
     );
     final animation = Tween<Offset>(

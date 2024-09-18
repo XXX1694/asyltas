@@ -37,6 +37,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
       return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i1.HomeView(),
+        transitionsBuilder: _i15.TransitionsBuilders.fadeIn,
         opaque: true,
         barrierDismissible: false,
       );
@@ -45,6 +46,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
       return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i2.LoginView(),
+        transitionsBuilder: _i15.TransitionsBuilders.moveInLeft,
         opaque: true,
         barrierDismissible: false,
       );
@@ -61,6 +63,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
       return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i4.CatalogView(),
+        transitionsBuilder: _i15.TransitionsBuilders.fadeIn,
         opaque: true,
         barrierDismissible: false,
       );
@@ -69,6 +72,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
       return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i5.CartView(),
+        transitionsBuilder: _i15.TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false,
       );
@@ -89,6 +93,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
           key: args.key,
           price: args.price,
         ),
+        transitionsBuilder: _i15.TransitionsBuilders.slideBottom,
         opaque: true,
         barrierDismissible: false,
       );
@@ -97,12 +102,14 @@ class StackedRouterWeb extends _i15.RootStackRouter {
       return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i8.MenuView(),
+        transitionsBuilder: _i15.TransitionsBuilders.fadeIn,
         opaque: true,
         barrierDismissible: false,
       );
     },
     CategoryViewRoute.name: (routeData) {
-      final args = routeData.argsAs<CategoryViewArgs>();
+      final args = routeData.argsAs<CategoryViewArgs>(
+          orElse: () => const CategoryViewArgs());
       return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: _i9.CategoryView(
@@ -110,6 +117,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
           categoryId: args.categoryId,
           categoryName: args.categoryName,
         ),
+        transitionsBuilder: _i15.TransitionsBuilders.fadeIn,
         opaque: true,
         barrierDismissible: false,
       );
@@ -126,6 +134,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
       return _i15.CustomPage<dynamic>(
         routeData: routeData,
         child: const _i11.FavoritesView(),
+        transitionsBuilder: _i15.TransitionsBuilders.fadeIn,
         opaque: true,
         barrierDismissible: false,
       );
@@ -139,6 +148,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
           product: args.product,
           categoryProducts: args.categoryProducts,
         ),
+        transitionsBuilder: _i15.TransitionsBuilders.fadeIn,
         opaque: true,
         barrierDismissible: false,
       );
@@ -156,58 +166,52 @@ class StackedRouterWeb extends _i15.RootStackRouter {
   @override
   List<_i15.RouteConfig> get routes => [
         _i15.RouteConfig(
-          '/#redirect',
-          path: '/',
-          redirectTo: '/home',
-          fullMatch: true,
-        ),
-        _i15.RouteConfig(
           HomeViewRoute.name,
-          path: '/home',
+          path: '/',
         ),
         _i15.RouteConfig(
           LoginViewRoute.name,
-          path: '/login',
+          path: '/login-view',
         ),
         _i15.RouteConfig(
           RegistrationViewRoute.name,
-          path: '/registration',
+          path: '/registration-view',
         ),
         _i15.RouteConfig(
           CatalogViewRoute.name,
-          path: '/catalog',
+          path: '/catalog-view',
         ),
         _i15.RouteConfig(
           CartViewRoute.name,
-          path: '/cart',
+          path: '/cart-view',
         ),
         _i15.RouteConfig(
           ProfileViewRoute.name,
-          path: '/profile',
+          path: '/profile-view',
         ),
         _i15.RouteConfig(
           PaymentViewRoute.name,
-          path: '/payment',
+          path: '/payment-view',
         ),
         _i15.RouteConfig(
           MenuViewRoute.name,
-          path: '/menu',
+          path: '/menu-view',
         ),
         _i15.RouteConfig(
           CategoryViewRoute.name,
-          path: '/category',
+          path: '/category-view',
         ),
         _i15.RouteConfig(
           ContactsViewRoute.name,
-          path: '/contacts',
+          path: '/contacts-view',
         ),
         _i15.RouteConfig(
           FavoritesViewRoute.name,
-          path: '/favorites',
+          path: '/favorites-view',
         ),
         _i15.RouteConfig(
           ProductViewRoute.name,
-          path: 'catalog/:productId',
+          path: '/product-view',
         ),
         _i15.RouteConfig(
           UnknownViewRoute.name,
@@ -216,7 +220,7 @@ class StackedRouterWeb extends _i15.RootStackRouter {
         _i15.RouteConfig(
           '*#redirect',
           path: '*',
-          redirectTo: '/home',
+          redirectTo: '/',
           fullMatch: true,
         ),
       ];
@@ -228,7 +232,7 @@ class HomeViewRoute extends _i15.PageRouteInfo<void> {
   const HomeViewRoute()
       : super(
           HomeViewRoute.name,
-          path: '/home',
+          path: '/',
         );
 
   static const String name = 'HomeView';
@@ -240,7 +244,7 @@ class LoginViewRoute extends _i15.PageRouteInfo<void> {
   const LoginViewRoute()
       : super(
           LoginViewRoute.name,
-          path: '/login',
+          path: '/login-view',
         );
 
   static const String name = 'LoginView';
@@ -252,7 +256,7 @@ class RegistrationViewRoute extends _i15.PageRouteInfo<void> {
   const RegistrationViewRoute()
       : super(
           RegistrationViewRoute.name,
-          path: '/registration',
+          path: '/registration-view',
         );
 
   static const String name = 'RegistrationView';
@@ -264,7 +268,7 @@ class CatalogViewRoute extends _i15.PageRouteInfo<void> {
   const CatalogViewRoute()
       : super(
           CatalogViewRoute.name,
-          path: '/catalog',
+          path: '/catalog-view',
         );
 
   static const String name = 'CatalogView';
@@ -276,7 +280,7 @@ class CartViewRoute extends _i15.PageRouteInfo<void> {
   const CartViewRoute()
       : super(
           CartViewRoute.name,
-          path: '/cart',
+          path: '/cart-view',
         );
 
   static const String name = 'CartView';
@@ -288,7 +292,7 @@ class ProfileViewRoute extends _i15.PageRouteInfo<void> {
   const ProfileViewRoute()
       : super(
           ProfileViewRoute.name,
-          path: '/profile',
+          path: '/profile-view',
         );
 
   static const String name = 'ProfileView';
@@ -302,7 +306,7 @@ class PaymentViewRoute extends _i15.PageRouteInfo<PaymentViewArgs> {
     required String price,
   }) : super(
           PaymentViewRoute.name,
-          path: '/payment',
+          path: '/payment-view',
           args: PaymentViewArgs(
             key: key,
             price: price,
@@ -334,7 +338,7 @@ class MenuViewRoute extends _i15.PageRouteInfo<void> {
   const MenuViewRoute()
       : super(
           MenuViewRoute.name,
-          path: '/menu',
+          path: '/menu-view',
         );
 
   static const String name = 'MenuView';
@@ -345,11 +349,11 @@ class MenuViewRoute extends _i15.PageRouteInfo<void> {
 class CategoryViewRoute extends _i15.PageRouteInfo<CategoryViewArgs> {
   CategoryViewRoute({
     _i16.Key? key,
-    required String categoryId,
-    required String categoryName,
+    String? categoryId,
+    String? categoryName,
   }) : super(
           CategoryViewRoute.name,
-          path: '/category',
+          path: '/category-view',
           args: CategoryViewArgs(
             key: key,
             categoryId: categoryId,
@@ -363,15 +367,15 @@ class CategoryViewRoute extends _i15.PageRouteInfo<CategoryViewArgs> {
 class CategoryViewArgs {
   const CategoryViewArgs({
     this.key,
-    required this.categoryId,
-    required this.categoryName,
+    this.categoryId,
+    this.categoryName,
   });
 
   final _i16.Key? key;
 
-  final String categoryId;
+  final String? categoryId;
 
-  final String categoryName;
+  final String? categoryName;
 
   @override
   String toString() {
@@ -385,7 +389,7 @@ class ContactsViewRoute extends _i15.PageRouteInfo<void> {
   const ContactsViewRoute()
       : super(
           ContactsViewRoute.name,
-          path: '/contacts',
+          path: '/contacts-view',
         );
 
   static const String name = 'ContactsView';
@@ -397,7 +401,7 @@ class FavoritesViewRoute extends _i15.PageRouteInfo<void> {
   const FavoritesViewRoute()
       : super(
           FavoritesViewRoute.name,
-          path: '/favorites',
+          path: '/favorites-view',
         );
 
   static const String name = 'FavoritesView';
@@ -412,7 +416,7 @@ class ProductViewRoute extends _i15.PageRouteInfo<ProductViewArgs> {
     required List<_i17.ProductModel> categoryProducts,
   }) : super(
           ProductViewRoute.name,
-          path: 'catalog/:productId',
+          path: '/product-view',
           args: ProductViewArgs(
             key: key,
             product: product,
@@ -527,8 +531,8 @@ extension RouterStateExtension on _i14.RouterService {
 
   Future<dynamic> navigateToCategoryView({
     _i16.Key? key,
-    required String categoryId,
-    required String categoryName,
+    String? categoryId,
+    String? categoryName,
     void Function(_i15.NavigationFailure)? onFailure,
   }) async {
     return navigateTo(
@@ -653,8 +657,8 @@ extension RouterStateExtension on _i14.RouterService {
 
   Future<dynamic> replaceWithCategoryView({
     _i16.Key? key,
-    required String categoryId,
-    required String categoryName,
+    String? categoryId,
+    String? categoryName,
     void Function(_i15.NavigationFailure)? onFailure,
   }) async {
     return replaceWith(

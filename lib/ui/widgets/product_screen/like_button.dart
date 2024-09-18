@@ -1,52 +1,48 @@
-import 'package:asyltas/provider/cart_provider.dart';
+import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/views/product/product_viewmodel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class CartButton extends StatefulWidget {
-  const CartButton({
-    super.key,
-    required this.viewModel,
-  });
+class LikeButton extends StatefulWidget {
+  const LikeButton({super.key, required this.viewModel});
   final ProductViewmodel viewModel;
   @override
-  State<CartButton> createState() => _CartButtonState();
+  State<LikeButton> createState() => _LikeButtonState();
 }
 
-class _CartButtonState extends State<CartButton> with TickerProviderStateMixin {
+class _LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
+  bool like = false;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        widget.viewModel.product.count = 1;
-        context.read<CartProvider>().addItem(
-              widget.viewModel.product,
-            );
+    return CupertinoButton(
+      padding: const EdgeInsets.all(0),
+      onPressed: () {
+        if (like) {
+          widget.viewModel.product.count = 1;
+          context.read<FavoritesProvider>().removeItem(
+                widget.viewModel.product,
+              );
 
-        showCustomSnackBar(context, 'Добавлен в корзину!');
+          showCustomSnackBar(context, 'Удален из избранных!');
+        } else {
+          widget.viewModel.product.count = 1;
+          context.read<FavoritesProvider>().addItem(
+                widget.viewModel.product,
+              );
+
+          showCustomSnackBar(context, 'Добавлен в избранные!');
+        }
+        setState(() {
+          like = !like;
+        });
       },
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 22,
-          vertical: 8,
-        ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: newBlack,
-            )),
-        child: const Center(
-          child: Text(
-            'В корзину',
-            style: TextStyle(
-              fontFamily: 'Gilroy',
-              color: newBlack,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
+      child: SvgPicture.asset(
+        like ? 'assets/like2_filled.svg' : 'assets/like2.svg',
+        height: 28,
+        width: 28,
       ),
     );
   }

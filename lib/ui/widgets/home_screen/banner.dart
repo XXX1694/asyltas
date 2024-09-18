@@ -123,8 +123,8 @@ class AdBanner extends StatelessWidget {
                     const Spacer(flex: 20),
                     CupertinoButton(
                       padding: const EdgeInsets.all(0),
-                      onPressed: () {
-                        showProduct(
+                      onPressed: () async {
+                        await showProduct(
                           product: ProductModel(
                             '02l2xpTsC00BgmMZD1CT',
                             'Хрустал 8мм',

@@ -2,8 +2,8 @@ import 'package:asyltas/provider/cart_provider.dart';
 import 'package:asyltas/provider/favorites_provider.dart';
 import 'package:asyltas/ui/common/app_colors.dart';
 import 'package:asyltas/ui/common/placeholder.dart';
-import 'package:asyltas/ui/widgets/app_iamge.dart';
 import 'package:asyltas/ui/widgets/product_screen/cart_button.dart';
+import 'package:asyltas/ui/widgets/product_screen/like_button.dart';
 import 'package:asyltas/ui/widgets/product_screen/other_products.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -144,13 +144,16 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(12),
                                   child: CachedNetworkImage(
+                                    filterQuality: FilterQuality.high,
+                                    fadeInDuration: const Duration(seconds: 0),
+                                    fadeOutDuration: const Duration(seconds: 0),
                                     imageUrl: viewModel
                                             .product.images?[currentImage] ??
                                         '',
                                     fit: BoxFit.cover,
                                     progressIndicatorBuilder:
-                                        (context, url, progress) =>
-                                            const ShrimerPlaceholder(
+                                        (context, url, progress) => Container(
+                                      color: Colors.grey.shade200,
                                       height: double.infinity,
                                       width: double.infinity,
                                     ),
@@ -186,10 +189,23 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(8),
-                                          child: AppImage(
+                                          child: CachedNetworkImage(
+                                            fadeInDuration:
+                                                const Duration(seconds: 0),
+                                            fadeOutDuration:
+                                                const Duration(seconds: 0),
                                             imageUrl: viewModel
                                                     .product.images?[index] ??
                                                 '',
+                                            fit: BoxFit.cover,
+                                            progressIndicatorBuilder:
+                                                (context, url, progress) {
+                                              return Container(
+                                                color: Colors.grey.shade200,
+                                                height: double.infinity,
+                                                width: double.infinity,
+                                              );
+                                            },
                                           ),
                                         ),
                                       ),
@@ -212,7 +228,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Неизвестно / Неизвестно',
+                          'В пачке: ${viewModel.product.numberLeft} шт',
                           style: TextStyle(
                             color: newBlack54,
                             fontSize: 16,
@@ -233,15 +249,7 @@ class ProductViewMobile extends ViewModelWidget<ProductViewmodel> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Text(
-                              'В пачке: ${viewModel.product.numberLeft} шт',
-                              style: const TextStyle(
-                                color: newBlack,
-                                fontFamily: 'Gilroy',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
+                            LikeButton(viewModel: viewModel),
                           ],
                         ),
                         const SizedBox(height: 18),

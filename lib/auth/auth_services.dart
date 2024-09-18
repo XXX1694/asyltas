@@ -1,58 +1,57 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Sign in with email and password
-  Future<User?> signInWithEmailPassword(String email, String password) async {
-    try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return userCredential.user;
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error signing in: $e');
-      }
-      return null;
-    }
-  }
+//   // Sign in with email and password
+//   Future<User?> signInWithEmailPassword(String email, String password) async {
+//     try {
+//       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+//         email: email,
+//         password: password,
+//       );
+//       return userCredential.user;
+//     } catch (e) {
+//       if (kDebugMode) {
+//         print('Error signing in: $e');
+//       }
+//       return null;
+//     }
+//   }
 
-  // Sign out
-  Future<void> signOut() async {
-    await _auth.signOut();
-  }
-}
+//   // Sign out
+//   Future<void> signOut() async {
+//     await _auth.signOut();
+//   }
+// }
 
-Future<bool> signInAndSaveToken(String email, String password) async {
-  try {
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    User? user = userCredential.user;
-    if (user != null) {
-      String idToken = user.uid;
-      // Save the token locally
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('idToken', idToken);
-      if (kDebugMode) {
-        print('ID Token saved locally.');
-      }
-      return true;
-    }
-  } catch (e) {
-    if (kDebugMode) {
-      print('Error signing in or saving token: $e');
-    }
-    return false;
-  }
-  return false;
+// Future<bool> signInAndSaveToken(String email, String password) async {
+//   try {
+//     UserCredential userCredential =
+//         await FirebaseAuth.instance.signInWithEmailAndPassword(
+//       email: email,
+//       password: password,
+//     );
+//     User? user = userCredential.user;
+//     if (user != null) {
+//       String idToken = user.uid;
+//       // Save the token locally
+//       SharedPreferences prefs = await SharedPreferences.getInstance();
+//       await prefs.setString('idToken', idToken);
+//       if (kDebugMode) {
+//         print('ID Token saved locally.');
+//       }
+//       return true;
+//     }
+//   } catch (e) {
+//     if (kDebugMode) {
+//       print('Error signing in or saving token: $e');
+//     }
+//     return false;
+//   }
+//   return false;
 }
 
 Future<void> deleteToken() async {
@@ -131,6 +130,7 @@ Future<bool> addDataToOrdersCollection(
   String comment,
   String name,
   String phoneNumber,
+  int total,
 ) async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   try {
@@ -158,7 +158,8 @@ Future<bool> addDataToOrdersCollection(
         'phoneNumber': phoneNumber,
         'status': 'Не обработан',
         'comment': comment,
-        'timestamp': DateTime.now(),
+        'timestamp': DateTime.now().toString(),
+        'total': total,
       },
     );
 
@@ -254,49 +255,49 @@ Future<Map<String, dynamic>?> getUserData() async {
   }
 }
 
-Future<bool> registerUser({
-  required String email,
-  required String password,
-  required String name,
-  required String surname,
-  required String phoneNumber,
-}) async {
-  try {
-    // Register the user with email and password
-    UserCredential userCredential =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+// Future<bool> registerUser({
+//   required String email,
+//   required String password,
+//   required String name,
+//   required String surname,
+//   required String phoneNumber,
+// }) async {
+//   try {
+//     // Register the user with email and password
+//     UserCredential userCredential =
+//         await FirebaseAuth.instance.createUserWithEmailAndPassword(
+//       email: email,
+//       password: password,
+//     );
 
-    User? user = userCredential.user;
-    if (user != null) {
-      // Save additional user details to Firestore
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-        'name': name,
-        'surname': surname,
-        'phoneNumber': phoneNumber,
-        'email': email,
-      });
+//     User? user = userCredential.user;
+//     if (user != null) {
+//       // Save additional user details to Firestore
+//       await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+//         'name': name,
+//         'surname': surname,
+//         'phoneNumber': phoneNumber,
+//         'email': email,
+//       });
 
-      if (kDebugMode) {
-        print('User registered and additional details saved.');
-      }
-      bool res = await signInAndSaveToken(
-        email,
-        password,
-      );
-      if (res) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  } catch (e) {
-    if (kDebugMode) {
-      print('Error registering user: $e');
-    }
-    return false;
-  }
-  return false;
-}
+//       if (kDebugMode) {
+//         print('User registered and additional details saved.');
+//       }
+//       bool res = await signInAndSaveToken(
+//         email,
+//         password,
+//       );
+//       if (res) {
+//         return true;
+//       } else {
+//         return false;
+//       }
+//     }
+//   } catch (e) {
+//     if (kDebugMode) {
+//       print('Error registering user: $e');
+//     }
+//     return false;
+//   }
+//   return false;
+// }

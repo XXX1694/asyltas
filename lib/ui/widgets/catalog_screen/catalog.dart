@@ -288,8 +288,8 @@ class _CatalogState extends State<Catalog> {
                 itemBuilder: (context, index) {
                   return CupertinoButton(
                     padding: const EdgeInsets.all(0),
-                    onPressed: () {
-                      widget.showProduct(
+                    onPressed: () async {
+                      await widget.showProduct(
                         product: categoryProducts[index],
                         categoryProducts: categoryProducts,
                       );
